@@ -1,42 +1,79 @@
-# Mendes Color 1.2.0 — instalador Windows e looks cinematográficos
+# Mendes Color 1.3.0 — Halation e navegação rápida
 
-Plugin OpenFX para DaVinci Resolve no Windows x64, com a LUT da Avata 2,
-19 opções de look e intensidade de estilo independente da conversão de câmera.
+Plugin OpenFX para DaVinci Resolve no Windows x64, com LUT Avata 2,
+19 looks, Halation e botões ANTERIOR/PRÓXIMO nos menus.
 
-## Download e instalação automática
+## Download e atualização
 
-**[Baixar MendesColor-1.2.0-Setup.exe](MendesColor-1.2.0-Setup.exe?raw=true)**
+**[Baixar MendesColor-1.3.0-Setup.exe](MendesColor-1.3.0-Setup.exe?raw=true)**
 
 1. Feche o DaVinci Resolve.
-2. Abra o Setup, autorize a solicitação de administrador do Windows e confirme
-   a instalação no destino exibido.
-3. Reabra o Resolve e procure **Mendes Color** em **Effects / Open FX**.
+2. Abra o Setup, autorize a solicitação de administrador do Windows e confirme o destino.
+3. Reabra o Resolve e procure **Mendes Color** em **Effects / Open FX**, grupo **Mendes**.
 
-Não é necessário copiar pastas nem extrair ZIP nesse fluxo. O instalador
-funciona offline, verifica os arquivos por SHA-256 e guarda a versão anterior
-em `C:\Program Files\Common Files\MendesColor\Backups\`. Ele não encerra
-seus projetos: se o Resolve estiver aberto, pede que você o feche.
+O instalador funciona offline e instala na pasta OpenFX automaticamente.
+Ele verifica os arquivos por SHA-256 e guarda a versão anterior em
+`C:\Program Files\Common Files\MendesColor\Backups\`.
+Se o Resolve estiver aberto, pede que você o feche; não encerra seus projetos.
 Nas próximas atualizações, execute o Setup da nova versão da mesma forma.
 
-O instalador não tem assinatura digital de editor; o Windows pode exibir uma
+O executável não tem assinatura digital de editor; o Windows pode exibir
 confirmação adicional. Confira a origem e o SHA-256 antes de executar.
 
 - [SHA-256 dos downloads](SHA256SUMS.txt)
-- [Verificação técnica do instalador](MendesColor-1.2.0-Setup-verification.json)
-- [Pacote portátil Windows (.zip)](MendesColor-1.2.0-Windows-x64.zip)
-- [Código-fonte completo (.zip)](MendesColor-1.2.0-source.zip)
+- [Verificação técnica do instalador](MendesColor-1.3.0-Setup-verification.json)
+- [Pacote portátil Windows](MendesColor-1.3.0-Windows-x64.zip)
+- [Código-fonte completo](MendesColor-1.3.0-source.zip)
 
-## Seus looks sobre a LUT da Avata 2
+## Halation
 
-Escolha **Input LUT → DJI Avata 2 D-Log M to Rec.709 (embedded)** e depois um
-estilo em **Creative Look**. Mantenha **LUT Output Transfer=Keep LUT output**,
-**Creative Gamma=1** e saída/monitoramento do fluxo manual em **Rec.709 Gamma 2.4**.
-Não some outra normalização técnica ao mesmo sinal sem definir os espaços.
+Abra a aba ou seção **Halation** e escolha **Halation Preset**:
 
-A conversão acontece primeiro e uma única vez. Todos os looks operam sobre
-essa imagem já convertida. Para as aparências pedidas:
+| Opção | Aparência |
+|---|---|
+| Desligado | Sem halo; padrão para preservar projetos existentes |
+| Mínimo | Halo quente discreto e mais estreito |
+| Médio | Halo mais visível e espalhado |
+| Alto | Halo mais intenso e amplo |
 
-| Estilo | Look |
+O halo vermelho-alaranjado aparece ao redor das altas luzes, depois da LUT e do
+look, antes de Effect Mix. Comece em Mínimo e compare uma cena com janelas,
+reflexos ou sol junto de áreas mais escuras. O tamanho acompanha a resolução,
+a escala da prévia e a proporção dos pixels. O alfa é preservado.
+
+[Guia da Halation](HALATION.md)
+
+![Halation em recortes sintéticos](HALATION-preview.png)
+
+A figura usa o mesmo motor C++ em dados sintéticos de RGB de exibição. Não é
+filmagem, emulação calibrada de película ou garantia da aparência no monitor.
+
+## Botões ANTERIOR e PRÓXIMO
+
+Os quatro menus **Creative Look**, **Input LUT**, **LUT Output Transfer** e
+**Halation Preset** têm botões **ANTERIOR / PRÓXIMO**. Cada clique troca uma
+opção do menu correspondente. Depois da última, PRÓXIMO volta à primeira;
+ANTERIOR na primeira vai para a última. Os menus continuam disponíveis.
+
+A navegação preserva os demais ajustes. Em Look/Halation já animados, atualiza
+somente o tempo atual sem alterar os outros keyframes; sem animação prévia,
+não cria keyframes. As alterações são agrupadas para desfazer pelo host.
+O layout dos botões, abas e seções depende da interface OpenFX do Resolve.
+
+Os botões de Input LUT alternam os modos; em Custom ainda é preciso selecionar
+um arquivo em LUT File. Para a LUT enviada, mantenha **LUT Output Transfer →
+Keep LUT output**. A outra opção é uma recodificação avançada que depende da
+curva de saída documentada da LUT.
+
+## Looks sobre a conversão da Avata 2
+
+Com os arquivos originais D-Log M, selecione **Input LUT → DJI Avata 2 D-Log M
+to Rec.709 (embedded)**. A mesma conversão acontece primeiro, uma única vez;
+escolha depois o estilo em **Creative Look**, ou use os botões de navegação.
+No fluxo manual, mantenha Creative Gamma=1 e configure saída/monitoramento
+Rec.709 Gamma 2.4 no Resolve. Não normalize o mesmo sinal duas vezes.
+
+| Estilo desejado | Look |
 |---|---|
 | Quente cinematográfico | Warm Cinema / Golden Hour |
 | Fim de tarde | Golden Hour |
@@ -45,35 +82,31 @@ essa imagem já convertida. Para as aparências pedidas:
 | Comercial com verde e azul | Commercial Teal |
 | Sombras frias e luzes quentes | Teal & Orange |
 
-**Look Strength** dosa só o estilo: zero mantém a LUT e suas correções manuais;
-1 aplica o look completo. Comece com 0,4–0,8 para uma aparência mais discreta.
-**Effect Mix=0** continua desligando o plugin inteiro, inclusive a LUT.
-Os seis looks antigos mantêm nomes, índices e resultados da versão 1.1.0.
+**Look Strength** dosa apenas o estilo: zero mantém a LUT, as correções manuais
+e a Halation selecionada. Para desligar só o halo use Halation Preset=Desligado.
+**Effect Mix=0** desliga o plugin inteiro, incluindo a LUT.
 
-[Catálogo completo de looks](LOOKS.md)
+[Catálogo de looks](LOOKS.md)
 
-![Comparação de cores sintéticas](LOOKS-preview.svg)
+## Validação
 
-A figura foi calculada pelo motor C++ com a LUT embutida e intensidade 1.
-Usa cores sintéticas, não filmagem nem uma simulação exata do seu monitor.
-Os estilos são propostas estéticas, sem emulação calibrada de película ou
-proteção automática de pele.
+Passaram **4.860 verificações locais**: 2.235 de cor, 166 de LUT/transferências,
+2.100 de Halation, 338 de host OpenFX simulado e 21 de instalação/backup/restauração.
+Também passaram ASan/UBSan com detecção de vazamentos. Os testes espaciais
+comparam imagem inteira e tiles, source ROI recortada, alfa, stride negativo,
+ROI, escala/PAR, mistura, cancelamento e resposta de impulso analítica.
+Os botões foram testados nos quatro menus, incluindo passagem circular,
+keyframes, notificações e falha de escrita com fechamento do grupo de desfazer.
 
-## Validação e limites
+O REA inspecionou as exportações/importações do plugin e os recursos do Setup.
+Os **13 payloads** e o manifesto UAC foram conferidos no EXE final.
+A interface e as APIs Windows do instalador, o layout/undo do host e a aparência
+na filmagem real ainda precisam ser verificados no Resolve do usuário.
+A versão 1.0.2 do plugin foi confirmada pelo usuário. O processamento é CPU,
+RGBA float32, sem promessa de desempenho em tempo real, especialmente em 4K.
 
-Passaram 2.235 verificações de cor, 166 de LUT/transferências, 184 de host OpenFX
-simulado e 21 de instalação/backup/restauração em filesystem temporário.
-Os testes também passaram com sanitizadores. O REA inspecionou o plugin e os
-recursos do Setup; os 11 payloads e o manifesto UAC foram conferidos no EXE final.
-
-A UI do instalador, UAC, APIs Windows e os novos looks no Resolve real ainda
-precisam ser exercitados no computador do usuário. O ambiente de compilação é
-Linux; os testes portáveis não substituem essa execução. A versão 1.0.2 do
-plugin foi confirmada pelo usuário no Resolve. O processamento é CPU/float32.
-
-A LUT fornecida foi preservada, com sua proveniência nos pacotes. Seu nome
-identifica Avata 2, enquanto um comentário interno menciona Mavic 3 Pro. Ela
-não declara gamma de saída; essa curva é preservada por padrão. A configuração
-Rec.709 Gamma 2.4 do projeto não equivale a provar uma curva 2.4 na LUT.
-Os ajustes e looks do motor são próprios; não reproduzem ToneLab.
+A LUT enviada foi preservada byte a byte com sua proveniência. O nome identifica
+Avata 2; um comentário interno menciona Mavic 3 Pro. Ela não declara gamma de
+saída, preservado por padrão. Configurar Rec.709 Gamma 2.4 no projeto não prova
+uma curva 2.4 na LUT. Os algoritmos e looks são próprios e não reproduzem ToneLab.
 As versões anteriores continuam disponíveis como histórico.

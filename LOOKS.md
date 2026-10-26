@@ -1,4 +1,4 @@
-# Looks cinematográficos — Mendes Color 1.2.0
+# Looks cinematográficos — Mendes Color 1.3.0
 
 Todos os estilos operam **depois** da transformação de entrada. Para sua Avata 2,
 selecione primeiro **Input LUT → DJI Avata 2 D-Log M to Rec.709 (embedded)**.
@@ -32,11 +32,19 @@ Ao trocar estilos, a mesma conversão técnica continua sendo usada como base.
 
 ## Intensidade e uso
 
+Use **ANTERIOR** e **PRÓXIMO** após Creative Look para comparar estilos sem
+abrir o menu. A navegação é circular e não altera a LUT, Look Strength ou os
+demais controles. O menu continua disponível para escolher qualquer estilo.
+
 - **Look Strength=0**: conserva a LUT e a sua correção manual.
 - **Look Strength=0,5**: mistura em partes iguais o resultado sem estilo e o
   resultado estilizado, ambos depois da LUT.
 - **Look Strength=1**: estilo completo. O controle pode ser animado no host.
 - **Effect Mix=0**: bypass do plugin inteiro, incluindo a conversão D-Log M.
+
+A seção [Halation](HALATION.md) acrescenta halo quente em altas luzes depois
+do look, com presets Desligado/Mínimo/Médio/Alto e seus próprios botões.
+Look Strength=0 não desliga Halation; para isso use Halation Preset=Desligado.
 
 Comece com 0,4–0,8 em Golden Hour, Sunset Glow, Moody Forest e Commercial Teal;
 adapte à luz, exposição e balanço de branco da sua filmagem. Os nomes descrevem
@@ -54,7 +62,7 @@ existentes foram preservados.
 ![Comparação com rampas e cores sintéticas](LOOKS-preview.svg)
 
 Esta figura foi calculada pelo mesmo motor C++ do plugin, usando a LUT embutida
-e Look Strength=1. Mostra códigos RGB de rampas e amostras sintéticas, limitados
+e Look Strength=1, com Halation desligada. Mostra códigos RGB de rampas e amostras sintéticas, limitados
 a 0–1 para exibição SVG. Não é uma comparação fotográfica, uma simulação exata
 do seu monitor ou certificação colorimétrica. Para regenerar: `make preview`.
 

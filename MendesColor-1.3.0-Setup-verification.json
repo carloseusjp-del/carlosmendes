@@ -1,0 +1,16 @@
+{
+  "installer": "MendesColor-1.3.0-Setup.exe",
+  "sha256": "01159d5607caa59225b7b31e51f969a60705c39200e0d59cdfdbe2c7e76ab58b",
+  "uac": "requireAdministrator",
+  "architecture": "x86_64",
+  "subsystem": "Windows GUI",
+  "payloads_verified": 13,
+  "evidence_id": "ev_a2256e50dd3b02ad33ec41934b122b0de581c0c1587500b29b3bcfcca5374562",
+  "windows_execution": "not_run",
+  "filesystem_checks": 21,
+  "color_checks": 2235,
+  "lut_checks": 166,
+  "mock_ofx_checks": 338,
+  "halation_checks": 2100,
+  "sanitizers": "ASan + UBSan passed; leak detection enabled"
+}
