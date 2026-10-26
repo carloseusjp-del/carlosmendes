@@ -1,0 +1,2 @@
+c0ca10949cd696294a83363a29945293e1e9fcc18ea0bf4c3bef2c262afa5b46  MendesColor-1.0.0-Windows-x64.zip
+40e5d15702b9b409d25ef5985d19e35d9fbc190a5d92fc755b758eda37805ad2  MendesColor-1.0.0-source.zip
