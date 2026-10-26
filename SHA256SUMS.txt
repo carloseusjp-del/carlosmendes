@@ -2,3 +2,5 @@ c0ca10949cd696294a83363a29945293e1e9fcc18ea0bf4c3bef2c262afa5b46  MendesColor-1.
 40e5d15702b9b409d25ef5985d19e35d9fbc190a5d92fc755b758eda37805ad2  MendesColor-1.0.0-source.zip
 34d1792f06df2a29111dd7ac34b7a985ab751bba9a90facabb7d0b19fd3dca0e  MendesColor-1.0.1-Windows-x64.zip
 965b83f2f94aa636df6d765814c3c8803dbb5859b77a9d6c3897ed1665019596  MendesColor-1.0.1-source.zip
+3af540c8a6e2dc0cfd393db0be1dd546d410fb2ae78b203ef5b1a4cfb7756064  MendesColor-1.0.2-Windows-x64.zip
+cdf68553bcb0415a281429300095dd0b5e3601dc8257c82e0ab214c00f5d6a43  MendesColor-1.0.2-source.zip
