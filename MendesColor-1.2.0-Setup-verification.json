@@ -1,0 +1,14 @@
+{
+  "installer": "MendesColor-1.2.0-Setup.exe",
+  "sha256": "160e5a431fe4d245ca5f072037e3cc5063231abd4ffd12583f9be44c5533a0d0",
+  "uac": "requireAdministrator",
+  "architecture": "x86_64",
+  "subsystem": "Windows GUI",
+  "payloads_verified": 11,
+  "evidence_id": "ev_7408f588f75975354a05634a3f448932c9feab01752e5b975c188299f8cf6e21",
+  "windows_execution": "not_run",
+  "filesystem_tests": "21 passed",
+  "color_checks": "2235 passed",
+  "lut_checks": "166 passed",
+  "mock_ofx_checks": "184 passed"
+}
