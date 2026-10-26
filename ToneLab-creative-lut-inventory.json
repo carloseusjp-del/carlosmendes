@@ -1,0 +1,2740 @@
+{
+  "target_sha256": "f74ecc8a51d1f75918304e214c6b40844ead89767895f3d65a80d4736d1cd27e",
+  "method": "native loader LEA to static dimension/count/RGBA float32 records",
+  "assets": [
+    {
+      "catalog_index": 1,
+      "name": "Signature 1",
+      "loader_address": "0x180445650",
+      "data_address": "0x192aaaa0c",
+      "file_offset": 313169420,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "26f0e98f7d0351c75a397744ab700d6ff290d0262c6a8dfa20b411f82d44fe55",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "midgray": [
+          0.5176470279693604,
+          0.5129320025444031,
+          0.5035319924354553
+        ],
+        "white": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "catalog_index": 2,
+      "name": "Signature 2",
+      "loader_address": "0x180445670",
+      "data_address": "0x188b6d6c4",
+      "file_offset": 146195140,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "6d8861128c222296908bee98e547397d46b4d2b2d6b929e49f346d850a2b085d",
+      "samples": {
+        "black": [
+          0.01646449975669384,
+          0.010986500419676304,
+          0.008239869959652424
+        ],
+        "midgray": [
+          0.4629429876804352,
+          0.4849010109901428,
+          0.47116801142692566
+        ],
+        "white": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "catalog_index": 3,
+      "name": "Signature 3",
+      "loader_address": "0x180445690",
+      "data_address": "0x1897ffba8",
+      "file_offset": 159377320,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.01564049907028675,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9955750107765198,
+        0.990218997001648,
+        0.9448540210723877,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "9c227d1e1b5909eb59894f01c624dadd7437603a09b968c77ef62bb45a28d0e8",
+      "samples": {
+        "black": [
+          0.016388200223445892,
+          0.01646449975669384,
+          0.01719689927995205
+        ],
+        "midgray": [
+          0.5203019976615906,
+          0.5226669907569885,
+          0.5177389979362488
+        ],
+        "white": [
+          0.9804679751396179,
+          0.9497060179710388,
+          0.9197829961776733
+        ]
+      }
+    },
+    {
+      "catalog_index": 4,
+      "name": "Signature 4",
+      "loader_address": "0x1804456b0",
+      "data_address": "0x189c307f4",
+      "file_offset": 163771380,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9949340224266052,
+        0.9730979800224304,
+        0.9759520292282104,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "818d43d2970d3bacb326620ed2eda650c92c891d99ae60136f999b37eafe65d9",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "midgray": [
+          0.4935680031776428,
+          0.49897000193595886,
+          0.5016710162162781
+        ],
+        "white": [
+          0.9868469834327698,
+          0.9715719819068909,
+          0.9554439783096313
+        ]
+      }
+    },
+    {
+      "catalog_index": 5,
+      "name": "Signature 5",
+      "loader_address": "0x1804456d0",
+      "data_address": "0x18a061440",
+      "file_offset": 168165440,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.015258999541401863,
+        0.01559470035135746,
+        0.015518399886786938,
+        1.0
+      ],
+      "rgba_max": [
+        0.9714499711990356,
+        0.9769279956817627,
+        0.9768369793891907,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b38b1de2cbc671ee644fb610089c51b158bd0b67137ae18cdc4d3b14271a94e0",
+      "samples": {
+        "black": [
+          0.017181700095534325,
+          0.016495000571012497,
+          0.017303699627518654
+        ],
+        "midgray": [
+          0.49977898597717285,
+          0.5012739896774292,
+          0.5046160221099854
+        ],
+        "white": [
+          0.9672080278396606,
+          0.9669179916381836,
+          0.9685360193252563
+        ]
+      }
+    },
+    {
+      "catalog_index": 6,
+      "name": "Signature 6",
+      "loader_address": "0x1804456f0",
+      "data_address": "0x18a49208c",
+      "file_offset": 172559500,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.003112840000540018,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9823300242424011,
+        0.9688559770584106,
+        0.9455100297927856,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "0f1229cfd8f78aeb0dc02830f096a443c43c9bcbe456e55421f07d23264de5d2",
+      "samples": {
+        "black": [
+          0.018402399495244026,
+          0.02624550089240074,
+          0.031250499188899994
+        ],
+        "midgray": [
+          0.4491339921951294,
+          0.4627450108528137,
+          0.468284010887146
+        ],
+        "white": [
+          0.969726026058197,
+          0.9568319916725159,
+          0.9455100297927856
+        ]
+      }
+    },
+    {
+      "catalog_index": 7,
+      "name": "Signature 7",
+      "loader_address": "0x180445710",
+      "data_address": "0x18a8c2cd8",
+      "file_offset": 176953560,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.005142290145158768,
+        0.005096510052680969,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.993071973323822,
+        0.9984440207481384,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "3de99aa41216708f09fb81e928abb0a1cea5ba7407f52fa2117528bd895a3f96",
+      "samples": {
+        "black": [
+          0.005142290145158768,
+          0.005096510052680969,
+          0.005569539964199066
+        ],
+        "midgray": [
+          0.5370259881019592,
+          0.5300830006599426,
+          0.519631028175354
+        ],
+        "white": [
+          0.988906979560852,
+          0.9849389791488647,
+          0.9784539937973022
+        ]
+      }
+    },
+    {
+      "catalog_index": 8,
+      "name": "Signature 8",
+      "loader_address": "0x180445730",
+      "data_address": "0x18acf3924",
+      "file_offset": 181347620,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.008285650052130222,
+        0.0,
+        0.0017547899624332786,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9926599860191345,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "197f9fc3153c28848bbc0ef004186a3b98e86e8ad2403323593576d049168d85",
+      "samples": {
+        "black": [
+          0.01742579974234104,
+          0.024597499519586563,
+          0.0307621993124485
+        ],
+        "midgray": [
+          0.5188220143318176,
+          0.535027027130127,
+          0.5381399989128113
+        ],
+        "white": [
+          0.9957119822502136,
+          0.988083004951477,
+          0.9796749949455261
+        ]
+      }
+    },
+    {
+      "catalog_index": 9,
+      "name": "Signature 9",
+      "loader_address": "0x180445750",
+      "data_address": "0x18b124570",
+      "file_offset": 185741680,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.014145099557936192,
+        0.009735260158777237,
+        0.012756500393152237,
+        1.0
+      ],
+      "rgba_max": [
+        0.9544209837913513,
+        0.9233080148696899,
+        0.9159380197525024,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "fcb938f6d89251e617c6931b417aa58b35fe5123323ad0800a32cdda73f3d5d5",
+      "samples": {
+        "black": [
+          0.014145099557936192,
+          0.0136415995657444,
+          0.012756500393152237
+        ],
+        "midgray": [
+          0.5244529843330383,
+          0.5053640007972717,
+          0.475165992975235
+        ],
+        "white": [
+          0.9184859991073608,
+          0.918317973613739,
+          0.9092699885368347
+        ]
+      }
+    },
+    {
+      "catalog_index": 10,
+      "name": "Signature 10",
+      "loader_address": "0x180445770",
+      "data_address": "0x18b5551bc",
+      "file_offset": 190135740,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.009735260158777237,
+        0.014862299896776676,
+        0.02281220071017742,
+        1.0
+      ],
+      "rgba_max": [
+        0.9944000244140625,
+        0.976622998714447,
+        0.9779509902000427,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "7bb1cd646458e7b731c3c31aa334420c9a716a06b74eb6673c7c4ec51e1e9709",
+      "samples": {
+        "black": [
+          0.013824700377881527,
+          0.02137790061533451,
+          0.026428600773215294
+        ],
+        "midgray": [
+          0.4938580095767975,
+          0.4960710108280182,
+          0.48508399724960327
+        ],
+        "white": [
+          0.9652400016784668,
+          0.965133011341095,
+          0.9667659997940063
+        ]
+      }
+    },
+    {
+      "catalog_index": 11,
+      "name": "Signature 11",
+      "loader_address": "0x180445790",
+      "data_address": "0x18b985e08",
+      "file_offset": 194529800,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        4.5777098421240225e-05,
+        0.007721070200204849,
+        1.0
+      ],
+      "rgba_max": [
+        0.9746549725532532,
+        0.9819030165672302,
+        0.985198974609375,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "42dbf486e8b462c4948bd93bff43f593aa69da371418331380db518ccf0602a0",
+      "samples": {
+        "black": [
+          0.013061700388789177,
+          0.012985399924218655,
+          0.017227400094270706
+        ],
+        "midgray": [
+          0.5222859978675842,
+          0.5361409783363342,
+          0.5295640230178833
+        ],
+        "white": [
+          0.9746549725532532,
+          0.9819030165672302,
+          0.985198974609375
+        ]
+      }
+    },
+    {
+      "catalog_index": 12,
+      "name": "Cinema Blue 1",
+      "loader_address": "0x1804457b0",
+      "data_address": "0x192edb658",
+      "file_offset": 317563480,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "dc18475e6f82678918519daf5f0d561726646bc5602679c8fdae823ffa094010",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.002105749910697341
+        ],
+        "midgray": [
+          0.4834519922733307,
+          0.5111929774284363,
+          0.5041580200195312
+        ],
+        "white": [
+          0.9944300055503845,
+          0.9942319989204407,
+          0.9924769997596741
+        ]
+      }
+    },
+    {
+      "catalog_index": 13,
+      "name": "Cinema Blue 2",
+      "loader_address": "0x1804457d0",
+      "data_address": "0x19330c2a4",
+      "file_offset": 321957540,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.010315099731087685,
+        0.01481650024652481,
+        0.01889069937169552,
+        1.0
+      ],
+      "rgba_max": [
+        0.9753109812736511,
+        0.972320020198822,
+        0.9691770076751709,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "32c0d97477ae4d5f808bf30f6aea27f0a6e592580952e8690e1a091424d38cb5",
+      "samples": {
+        "black": [
+          0.010315099731087685,
+          0.01481650024652481,
+          0.01889069937169552
+        ],
+        "midgray": [
+          0.4839250147342682,
+          0.49933600425720215,
+          0.5086590051651001
+        ],
+        "white": [
+          0.97291499376297,
+          0.972320020198822,
+          0.9691770076751709
+        ]
+      }
+    },
+    {
+      "catalog_index": 14,
+      "name": "Cinema Blue 3",
+      "loader_address": "0x1804457f0",
+      "data_address": "0x19373cef0",
+      "file_offset": 326351600,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.02124059945344925,
+        0.01542690023779869,
+        0.013275300152599812,
+        1.0
+      ],
+      "rgba_max": [
+        0.9946900010108948,
+        0.9909510016441345,
+        0.9845730066299438,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "ea674e44a0cd5932e3037b36522286bd7de4f840804d49c64d2b18ea9fb88066",
+      "samples": {
+        "black": [
+          0.02154570072889328,
+          0.02262910082936287,
+          0.022384999319911003
+        ],
+        "midgray": [
+          0.5299149751663208,
+          0.5460900068283081,
+          0.5511710047721863
+        ],
+        "white": [
+          0.9921420216560364,
+          0.9829859733581543,
+          0.9744560122489929
+        ]
+      }
+    },
+    {
+      "catalog_index": 15,
+      "name": "Cinema Blue 4",
+      "loader_address": "0x180445810",
+      "data_address": "0x193b6db3c",
+      "file_offset": 330745660,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0052490998059511185,
+        0.01554889976978302,
+        0.018707599490880966,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9932100176811218,
+        0.9871670007705688,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "fe817cdc8088e91afb36b4b3d1f79a6adaf927744496697f7c399f614b5697e3",
+      "samples": {
+        "black": [
+          0.0073243300430476665,
+          0.01554889976978302,
+          0.02293430082499981
+        ],
+        "midgray": [
+          0.48403099179267883,
+          0.4879379868507385,
+          0.47415900230407715
+        ],
+        "white": [
+          0.9823610186576843,
+          0.9884639978408813,
+          0.9850000143051147
+        ]
+      }
+    },
+    {
+      "catalog_index": 16,
+      "name": "Cinema Blue 5",
+      "loader_address": "0x180445830",
+      "data_address": "0x193f9e788",
+      "file_offset": 335139720,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9833980202674866,
+        0.9820250272750854,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "aa2563121efb29a48f1e544814eb2fe420055bdef6eb8a44ccf8d9d5cdf4766a",
+      "samples": {
+        "black": [
+          7.629510218976066e-05,
+          7.629510218976066e-05,
+          0.0001220720005221665
+        ],
+        "midgray": [
+          0.5012739896774292,
+          0.5165029764175415,
+          0.5073320269584656
+        ],
+        "white": [
+          0.9807279706001282,
+          0.9833980202674866,
+          0.9812769889831543
+        ]
+      }
+    },
+    {
+      "catalog_index": 17,
+      "name": "Cinema Blue 6",
+      "loader_address": "0x180445850",
+      "data_address": "0x1943cf3d4",
+      "file_offset": 339533780,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0171205997467041,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        1.0,
+        0.9718620181083679,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "93a64098cbf81d312ff1529a9157487b4ce9a919583c62d77b9371b056931661",
+      "samples": {
+        "black": [
+          0.0171205997467041,
+          0.01733420044183731,
+          0.02098120003938675
+        ],
+        "midgray": [
+          0.5615630149841309,
+          0.5772789716720581,
+          0.5501030087471008
+        ],
+        "white": [
+          1.0,
+          0.9946439862251282,
+          0.9718620181083679
+        ]
+      }
+    },
+    {
+      "catalog_index": 18,
+      "name": "Cinema Blue 7",
+      "loader_address": "0x180445870",
+      "data_address": "0x194800020",
+      "file_offset": 343927840,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.025528300553560257,
+        0.035339899361133575,
+        0.04048220068216324,
+        1.0
+      ],
+      "rgba_max": [
+        0.9960020184516907,
+        0.9950100183486938,
+        0.9926909804344177,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "55c302df5d803c5f328ae536701e24a6232f0a33998b462ddb0739a8a48275ec",
+      "samples": {
+        "black": [
+          0.027862999588251114,
+          0.03857479989528656,
+          0.04048220068216324
+        ],
+        "midgray": [
+          0.5253379940986633,
+          0.5304949879646301,
+          0.5202869772911072
+        ],
+        "white": [
+          0.9869539737701416,
+          0.9950100183486938,
+          0.9926909804344177
+        ]
+      }
+    },
+    {
+      "catalog_index": 19,
+      "name": "Cinema Blue 8",
+      "loader_address": "0x180445890",
+      "data_address": "0x194c30c6c",
+      "file_offset": 348321900,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.00798046961426735,
+        0.025619899854063988,
+        0.020096100866794586,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.975570023059845,
+        0.9676049947738647,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b6195d62cb15de143dd9f5fb6c0189932e2ca4d8c899f8ee93e126efb6008745",
+      "samples": {
+        "black": [
+          0.00798046961426735,
+          0.0340581014752388,
+          0.03645379841327667
+        ],
+        "midgray": [
+          0.471900999546051,
+          0.48670199513435364,
+          0.48406198620796204
+        ],
+        "white": [
+          0.9902039766311646,
+          0.975570023059845,
+          0.9656209945678711
+        ]
+      }
+    },
+    {
+      "catalog_index": 20,
+      "name": "Cinema Blue 9",
+      "loader_address": "0x1804458b0",
+      "data_address": "0x1950618b8",
+      "file_offset": 352715960,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.010452399961650372,
+        0.01379419956356287,
+        0.025467300787568092,
+        1.0
+      ],
+      "rgba_max": [
+        0.9387810230255127,
+        0.9518730044364929,
+        0.9867550134658813,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "1f9b7e66d645014916b3bc100dd1dcc1c03882849f638fe13302cfccdc13125b",
+      "samples": {
+        "black": [
+          0.010452399961650372,
+          0.01379419956356287,
+          0.025467300787568092
+        ],
+        "midgray": [
+          0.4095059931278229,
+          0.4738689959049225,
+          0.4986500144004822
+        ],
+        "white": [
+          0.9225299954414368,
+          0.9518730044364929,
+          0.9867550134658813
+        ]
+      }
+    },
+    {
+      "catalog_index": 21,
+      "name": "Cinema Blue 10",
+      "loader_address": "0x1804458d0",
+      "data_address": "0x195492504",
+      "file_offset": 357110020,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.003265429986640811,
+        0.01980620063841343,
+        0.032867901027202606,
+        1.0
+      ],
+      "rgba_max": [
+        0.9188979864120483,
+        0.9409319758415222,
+        0.985031008720398,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "6c8f09ad79bc09f01951b7db99c86c98d78e65b101a8b67e7cc6869262121db3",
+      "samples": {
+        "black": [
+          0.014190900139510632,
+          0.01980620063841343,
+          0.032867901027202606
+        ],
+        "midgray": [
+          0.4382700026035309,
+          0.4466319978237152,
+          0.43503499031066895
+        ],
+        "white": [
+          0.917464017868042,
+          0.9409319758415222,
+          0.9849550127983093
+        ]
+      }
+    },
+    {
+      "catalog_index": 22,
+      "name": "Cinema Blue 11",
+      "loader_address": "0x1804458f0",
+      "data_address": "0x1958c3150",
+      "file_offset": 361504080,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "a31771ffeb52ff41f07f1aae803d4c04388d3165393ca377f39acce96e9feaf9",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "midgray": [
+          0.4903939962387085,
+          0.5205919742584229,
+          0.5315629839897156
+        ],
+        "white": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "catalog_index": 23,
+      "name": "Cinema Blue 12",
+      "loader_address": "0x180445910",
+      "data_address": "0x195cf3d9c",
+      "file_offset": 365898140,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.015411599539220333,
+        0.011825700290501118,
+        0.009674220345914364,
+        1.0
+      ],
+      "rgba_max": [
+        0.9929659962654114,
+        0.991424024105072,
+        0.9762259721755981,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "94749fbcd0c91fa3e804f235e49673e5e533cafc7aecdab7e0e52bebafb09739",
+      "samples": {
+        "black": [
+          0.01902800053358078,
+          0.027878200635313988,
+          0.03515680134296417
+        ],
+        "midgray": [
+          0.534142017364502,
+          0.551048994064331,
+          0.5500720143318176
+        ],
+        "white": [
+          0.9929659962654114,
+          0.9834439754486084,
+          0.9724730253219604
+        ]
+      }
+    },
+    {
+      "catalog_index": 24,
+      "name": "Cinema Warm 1",
+      "loader_address": "0x180445930",
+      "data_address": "0x1961249e8",
+      "file_offset": 370292200,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9999390244483948,
+        0.9991300106048584,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "d7142ccfe64bb90ecb7d180645247d45c9ab7621b8d2529992024ca4504a5fa6",
+      "samples": {
+        "black": [
+          0.00482184998691082,
+          0.0047760698944330215,
+          0.007095439825206995
+        ],
+        "midgray": [
+          0.5860530138015747,
+          0.5274890065193176,
+          0.4740220010280609
+        ],
+        "white": [
+          1.0,
+          0.9999390244483948,
+          0.9991300106048584
+        ]
+      }
+    },
+    {
+      "catalog_index": 25,
+      "name": "Cinema Warm 2",
+      "loader_address": "0x180445950",
+      "data_address": "0x196555634",
+      "file_offset": 374686260,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.02446020022034645,
+        0.012191999703645706,
+        0.0038300100713968277,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9739530086517334,
+        0.9728080034255981,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "2514a174bad6d1bdc7b1eef43278314025eb0ae07bcffc38392292ee0af1f862",
+      "samples": {
+        "black": [
+          0.02446020022034645,
+          0.012191999703645706,
+          0.0038300100713968277
+        ],
+        "midgray": [
+          0.49335500597953796,
+          0.48451998829841614,
+          0.480430006980896
+        ],
+        "white": [
+          0.975051999092102,
+          0.9739530086517334,
+          0.9728080034255981
+        ]
+      }
+    },
+    {
+      "catalog_index": 26,
+      "name": "Cinema Warm 3",
+      "loader_address": "0x180445970",
+      "data_address": "0x196986280",
+      "file_offset": 379080320,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.01214620005339384,
+        0.009735260158777237,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "482cb3915630277361887c9f16816ee0c6f8c8e3c07428e2762f0e4081c63600",
+      "samples": {
+        "black": [
+          0.010055700317025185,
+          0.01214620005339384,
+          0.013199100270867348
+        ],
+        "midgray": [
+          0.5924620032310486,
+          0.556801974773407,
+          0.5185319781303406
+        ],
+        "white": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    },
+    {
+      "catalog_index": 27,
+      "name": "Cinema Warm 4",
+      "loader_address": "0x180445990",
+      "data_address": "0x196db6ecc",
+      "file_offset": 383474380,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.019302699714899063,
+        0.02020289935171604,
+        0.020828599110245705,
+        1.0
+      ],
+      "rgba_max": [
+        0.9899600148200989,
+        0.9941250085830688,
+        0.9907680153846741,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "a99ff7c8ca212ea3cf58c371d942c495f86e12477a9e78b8e2071f59ae543ded",
+      "samples": {
+        "black": [
+          0.019302699714899063,
+          0.02020289935171604,
+          0.020828599110245705
+        ],
+        "midgray": [
+          0.528099000453949,
+          0.5103229880332947,
+          0.4748300015926361
+        ],
+        "white": [
+          0.984969973564148,
+          0.9941250085830688,
+          0.9907680153846741
+        ]
+      }
+    },
+    {
+      "catalog_index": 28,
+      "name": "Cinema Warm 5",
+      "loader_address": "0x1804459b0",
+      "data_address": "0x1971e7b18",
+      "file_offset": 387868440,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.008392459712922573,
+        0.022842800244688988,
+        0.026260800659656525,
+        1.0
+      ],
+      "rgba_max": [
+        0.9964450001716614,
+        0.9833980202674866,
+        0.9631800055503845,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b42debe37cc9090a7e5b3684dccf112a980a2b9cefa3bb152612190ae7af9c62",
+      "samples": {
+        "black": [
+          0.010513500310480595,
+          0.025787699967622757,
+          0.026260800659656525
+        ],
+        "midgray": [
+          0.5908290147781372,
+          0.5470659732818604,
+          0.48812100291252136
+        ],
+        "white": [
+          0.9951779842376709,
+          0.9833369851112366,
+          0.9631800055503845
+        ]
+      }
+    },
+    {
+      "catalog_index": 29,
+      "name": "Cinema Warm 6",
+      "loader_address": "0x1804459d0",
+      "data_address": "0x197618764",
+      "file_offset": 392262500,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.008575569838285446,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9990689754486084,
+        0.9655600190162659,
+        0.9756309986114502,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "6af63192d2213e744b80b745a6ebc81bd160beb38323f366fb89ede38a4c86f1",
+      "samples": {
+        "black": [
+          0.01611349917948246,
+          0.013778899796307087,
+          0.016540799289941788
+        ],
+        "midgray": [
+          0.5796290040016174,
+          0.5553979873657227,
+          0.5229570269584656
+        ],
+        "white": [
+          0.9535970091819763,
+          0.9510800242424011,
+          0.9613789916038513
+        ]
+      }
+    },
+    {
+      "catalog_index": 30,
+      "name": "Cinema Warm 7",
+      "loader_address": "0x1804459f0",
+      "data_address": "0x197a493b0",
+      "file_offset": 396656560,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.009872590191662312,
+        0.015258999541401863,
+        0.02194250002503395,
+        1.0
+      ],
+      "rgba_max": [
+        0.9517049789428711,
+        0.9721829891204834,
+        0.9975129961967468,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "ee0bc24fe5b0fdf68aad54d3987314a100c864c7f328d6b6a3ea3f8f9331b490",
+      "samples": {
+        "black": [
+          0.010391400195658207,
+          0.015258999541401863,
+          0.028091900050640106
+        ],
+        "midgray": [
+          0.46794798970222473,
+          0.42803099751472473,
+          0.38602301478385925
+        ],
+        "white": [
+          0.9517049789428711,
+          0.9721829891204834,
+          0.9975129961967468
+        ]
+      }
+    },
+    {
+      "catalog_index": 31,
+      "name": "Cinema Warm 8",
+      "loader_address": "0x180445a10",
+      "data_address": "0x197e79ffc",
+      "file_offset": 401050620,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.023300500586628914,
+        0.01815819926559925,
+        1.0
+      ],
+      "rgba_max": [
+        0.9433889985084534,
+        0.9682919979095459,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "e7326b4f22027713c03bd0595bcd4a3b3f268c7e9e3ad8da9fdf85829f9aa029",
+      "samples": {
+        "black": [
+          0.0,
+          0.023300500586628914,
+          0.03749139979481697
+        ],
+        "midgray": [
+          0.42989200353622437,
+          0.4129849970340729,
+          0.38120099902153015
+        ],
+        "white": [
+          0.9433889985084534,
+          0.9682919979095459,
+          1.0
+        ]
+      }
+    },
+    {
+      "catalog_index": 32,
+      "name": "Cinema Warm 9",
+      "loader_address": "0x180445a30",
+      "data_address": "0x1982aac48",
+      "file_offset": 405444680,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.007568470202386379,
+        0.006836039945483208,
+        0.0054322099313139915,
+        1.0
+      ],
+      "rgba_max": [
+        0.9768670201301575,
+        0.9644309878349304,
+        0.9337610006332397,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "8030188309a252e8ae3d2de0bf402d47206440e7d0f9f1c859a8cad7beb8b57a",
+      "samples": {
+        "black": [
+          0.007568470202386379,
+          0.006836039945483208,
+          0.0054322099313139915
+        ],
+        "midgray": [
+          0.5068590044975281,
+          0.48461100459098816,
+          0.4483560025691986
+        ],
+        "white": [
+          0.9768670201301575,
+          0.9644309878349304,
+          0.9304190278053284
+        ]
+      }
+    },
+    {
+      "catalog_index": 33,
+      "name": "Cinema Warm 10",
+      "loader_address": "0x180445a50",
+      "data_address": "0x1986db894",
+      "file_offset": 409838740,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.010513500310480595,
+        0.012542899698019028,
+        0.015182700008153915,
+        1.0
+      ],
+      "rgba_max": [
+        0.9774619936943054,
+        0.9541770219802856,
+        0.9114980101585388,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "6d9a855b417c4e55722cbf34b3815e39269f381491adc477c241cce49d5a7300",
+      "samples": {
+        "black": [
+          0.010513500310480595,
+          0.012542899698019028,
+          0.015182700008153915
+        ],
+        "midgray": [
+          0.4752120077610016,
+          0.44930198788642883,
+          0.40595099329948425
+        ],
+        "white": [
+          0.9774619936943054,
+          0.9540860056877136,
+          0.9109330177307129
+        ]
+      }
+    },
+    {
+      "catalog_index": 34,
+      "name": "Cinema Warm 11",
+      "loader_address": "0x180445a70",
+      "data_address": "0x198b0c4e0",
+      "file_offset": 414232800,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.006652929820120335,
+        0.0047913300804793835,
+        0.001068130019120872,
+        1.0
+      ],
+      "rgba_max": [
+        0.9999690055847168,
+        0.9839320182800293,
+        0.9726409912109375,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "bed7ad98748099c62b8e310fc738c08f0839834fbe530aaf5ca38d9673a668c4",
+      "samples": {
+        "black": [
+          0.006652929820120335,
+          0.005874719936400652,
+          0.004531930200755596
+        ],
+        "midgray": [
+          0.5900359749794006,
+          0.569329023361206,
+          0.5444110035896301
+        ],
+        "white": [
+          0.9819790124893188,
+          0.9791709780693054,
+          0.9702140092849731
+        ]
+      }
+    },
+    {
+      "catalog_index": 35,
+      "name": "Commercial 1",
+      "loader_address": "0x180445a90",
+      "data_address": "0x198f3d12c",
+      "file_offset": 418626860,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.00018310800078324974,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9992679953575134,
+        0.9987949728965759,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "d97f8dbc1aacd720bffc79f3ff2e14365f78c675f82fc08ec11b1553eb8dd666",
+      "samples": {
+        "black": [
+          0.0001525900006527081,
+          0.00018310800078324974,
+          0.0024261800572276115
+        ],
+        "midgray": [
+          0.46840599179267883,
+          0.4522770047187805,
+          0.43979600071907043
+        ],
+        "white": [
+          0.9996029734611511,
+          0.9992679953575134,
+          0.9987949728965759
+        ]
+      }
+    },
+    {
+      "catalog_index": 36,
+      "name": "Commercial 2",
+      "loader_address": "0x180445ab0",
+      "data_address": "0x19936dd78",
+      "file_offset": 423020920,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9955139756202698,
+        0.9812309741973877,
+        0.9847260117530823,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "2f86ff0cc81ea4979262dd8f596db7b501c02b6fafdb740f074c15da3e310d6f",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "midgray": [
+          0.4857560098171234,
+          0.4899980127811432,
+          0.4868699908256531
+        ],
+        "white": [
+          0.9670559763908386,
+          0.9709159731864929,
+          0.972000002861023
+        ]
+      }
+    },
+    {
+      "catalog_index": 37,
+      "name": "Commercial 3",
+      "loader_address": "0x180445ad0",
+      "data_address": "0x19979e9c4",
+      "file_offset": 427414980,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9987949728965759,
+        0.9970549941062927,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "699a23c48520f78a2a5b1e67c132fc0004f1c8c04216136bb4bfebf149f2077b",
+      "samples": {
+        "black": [
+          0.0005188069771975279,
+          0.004715039860457182,
+          0.00936903990805149
+        ],
+        "midgray": [
+          0.5273209810256958,
+          0.5429620146751404,
+          0.5455250144004822
+        ],
+        "white": [
+          0.9981989860534668,
+          0.9987949728965759,
+          0.9970399737358093
+        ]
+      }
+    },
+    {
+      "catalog_index": 38,
+      "name": "Commercial 4",
+      "loader_address": "0x180445af0",
+      "data_address": "0x18bdb6a54",
+      "file_offset": 198923860,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9894559979438782,
+        0.9913330078125,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "8315e1354c660b127f3201bb24ce25fb5b305f42c4ac6e2253805bc7343a8b4c",
+      "samples": {
+        "black": [
+          0.030777400359511375,
+          0.0189363993704319,
+          0.0189363993704319
+        ],
+        "midgray": [
+          0.5220109820365906,
+          0.504692018032074,
+          0.495963990688324
+        ],
+        "white": [
+          0.9870449900627136,
+          0.9894559979438782,
+          0.9913330078125
+        ]
+      }
+    },
+    {
+      "catalog_index": 39,
+      "name": "Commercial 5",
+      "loader_address": "0x180445b10",
+      "data_address": "0x18c1e76a0",
+      "file_offset": 203317920,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.01568629965186119,
+        0.01963840052485466,
+        0.016876500099897385,
+        1.0
+      ],
+      "rgba_max": [
+        0.9709320068359375,
+        0.9688109755516052,
+        0.9428550004959106,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b066436f964f3a5da9a5ba853a16670b7fd76793a5ce258b91a757df77bd1345",
+      "samples": {
+        "black": [
+          0.019409500062465668,
+          0.01963840052485466,
+          0.022873299196362495
+        ],
+        "midgray": [
+          0.5727930068969727,
+          0.5582360029220581,
+          0.5315790176391602
+        ],
+        "white": [
+          0.9709320068359375,
+          0.9578999876976013,
+          0.9428550004959106
+        ]
+      }
+    },
+    {
+      "catalog_index": 40,
+      "name": "Commercial 6",
+      "loader_address": "0x180445b30",
+      "data_address": "0x18c6182ec",
+      "file_offset": 207711980,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.016784900799393654,
+        0.016143999993801117,
+        0.01690700091421604,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.985916018486023,
+        0.9888759851455688,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "61a4002d8f9d11f0500459639f3013e3c580b0488f15c04d4570d06750434ca4",
+      "samples": {
+        "black": [
+          0.016784900799393654,
+          0.016143999993801117,
+          0.01690700091421604
+        ],
+        "midgray": [
+          0.5492179989814758,
+          0.5413600206375122,
+          0.5327529907226562
+        ],
+        "white": [
+          0.9821770191192627,
+          0.9784079790115356,
+          0.9742270112037659
+        ]
+      }
+    },
+    {
+      "catalog_index": 41,
+      "name": "Commercial 7",
+      "loader_address": "0x180445b50",
+      "data_address": "0x18ca48f38",
+      "file_offset": 212106040,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.032517001032829285,
+        0.03210499882698059,
+        0.0317998006939888,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.988739013671875,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "4a62438207f2d20ea55ff9bcb6b35079252536c508f4b8752a7576b47658f605",
+      "samples": {
+        "black": [
+          0.03418020159006119,
+          0.032867901027202606,
+          0.031860798597335815
+        ],
+        "midgray": [
+          0.5514310002326965,
+          0.5646299719810486,
+          0.5760589838027954
+        ],
+        "white": [
+          0.9915469884872437,
+          0.9886929988861084,
+          0.989395022392273
+        ]
+      }
+    },
+    {
+      "catalog_index": 42,
+      "name": "Commercial 8",
+      "loader_address": "0x180445b70",
+      "data_address": "0x18ce79b84",
+      "file_offset": 216500100,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.01933320052921772,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9732660055160522,
+        0.9388269782066345,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "caf252d9b1b7205773ea1e85fd951a7c9d4f7385287598cca6f3381a973161bc",
+      "samples": {
+        "black": [
+          0.019562099128961563,
+          0.01963840052485466,
+          0.02037080004811287
+        ],
+        "midgray": [
+          0.5316089987754822,
+          0.5347679853439331,
+          0.529350996017456
+        ],
+        "white": [
+          1.0,
+          0.9696800112724304,
+          0.9369500279426575
+        ]
+      }
+    },
+    {
+      "catalog_index": 43,
+      "name": "Commercial 9",
+      "loader_address": "0x180445b90",
+      "data_address": "0x18d2aa7d0",
+      "file_offset": 220894160,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9942780137062073,
+        0.9884179830551147,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "1206c521d7fd6f590cb28adc381112f7a2c504b910e22b0b3d2453b2581dfa72",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "midgray": [
+          0.544152021408081,
+          0.5339279770851135,
+          0.5082629919052124
+        ],
+        "white": [
+          0.9983519911766052,
+          0.9941099882125854,
+          0.9835050106048584
+        ]
+      }
+    },
+    {
+      "catalog_index": 44,
+      "name": "Commercial 10",
+      "loader_address": "0x180445bb0",
+      "data_address": "0x18d6db41c",
+      "file_offset": 225288220,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.006897080224007368,
+        0.0067597501911222935,
+        0.006866559851914644,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9838560223579407,
+        0.9916689991950989,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b05f5462cd482bc96f47791ccbf79d740145d0d3eb5a53f54dbef16a8de09be8",
+      "samples": {
+        "black": [
+          0.006897080224007368,
+          0.0067597501911222935,
+          0.006866559851914644
+        ],
+        "midgray": [
+          0.5268329977989197,
+          0.5089799761772156,
+          0.48249000310897827
+        ],
+        "white": [
+          0.9826200008392334,
+          0.9821929931640625,
+          0.9707790017127991
+        ]
+      }
+    },
+    {
+      "catalog_index": 45,
+      "name": "Commercial 11",
+      "loader_address": "0x180445bd0",
+      "data_address": "0x18db0c068",
+      "file_offset": 229682280,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.025574099272489548,
+        0.02481120079755783,
+        0.02441439963877201,
+        1.0
+      ],
+      "rgba_max": [
+        0.982010006904602,
+        0.9671170115470886,
+        0.9664610028266907,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "1a4adef1a4d4faf2e9c2850f5433e2c9acfe05e23127958053bb90ce260b4032",
+      "samples": {
+        "black": [
+          0.025574099272489548,
+          0.02481120079755783,
+          0.02441439963877201
+        ],
+        "midgray": [
+          0.5129929780960083,
+          0.5358660221099854,
+          0.5306479930877686
+        ],
+        "white": [
+          0.9620199799537659,
+          0.9670559763908386,
+          0.9664610028266907
+        ]
+      }
+    },
+    {
+      "catalog_index": 46,
+      "name": "Commercial 12",
+      "loader_address": "0x180445bf0",
+      "data_address": "0x18df3ccb4",
+      "file_offset": 234076340,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9999690055847168,
+        1.0,
+        0.9838860034942627,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b596100fb84f29a4984fdc717eea4b1f7398438c708f5beb2d1925b847cd6919",
+      "samples": {
+        "black": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "midgray": [
+          0.5765619874000549,
+          0.5713890194892883,
+          0.5375750064849854
+        ],
+        "white": [
+          0.99822998046875,
+          1.0,
+          0.9752960205078125
+        ]
+      }
+    },
+    {
+      "catalog_index": 47,
+      "name": "Ethereal Green 1",
+      "loader_address": "0x180445c10",
+      "data_address": "0x18e36d900",
+      "file_offset": 238470400,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0002746619866229594,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9733420014381409,
+        0.9706569910049438,
+        0.9526820182800293,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "880397087df2be0968b618cdd308f4666db758a4b79297137b8596e3414406a1",
+      "samples": {
+        "black": [
+          0.005600059870630503,
+          0.005600059870630503,
+          0.005600059870630503
+        ],
+        "midgray": [
+          0.513329029083252,
+          0.4917829930782318,
+          0.47499799728393555
+        ],
+        "white": [
+          0.972258985042572,
+          0.9690240025520325,
+          0.9405660033226013
+        ]
+      }
+    },
+    {
+      "catalog_index": 48,
+      "name": "Ethereal Green 2",
+      "loader_address": "0x180445c30",
+      "data_address": "0x18e79e54c",
+      "file_offset": 242864460,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.006256199907511473,
+        0.028946399688720703,
+        0.012741300277411938,
+        1.0
+      ],
+      "rgba_max": [
+        0.9871670007705688,
+        0.9826509952545166,
+        0.9372239708900452,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b49cc659754b26d9942aab8108b2de3caecb2e61b92447b9594fd6fdc52feb89",
+      "samples": {
+        "black": [
+          0.021561000496149063,
+          0.029419399797916412,
+          0.035294100642204285
+        ],
+        "midgray": [
+          0.4516980051994324,
+          0.4530560076236725,
+          0.42717599868774414
+        ],
+        "white": [
+          0.976822018623352,
+          0.9732049703598022,
+          0.9342640042304993
+        ]
+      }
+    },
+    {
+      "catalog_index": 49,
+      "name": "Ethereal Green 3",
+      "loader_address": "0x180445c50",
+      "data_address": "0x18ebcf198",
+      "file_offset": 247258520,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.011703699827194214,
+        0.008438239805400372,
+        0.008529789745807648,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9962159991264343,
+        0.9657589793205261,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "904082f1570651b8259f709dd99ceccdbfbf67740548538bb5dd3ab34739ae84",
+      "samples": {
+        "black": [
+          0.011703699827194214,
+          0.008438239805400372,
+          0.008529789745807648
+        ],
+        "midgray": [
+          0.5079119801521301,
+          0.4995189905166626,
+          0.49019598960876465
+        ],
+        "white": [
+          1.0,
+          0.9962159991264343,
+          0.9655449986457825
+        ]
+      }
+    },
+    {
+      "catalog_index": 50,
+      "name": "Ethereal Green 4",
+      "loader_address": "0x180445c70",
+      "data_address": "0x18efffde4",
+      "file_offset": 251652580,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.008010989986360073,
+        0.019012700766324997,
+        0.016006700694561005,
+        1.0
+      ],
+      "rgba_max": [
+        0.9599599838256836,
+        0.9606009721755981,
+        0.9533680081367493,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "5188ee08c1c070363e180971e71a5535768426f4eda36382e37f885e3b8eaab3",
+      "samples": {
+        "black": [
+          0.014679200015962124,
+          0.019226400181651115,
+          0.019958799704909325
+        ],
+        "midgray": [
+          0.4986799955368042,
+          0.5068280100822449,
+          0.47983500361442566
+        ],
+        "white": [
+          0.9599599838256836,
+          0.9606009721755981,
+          0.9533680081367493
+        ]
+      }
+    },
+    {
+      "catalog_index": 51,
+      "name": "Ethereal Green 5",
+      "loader_address": "0x180445c90",
+      "data_address": "0x18f430a30",
+      "file_offset": 256046640,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.009231709875166416,
+        0.016098299995064735,
+        0.013321099802851677,
+        1.0
+      ],
+      "rgba_max": [
+        0.9959869980812073,
+        0.9850460290908813,
+        0.9779199957847595,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "bb784ad159401f648d13f591f285883401561605784584e3dff0f6bebaa86a80",
+      "samples": {
+        "black": [
+          0.014755499549210072,
+          0.01629660092294216,
+          0.014938600361347198
+        ],
+        "midgray": [
+          0.515296995639801,
+          0.544152021408081,
+          0.4903180003166199
+        ],
+        "white": [
+          0.9959869980812073,
+          0.9850460290908813,
+          0.9779199957847595
+        ]
+      }
+    },
+    {
+      "catalog_index": 52,
+      "name": "Ethereal Green 6",
+      "loader_address": "0x180445cb0",
+      "data_address": "0x18f86167c",
+      "file_offset": 260440700,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.004699780140072107,
+        0.022384999319911003,
+        0.02716110087931156,
+        1.0
+      ],
+      "rgba_max": [
+        0.9570459723472595,
+        0.9441829919815063,
+        0.9448840022087097,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "1f7ad62acac6a0c04e7ef7fcccd32126074e13acac632cdf180900be2b8ebbd4",
+      "samples": {
+        "black": [
+          0.004699780140072107,
+          0.022384999319911003,
+          0.02716110087931156
+        ],
+        "midgray": [
+          0.4673529863357544,
+          0.46076101064682007,
+          0.4292669892311096
+        ],
+        "white": [
+          0.9526050090789795,
+          0.9441829919815063,
+          0.9441670179367065
+        ]
+      }
+    },
+    {
+      "catalog_index": 53,
+      "name": "Ethereal Green 7",
+      "loader_address": "0x180445cd0",
+      "data_address": "0x18fc922c8",
+      "file_offset": 264834760,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.01568629965186119,
+        0.033341001719236374,
+        0.04313730075955391,
+        1.0
+      ],
+      "rgba_max": [
+        0.9722899794578552,
+        0.9708399772644043,
+        0.972823977470398,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "862453061e7ff2262f41068d7478cace8ed91c874000be64e53907ee92ad6b10",
+      "samples": {
+        "black": [
+          0.01568629965186119,
+          0.033341001719236374,
+          0.04313730075955391
+        ],
+        "midgray": [
+          0.4796519875526428,
+          0.4726940095424652,
+          0.4677959978580475
+        ],
+        "white": [
+          0.9569699764251709,
+          0.9595329761505127,
+          0.9722899794578552
+        ]
+      }
+    },
+    {
+      "catalog_index": 54,
+      "name": "Terra Tones 1",
+      "loader_address": "0x180445cf0",
+      "data_address": "0x1900c2f14",
+      "file_offset": 269228820,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9971920251846313,
+        0.9946900010108948,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "f74dce68f79715571a2c680a1609f4f96a20fd8fcae4c74b3010574bd4af6e86",
+      "samples": {
+        "black": [
+          0.00018310800078324974,
+          0.00010681300045689568,
+          7.629510218976066e-05
+        ],
+        "midgray": [
+          0.5279930233955383,
+          0.5025709867477417,
+          0.4580000042915344
+        ],
+        "white": [
+          0.9943689703941345,
+          0.9971920251846313,
+          0.9946900010108948
+        ]
+      }
+    },
+    {
+      "catalog_index": 55,
+      "name": "Terra Tones 2",
+      "loader_address": "0x180445d10",
+      "data_address": "0x1904f3b60",
+      "file_offset": 273622880,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9998779892921448,
+        0.9930880069732666,
+        0.9893029928207397,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "55e8a92072b7eb7c946ddbe08cb0d04b71d65e631cb02ea41b6ca3767d3231b3",
+      "samples": {
+        "black": [
+          0.0001525900006527081,
+          0.00010681300045689568,
+          0.00010681300045689568
+        ],
+        "midgray": [
+          0.5065839886665344,
+          0.4929119944572449,
+          0.47193101048469543
+        ],
+        "white": [
+          0.9884340167045593,
+          0.9930880069732666,
+          0.9893029928207397
+        ]
+      }
+    },
+    {
+      "catalog_index": 56,
+      "name": "Terra Tones 3",
+      "loader_address": "0x180445d30",
+      "data_address": "0x1909247ac",
+      "file_offset": 278016940,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9997100234031677,
+        0.9957119822502136,
+        0.9915310144424438,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "fbf4b647ff2b3d0e96267bf8efc4ede47f4f713bbcfcd950e3b9c74c64ddd78d",
+      "samples": {
+        "black": [
+          0.0003356979868840426,
+          0.00941482000052929,
+          0.018783900886774063
+        ],
+        "midgray": [
+          0.5032879710197449,
+          0.5002819895744324,
+          0.486640989780426
+        ],
+        "white": [
+          0.994156002998352,
+          0.9957119822502136,
+          0.9903720021247864
+        ]
+      }
+    },
+    {
+      "catalog_index": 57,
+      "name": "Terra Tones 4",
+      "loader_address": "0x180445d50",
+      "data_address": "0x190d553f8",
+      "file_offset": 282411000,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0005188069771975279,
+        0.007110700011253357,
+        0.00028992100851610303,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9984740018844604,
+        0.9944149851799011,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "0c04175b61f8e0fb60839dd17fbd0b1299b0a589c5da9549be44a7cc82b0e19f",
+      "samples": {
+        "black": [
+          0.0005188069771975279,
+          0.009338519535958767,
+          0.00028992100851610303
+        ],
+        "midgray": [
+          0.5030750036239624,
+          0.48548099398612976,
+          0.46553701162338257
+        ],
+        "white": [
+          0.9980159997940063,
+          0.9984740018844604,
+          0.9944149851799011
+        ]
+      }
+    },
+    {
+      "catalog_index": 58,
+      "name": "Terra Tones 5",
+      "loader_address": "0x180445d70",
+      "data_address": "0x191186044",
+      "file_offset": 286805060,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9901120066642761,
+        0.9850770235061646,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "f8a92a2ae02f8ef101170f169af0a8d894bf54c2e1ef8ce3888718f9eeb3372f",
+      "samples": {
+        "black": [
+          0.03088429942727089,
+          0.00952162966132164,
+          0.00717173982411623
+        ],
+        "midgray": [
+          0.5816429853439331,
+          0.556863009929657,
+          0.518090009689331
+        ],
+        "white": [
+          0.9760130047798157,
+          0.9834589958190918,
+          0.9850770235061646
+        ]
+      }
+    },
+    {
+      "catalog_index": 59,
+      "name": "Terra Tones 6",
+      "loader_address": "0x180445d90",
+      "data_address": "0x1915b6c90",
+      "file_offset": 291199120,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9995269775390625,
+        0.998458981513977,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "e6f18e3eeb5a1bcaebb91b0a989515d97db78253684a39310cdf3bf76d12bdc8",
+      "samples": {
+        "black": [
+          0.01672389917075634,
+          0.011978300288319588,
+          0.00952162966132164
+        ],
+        "midgray": [
+          0.5370110273361206,
+          0.5419849753379822,
+          0.5081859827041626
+        ],
+        "white": [
+          0.9988099932670593,
+          0.9995269775390625,
+          0.998458981513977
+        ]
+      }
+    },
+    {
+      "catalog_index": 60,
+      "name": "Terra Tones 7",
+      "loader_address": "0x180445db0",
+      "data_address": "0x1919e78dc",
+      "file_offset": 295593180,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.005172810051590204,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9837639927864075,
+        0.9875329732894897,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "f941adb6348414b715b3e61301d0353dd491c1fd9b521751370e15d15c6276ee",
+      "samples": {
+        "black": [
+          0.025574099272489548,
+          0.005172810051590204,
+          0.005172810051590204
+        ],
+        "midgray": [
+          0.5335010290145874,
+          0.5066609978675842,
+          0.4796220064163208
+        ],
+        "white": [
+          0.9838560223579407,
+          0.9837639927864075,
+          0.9875329732894897
+        ]
+      }
+    },
+    {
+      "catalog_index": 61,
+      "name": "Terra Tones 8",
+      "loader_address": "0x180445dd0",
+      "data_address": "0x191e18528",
+      "file_offset": 299987240,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9898070096969604,
+        0.9864649772644043,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "477a121e776f6fbbb1a280e2f1518f3879b1a00d5c29e60cf50f33ba9a9c0da5",
+      "samples": {
+        "black": [
+          0.033249400556087494,
+          0.007766840048134327,
+          0.007690549828112125
+        ],
+        "midgray": [
+          0.5256580114364624,
+          0.5128250122070312,
+          0.5027080178260803
+        ],
+        "white": [
+          0.9673460125923157,
+          0.9820860028266907,
+          0.9833980202674866
+        ]
+      }
+    },
+    {
+      "catalog_index": 62,
+      "name": "Terra Tones 9",
+      "loader_address": "0x180445df0",
+      "data_address": "0x192249174",
+      "file_offset": 304381300,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0010986500419676304,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.970550000667572,
+        0.9503170251846313,
+        0.9276570081710815,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "9eae76d876c0b2b6621cd52307b75491ea9e2728573d75817929a4a1940c1bfe",
+      "samples": {
+        "black": [
+          0.015670999884605408,
+          0.01322960015386343,
+          0.008773939684033394
+        ],
+        "midgray": [
+          0.4926680028438568,
+          0.4899060130119324,
+          0.4652929902076721
+        ],
+        "white": [
+          0.937529981136322,
+          0.936706006526947,
+          0.9071339964866638
+        ]
+      }
+    },
+    {
+      "catalog_index": 63,
+      "name": "Terra Tones 10",
+      "loader_address": "0x180445e10",
+      "data_address": "0x192679dc0",
+      "file_offset": 308775360,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0001525900006527081,
+        0.00018310800078324974,
+        0.0016937500331550837,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9992679953575134,
+        1.0,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "8978af8038f331ae172612fafc748a4394447f7f08e1aaffa869d13fe2b28beb",
+      "samples": {
+        "black": [
+          0.0001525900006527081,
+          0.00018310800078324974,
+          0.0024261800572276115
+        ],
+        "midgray": [
+          0.5174639821052551,
+          0.5008929967880249,
+          0.48198699951171875
+        ],
+        "white": [
+          0.9996029734611511,
+          0.9992679953575134,
+          0.9987949728965759
+        ]
+      }
+    },
+    {
+      "catalog_index": 64,
+      "name": "Terra Tones 11",
+      "loader_address": "0x180445e30",
+      "data_address": "0x188f9e310",
+      "file_offset": 150589200,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.009735260158777237,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        0.9808040261268616,
+        0.9647060036659241,
+        0.9560390114784241,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "b425bdb93a8371f6cfba7857527c91f2a8732aa636a8f568e7dd0a46b3d57275",
+      "samples": {
+        "black": [
+          0.009674220345914364,
+          0.009735260158777237,
+          0.012207199819386005
+        ],
+        "midgray": [
+          0.5400170087814331,
+          0.535194993019104,
+          0.5014569759368896
+        ],
+        "white": [
+          0.9670100212097168,
+          0.9647060036659241,
+          0.9560390114784241
+        ]
+      }
+    },
+    {
+      "catalog_index": 65,
+      "name": "Terra Tones 12",
+      "loader_address": "0x180445e50",
+      "data_address": "0x1893cef5c",
+      "file_offset": 154983260,
+      "dimension": 65,
+      "entries": 274625,
+      "stored_channels": 4,
+      "storage": "little-endian float32 RGBA, red-fast grid",
+      "rgba_min": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "rgba_max": [
+        1.0,
+        0.9992070198059082,
+        0.998458981513977,
+        1.0
+      ],
+      "payload_bytes": 4394016,
+      "payload_sha256": "45098911a835c2786601f3032d2f507d7fa47749895b5bf277fa86793d689d4b",
+      "samples": {
+        "black": [
+          0.012054599821567535,
+          0.009597919881343842,
+          0.00717173982411623
+        ],
+        "midgray": [
+          0.5245440006256104,
+          0.5252159833908081,
+          0.5027700066566467
+        ],
+        "white": [
+          0.9988099932670593,
+          0.9992070198059082,
+          0.998458981513977
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Inventory does not validate which input/output encoding and interpolation the render pipeline uses",
+    "No render, licensing activation, or extraction of assets for redistribution performed"
+  ]
+}

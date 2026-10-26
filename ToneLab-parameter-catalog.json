@@ -1,0 +1,1450 @@
+{
+  "target_sha256": "f74ecc8a51d1f75918304e214c6b40844ead89767895f3d65a80d4736d1cd27e",
+  "method": "decoded metadata-constructor CPU emulation with empty local user state",
+  "group_count": 13,
+  "control_count": 126,
+  "control_types": {
+    "button": 18,
+    "choice": 17,
+    "double": 73,
+    "boolean": 16,
+    "label": 1,
+    "hidden_string": 1
+  },
+  "groups": [
+    {
+      "id": "LutGroup",
+      "label": "LUTs",
+      "open_by_default": true,
+      "metadata_address": "0x4000001000",
+      "controls": [
+        {
+          "id": "PurchaseFull",
+          "type": "button",
+          "label": "Purchase license",
+          "hint": "Purchase a full license to unlock all features",
+          "metadata_address": "0x4000010060"
+        },
+        {
+          "id": "Renew",
+          "type": "button",
+          "label": "Renew subscription",
+          "hint": "Your ToneLab subscription has expired. Click to renew and restore editing.",
+          "metadata_address": "0x40000100b8"
+        },
+        {
+          "id": "ConversionLut",
+          "label": "Conversion LUT",
+          "hint": "Conversion LUT",
+          "type": "choice",
+          "options": [
+            "None",
+            "Apple Log (iPhone)",
+            "Apple Log 2 (iPhone)",
+            "Blackmagic BRAW",
+            "Canon C-Log 1",
+            "Canon C-Log 2",
+            "Canon C-Log 3",
+            "DJI D-Log (Mavic 3)",
+            "DJI D-Log (Mavic 4/Zenmuse X9)",
+            "DJI D-Log Vivid (Mavic 4)",
+            "DJI D-Log M (Mavic 4)",
+            "DJI D-Log M Vivid",
+            "DJI D-Log M",
+            "DJI D-Log 2",
+            "Freefly Ember (HLG neutral)",
+            "Freefly Ember (HLG vivid)",
+            "Freefly Ember (Rec709)",
+            "Fujifilm F-Log",
+            "Fujifilm F-Log 2",
+            "GoPro Log",
+            "Insta360 I-Log",
+            "Nikon N-Log",
+            "Panasonic V-Log",
+            "RED RAW (RWG Log3G10)",
+            "Sony S-Log 3 (SGamut3 Cine)",
+            "Sony S-Log 2",
+            "Arri C3",
+            "Arri C4",
+            "GoPro Log2",
+            "Olympus Log",
+            "Samsung Log",
+            "GoPro Log2 (V1)"
+          ],
+          "default": "None",
+          "default_index": 0,
+          "metadata_address": "0x4000010110"
+        },
+        {
+          "id": "CreativeLut",
+          "label": "Creative LUT",
+          "hint": "Creative LUT",
+          "type": "choice",
+          "options": [
+            "None"
+          ],
+          "default": "None",
+          "default_index": 0,
+          "metadata_address": "0x4000010168"
+        },
+        {
+          "id": "PrevLut",
+          "type": "button",
+          "label": "Prev LUT",
+          "hint": "Previous LUT",
+          "metadata_address": "0x40000101c0"
+        },
+        {
+          "id": "NextLut",
+          "type": "button",
+          "label": "Next LUT",
+          "hint": "Next LUT",
+          "metadata_address": "0x4000010218"
+        },
+        {
+          "id": "CreativeIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Intensity",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000010270"
+        }
+      ]
+    },
+    {
+      "id": "BasicGroup",
+      "label": "Basic Adjustments",
+      "open_by_default": false,
+      "metadata_address": "0x4000001058",
+      "controls": [
+        {
+          "id": "BasicEnable",
+          "type": "boolean",
+          "label": "Enable",
+          "hint": "Enable",
+          "default": true,
+          "metadata_address": "0x40000104e0"
+        },
+        {
+          "id": "Exposure",
+          "type": "double",
+          "label": "Exposure",
+          "hint": "Exposure (stops) - applied in scene-linear before the conversion",
+          "display_min": -4.0,
+          "display_max": 4.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010538"
+        },
+        {
+          "id": "Lift",
+          "type": "double",
+          "label": "Lift",
+          "hint": "Raises (+) or deepens (-) the blacks; white stays anchored",
+          "display_min": -100.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010590"
+        },
+        {
+          "id": "Gamma",
+          "type": "double",
+          "label": "Gamma",
+          "hint": "Brightens (+) or darkens (-) the midtones; black and white stay anchored",
+          "display_min": -100.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x40000105e8"
+        },
+        {
+          "id": "Gain",
+          "type": "double",
+          "label": "Gain",
+          "hint": "Scales the whites (±1 stop); black stays anchored",
+          "display_min": -100.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010640"
+        },
+        {
+          "id": "Highlights",
+          "type": "double",
+          "label": "Highlights",
+          "hint": "Recover (-) or lift (+) the brightest tones",
+          "display_min": -200.0,
+          "display_max": 200.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010698"
+        },
+        {
+          "id": "Temperature",
+          "type": "double",
+          "label": "Temperature",
+          "hint": "White balance temperature (warmer +, cooler -)",
+          "display_min": -100.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x40000106f0"
+        },
+        {
+          "id": "Tint",
+          "type": "double",
+          "label": "Tint",
+          "hint": "White balance tint (magenta +, green -)",
+          "display_min": -60.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010748"
+        },
+        {
+          "id": "Saturation",
+          "type": "double",
+          "label": "Saturation",
+          "hint": "Saturation",
+          "display_min": 0.0,
+          "display_max": 2.0,
+          "default": 1.0,
+          "metadata_address": "0x40000107a0"
+        },
+        {
+          "id": "Contrast",
+          "type": "double",
+          "label": "Contrast",
+          "hint": "Contrast",
+          "display_min": 0.6,
+          "display_max": 2.0,
+          "default": 1.0,
+          "metadata_address": "0x40000107f8"
+        },
+        {
+          "id": "Fade",
+          "type": "double",
+          "label": "Fade",
+          "hint": "Lifts and softens the blacks for a faded film look",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010850"
+        },
+        {
+          "id": "ColourRichness",
+          "type": "double",
+          "label": "Colour Richness",
+          "hint": "Global colour density - deepens colours without oversaturating",
+          "display_min": -100.0,
+          "display_max": 100.0,
+          "default": 0.0,
+          "metadata_address": "0x40000108a8"
+        },
+        {
+          "id": "BleachBypass",
+          "type": "double",
+          "label": "Bleach Bypass",
+          "hint": "Silver-retention film process - desaturated, high-contrast look",
+          "display_min": 0.0,
+          "display_max": 80.0,
+          "default": 0.0,
+          "metadata_address": "0x4000010900"
+        },
+        {
+          "id": "BasicIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Overall strength of the basic adjustments (wet/dry mix)",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000010958"
+        },
+        {
+          "id": "ResetBasic",
+          "type": "button",
+          "label": "Reset Basic Adjustments",
+          "hint": "Reset basic adjustments to defaults",
+          "metadata_address": "0x40000109b0"
+        }
+      ]
+    },
+    {
+      "id": "BwGroup",
+      "label": "Black & White Point",
+      "open_by_default": false,
+      "metadata_address": "0x40000010b0",
+      "controls": [
+        {
+          "id": "BwEnable",
+          "type": "boolean",
+          "label": "Enable",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x4000010a60"
+        },
+        {
+          "id": "BwPreset",
+          "label": "Preset",
+          "hint": "Predefined Black & White Point looks - selecting one fills in the sliders below.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "More Range",
+            "Less Contrast",
+            "Dark Shadows"
+          ],
+          "default": "More Range",
+          "default_index": 1,
+          "metadata_address": "0x4000010ab8"
+        },
+        {
+          "id": "BlackPoint",
+          "type": "double",
+          "label": "Black Point",
+          "hint": "Black point (-45..+45)",
+          "display_min": -45.0,
+          "display_max": 45.0,
+          "default": 4.0,
+          "metadata_address": "0x4000010b10"
+        },
+        {
+          "id": "WhitePoint",
+          "type": "double",
+          "label": "White Point",
+          "hint": "White point (-100..+100)",
+          "display_min": -100.0,
+          "display_max": 100.0,
+          "default": -10.0,
+          "metadata_address": "0x4000010b68"
+        },
+        {
+          "id": "ColorMode",
+          "label": "Color Mode",
+          "hint": "Color mode",
+          "type": "choice",
+          "options": [
+            "Normal",
+            "RGB",
+            "Luma"
+          ],
+          "default": "Normal",
+          "default_index": 0,
+          "metadata_address": "0x4000010bc0"
+        },
+        {
+          "id": "BwIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Overall strength of the black & white point adjustment (wet/dry mix)",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000010c18"
+        },
+        {
+          "id": "ResetBw",
+          "type": "button",
+          "label": "Reset Black & White Point",
+          "hint": "Reset Black & White Point to defaults",
+          "metadata_address": "0x4000010c70"
+        }
+      ]
+    },
+    {
+      "id": "CustomLutGroup",
+      "label": "Custom LUT",
+      "open_by_default": false,
+      "metadata_address": "0x4000001108",
+      "controls": [
+        {
+          "id": "CustomLut",
+          "label": "Custom LUT",
+          "hint": "Custom LUT slot",
+          "type": "choice",
+          "options": [
+            "None",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "default": "None",
+          "default_index": 0,
+          "metadata_address": "0x40000121a0"
+        },
+        {
+          "id": "CustomLutFilename",
+          "type": "label",
+          "label": "File Name",
+          "hint": "Currently loaded file for the selected slot",
+          "metadata_address": "0x40000121f8"
+        },
+        {
+          "id": "LoadCustomLut",
+          "type": "button",
+          "label": "Load Custom LUT...",
+          "hint": "Load one or more .cube or .3dl files",
+          "metadata_address": "0x4000012250"
+        },
+        {
+          "id": "PrevCustomLut",
+          "type": "button",
+          "label": "Prev LUT",
+          "hint": "Previous custom LUT",
+          "metadata_address": "0x40000122a8"
+        },
+        {
+          "id": "NextCustomLut",
+          "type": "button",
+          "label": "Next LUT",
+          "hint": "Next custom LUT",
+          "metadata_address": "0x4000012300"
+        },
+        {
+          "id": "CustomIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Custom LUT intensity",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000012358"
+        },
+        {
+          "id": "CustomLutSlotMap",
+          "type": "hidden_string",
+          "metadata_address": "0x40000123b0"
+        }
+      ]
+    },
+    {
+      "id": "FinishingGroup",
+      "label": "Finishing Tones",
+      "open_by_default": false,
+      "metadata_address": "0x4000001160",
+      "controls": [
+        {
+          "id": "FinishingTones",
+          "label": "Finishing Tones",
+          "hint": "Finishing tones preset",
+          "type": "choice",
+          "options": [
+            "None",
+            "Clean Blue Mono",
+            "Deep Blue Pop",
+            "Muted Blue Steel",
+            "Teal & Aqua Split",
+            "Cine Green Highs",
+            "Vivid Green Highs",
+            "Pale Green Soften",
+            "Earthy Warm Green",
+            "Dark Green Mood",
+            "Rich Gold Glow",
+            "Shadow Red Cast",
+            "Classic Retro Film",
+            "Azure Noir",
+            "Evergreen",
+            "Moss",
+            "Teal Noir",
+            "Vintage Wish"
+          ],
+          "default": "None",
+          "default_index": 0,
+          "metadata_address": "0x4000012540"
+        },
+        {
+          "id": "PrevFinishingTone",
+          "type": "button",
+          "label": "Prev Tones",
+          "hint": "Previous finishing tone",
+          "metadata_address": "0x4000012598"
+        },
+        {
+          "id": "NextFinishingTone",
+          "type": "button",
+          "label": "Next Tones",
+          "hint": "Next finishing tone",
+          "metadata_address": "0x40000125f0"
+        },
+        {
+          "id": "FinishingIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Finishing tones intensity",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 50.0,
+          "metadata_address": "0x4000012648"
+        }
+      ]
+    },
+    {
+      "id": "SplitToningGroup",
+      "label": "Split Tone",
+      "open_by_default": false,
+      "metadata_address": "0x40000011b8",
+      "controls": [
+        {
+          "id": "SplitToningEnable",
+          "type": "boolean",
+          "label": "Enable",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x4000012700"
+        },
+        {
+          "id": "SplitToningPreset",
+          "label": "Preset",
+          "hint": "Predefined split-toning looks - selecting one fills in the sliders below.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "Teal & Orange",
+            "Cool Shadows",
+            "Warm Highlights",
+            "Bleach Bypass",
+            "Cross Process"
+          ],
+          "default": "Teal & Orange",
+          "default_index": 1,
+          "metadata_address": "0x4000012758"
+        },
+        {
+          "id": "SplitProtectNeutrals",
+          "type": "boolean",
+          "label": "Correct Neutrals",
+          "hint": "Reduce the tint on near-neutral pixels so only colored areas shift",
+          "default": true,
+          "metadata_address": "0x40000127b0"
+        },
+        {
+          "id": "SplitAmount",
+          "type": "double",
+          "label": "Amount",
+          "hint": "Master split-tone strength",
+          "display_min": 0.0,
+          "display_max": 0.4,
+          "default": 0.3,
+          "metadata_address": "0x4000012808"
+        },
+        {
+          "id": "SplitHueAngle",
+          "type": "double",
+          "label": "Hue",
+          "hint": "Highlight hue in degrees; shadows get the complementary (180° offset)",
+          "display_min": 0.0,
+          "display_max": 360.0,
+          "default": 20.0,
+          "metadata_address": "0x4000012860"
+        },
+        {
+          "id": "SplitPivot",
+          "type": "double",
+          "label": "Balance",
+          "hint": "Tonal balance point where shadows and highlights split (0..1)",
+          "display_min": 0.0,
+          "display_max": 1.0,
+          "default": 0.3,
+          "metadata_address": "0x40000128b8"
+        },
+        {
+          "id": "SplitIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Overall strength of the split toning (wet/dry mix)",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000012910"
+        },
+        {
+          "id": "ResetSplitToning",
+          "type": "button",
+          "label": "Reset Split Tone",
+          "hint": "Reset split toning to defaults",
+          "metadata_address": "0x4000012968"
+        }
+      ]
+    },
+    {
+      "id": "SkinTonesGroup",
+      "label": "Skin Tones",
+      "open_by_default": false,
+      "metadata_address": "0x4000001210",
+      "controls": [
+        {
+          "id": "SkinEnable",
+          "type": "boolean",
+          "label": "Enable",
+          "hint": "Enable skin tones adjustment",
+          "default": false,
+          "metadata_address": "0x4000012a20"
+        },
+        {
+          "id": "SkinPreset",
+          "label": "Skin Preset",
+          "hint": "Skin tones preset",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "Vibrant",
+            "Muted",
+            "Cool / Neutralize Red",
+            "Warm / Add Warmth",
+            "Matte / Reduce Shine"
+          ],
+          "default": "Vibrant",
+          "default_index": 1,
+          "metadata_address": "0x4000012a78"
+        },
+        {
+          "id": "SkinSaturate",
+          "type": "double",
+          "label": "Saturate Skin",
+          "hint": "Skin saturation",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.2,
+          "metadata_address": "0x4000012ad0"
+        },
+        {
+          "id": "SkinColour",
+          "type": "double",
+          "label": "Skin Luminance",
+          "hint": "Skin luminance / density",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000012b28"
+        },
+        {
+          "id": "SkinPop",
+          "type": "double",
+          "label": "Skin tone",
+          "hint": "Skin hue rotation (degrees)",
+          "display_min": -60.0,
+          "display_max": 60.0,
+          "default": 0.0,
+          "metadata_address": "0x4000012b80"
+        },
+        {
+          "id": "SkinCenter",
+          "type": "double",
+          "label": "Tone center",
+          "hint": "Skin tone selection center offset",
+          "display_min": -30.0,
+          "display_max": 30.0,
+          "default": 0.0,
+          "metadata_address": "0x4000012bd8"
+        },
+        {
+          "id": "SkinRange",
+          "type": "double",
+          "label": "Tone range",
+          "hint": "Skin tone selection range",
+          "display_min": 15.0,
+          "display_max": 65.0,
+          "default": 40.0,
+          "metadata_address": "0x4000012c30"
+        },
+        {
+          "id": "SkinBrightness",
+          "type": "double",
+          "label": "Brightness center",
+          "hint": "Luma selection center",
+          "display_min": 0.0,
+          "display_max": 1.0,
+          "default": 0.5,
+          "metadata_address": "0x4000012c88"
+        },
+        {
+          "id": "SkinBrightnessRange",
+          "type": "double",
+          "label": "Brightness Range",
+          "hint": "Luma selection range",
+          "display_min": 0.25,
+          "display_max": 1.75,
+          "default": 1.0,
+          "metadata_address": "0x4000012ce0"
+        },
+        {
+          "id": "ShowSkinSelection",
+          "type": "boolean",
+          "label": "Show Mask",
+          "hint": "Show the skin tone selection mask",
+          "default": false,
+          "metadata_address": "0x4000012d38"
+        },
+        {
+          "id": "SkinIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Skin tones intensity",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000012d90"
+        },
+        {
+          "id": "ResetSkinTones",
+          "type": "button",
+          "label": "Reset Skin Tones",
+          "hint": "Reset skin tones to defaults",
+          "metadata_address": "0x4000012de8"
+        }
+      ]
+    },
+    {
+      "id": "ColorIntensityGroup",
+      "label": "Color Punch",
+      "open_by_default": false,
+      "metadata_address": "0x4000001268",
+      "controls": [
+        {
+          "id": "ColorIntensityEnable",
+          "type": "boolean",
+          "label": "Enable",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x4000013da0"
+        },
+        {
+          "id": "ColorIntensityPreset",
+          "label": "Preset",
+          "hint": "Predefined Color Punch looks - selecting one fills in the sliders below.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "Punch / Vibrant",
+            "Warm UP",
+            "De-Blue",
+            "Cool Down",
+            "De-Warm",
+            "De-Green",
+            "Lush"
+          ],
+          "default": "Punch / Vibrant",
+          "default_index": 1,
+          "metadata_address": "0x4000013df8"
+        },
+        {
+          "id": "ColorIntensityGlobal",
+          "type": "double",
+          "label": "Global",
+          "hint": "Overall saturation multiplier",
+          "display_min": 0.0,
+          "display_max": 2.0,
+          "default": 1.25,
+          "metadata_address": "0x4000013e50"
+        },
+        {
+          "id": "ColorIntensityRed",
+          "type": "double",
+          "label": "Red",
+          "hint": "Per-hue saturation adjustment for reds",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000013ea8"
+        },
+        {
+          "id": "ColorIntensityYellow",
+          "type": "double",
+          "label": "Yellow",
+          "hint": "Per-hue saturation adjustment for yellows",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000013f00"
+        },
+        {
+          "id": "ColorIntensityGreen",
+          "type": "double",
+          "label": "Green",
+          "hint": "Per-hue saturation adjustment for greens",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000013f58"
+        },
+        {
+          "id": "ColorIntensityCyan",
+          "type": "double",
+          "label": "Cyan",
+          "hint": "Per-hue saturation adjustment for cyans",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000013fb0"
+        },
+        {
+          "id": "ColorIntensityBlue",
+          "type": "double",
+          "label": "Blue",
+          "hint": "Per-hue saturation adjustment for blues",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000014008"
+        },
+        {
+          "id": "ColorIntensityMagenta",
+          "type": "double",
+          "label": "Magenta",
+          "hint": "Per-hue saturation adjustment for magentas",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000014060"
+        },
+        {
+          "id": "ColorIntensityHighlight",
+          "type": "boolean",
+          "label": "Highlight",
+          "hint": "Restrict the per-color adjustment to highlights",
+          "default": false,
+          "metadata_address": "0x40000140b8"
+        },
+        {
+          "id": "ColorIntensityIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Overall color intensity strength",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000014110"
+        },
+        {
+          "id": "ResetColorIntensity",
+          "type": "button",
+          "label": "Reset Color Intensity",
+          "hint": "Reset color intensity to defaults",
+          "metadata_address": "0x4000014168"
+        }
+      ]
+    },
+    {
+      "id": "VignetteGroup",
+      "label": "Vignette",
+      "open_by_default": false,
+      "metadata_address": "0x40000012c0",
+      "controls": [
+        {
+          "id": "VignetteEnable",
+          "type": "boolean",
+          "label": "Enabled",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x4000014220"
+        },
+        {
+          "id": "VignettePreset",
+          "label": "Preset",
+          "hint": "Predefined vignette looks - selecting one fills in the sliders below.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "Whisper",
+            "Focus",
+            "Spotlight",
+            "Letterbox"
+          ],
+          "default": "Whisper",
+          "default_index": 1,
+          "metadata_address": "0x4000014278"
+        },
+        {
+          "id": "VignetteExposure",
+          "type": "double",
+          "label": "Amount",
+          "hint": "Brightness applied at the vignette edges (stops)",
+          "display_min": -2.3,
+          "display_max": 1.1,
+          "default": -0.25,
+          "metadata_address": "0x40000142d0"
+        },
+        {
+          "id": "VignetteSize",
+          "type": "double",
+          "label": "Size",
+          "hint": "Inner clear radius (0..100)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 60.0,
+          "metadata_address": "0x4000014328"
+        },
+        {
+          "id": "VignetteFeather",
+          "type": "double",
+          "label": "Feather",
+          "hint": "Softness of the falloff (0..100)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 100.0,
+          "metadata_address": "0x4000014380"
+        },
+        {
+          "id": "VignetteAspectRatio",
+          "type": "double",
+          "label": "Aspect Ratio",
+          "hint": "Shape aspect (negative = vertical, positive = horizontal)",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": -0.333,
+          "metadata_address": "0x40000143d8"
+        },
+        {
+          "id": "VignetteCenterX",
+          "type": "double",
+          "label": "Center X",
+          "hint": "Horizontal center offset (-1..+1)",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000014430"
+        },
+        {
+          "id": "VignetteCenterY",
+          "type": "double",
+          "label": "Center Y",
+          "hint": "Vertical center offset (-1..+1)",
+          "display_min": -1.0,
+          "display_max": 1.0,
+          "default": 0.0,
+          "metadata_address": "0x4000014488"
+        },
+        {
+          "id": "VignetteMaskMode",
+          "type": "boolean",
+          "label": "Show Mask",
+          "hint": "Preview the vignette mask as grayscale",
+          "default": false,
+          "metadata_address": "0x40000144e0"
+        },
+        {
+          "id": "VignetteIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Overall strength of the vignette (wet/dry mix)",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000014538"
+        },
+        {
+          "id": "ResetVignette",
+          "type": "button",
+          "label": "Reset Vignette",
+          "hint": "Reset vignette to defaults",
+          "metadata_address": "0x4000014590"
+        }
+      ]
+    },
+    {
+      "id": "GrainGroup",
+      "label": "Film Grain",
+      "open_by_default": false,
+      "metadata_address": "0x4000001318",
+      "controls": [
+        {
+          "id": "GrainEnable",
+          "type": "boolean",
+          "label": "Enabled",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x4000012ee0"
+        },
+        {
+          "id": "GrainPreset",
+          "label": "Preset",
+          "hint": "Film stock / ISO - fills in all sliders below.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "Heavy · Low",
+            "Heavy · High",
+            "Bold · Low",
+            "Bold · High",
+            "Light · Low",
+            "Light · High",
+            "Fine · Low",
+            "Fine · High"
+          ],
+          "default": "Light · High",
+          "default_index": 6,
+          "metadata_address": "0x4000012f38"
+        },
+        {
+          "id": "GrainScale",
+          "type": "double",
+          "label": "Grain size",
+          "hint": "grain texel size - 1 = fine (65mm), 48 = coarse (8mm)",
+          "display_min": 1.0,
+          "display_max": 50.0,
+          "default": 12.0,
+          "metadata_address": "0x4000012f90"
+        },
+        {
+          "id": "GrainAmount",
+          "type": "double",
+          "label": "Grain strength",
+          "hint": "master amount (0..100)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 35.0,
+          "metadata_address": "0x4000012fe8"
+        },
+        {
+          "id": "GrainHighlights",
+          "type": "double",
+          "label": "Grain in highlights",
+          "hint": "highlight zone weight (0..100)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 65.0,
+          "metadata_address": "0x4000013040"
+        },
+        {
+          "id": "GrainShadows",
+          "type": "double",
+          "label": "Grain in shadows",
+          "hint": "shadow zone weight (0..100)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 30.0,
+          "metadata_address": "0x4000013098"
+        },
+        {
+          "id": "GrainMidtones",
+          "type": "double",
+          "label": "Grain in midtones",
+          "hint": "midtone zone weight (0..100)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 55.0,
+          "metadata_address": "0x40000130f0"
+        },
+        {
+          "id": "GrainColor",
+          "type": "double",
+          "label": "Particle colour",
+          "hint": "chroma decorrelation (0 = mono, 100 = independent RGB)",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 65.0,
+          "metadata_address": "0x4000013148"
+        },
+        {
+          "id": "GrainClusterSize",
+          "type": "double",
+          "label": "Particle clamping",
+          "hint": "clump size (0.5..3.0)",
+          "display_min": 0.5,
+          "display_max": 3.0,
+          "default": 1.6,
+          "metadata_address": "0x40000131a0"
+        },
+        {
+          "id": "GrainRotation",
+          "type": "double",
+          "label": "Particle orientation",
+          "hint": "per-texel randomness - 0 = smooth coherent field",
+          "display_min": 0.0,
+          "display_max": 3.0,
+          "default": 1.0,
+          "metadata_address": "0x40000131f8"
+        },
+        {
+          "id": "GrainBlur",
+          "type": "double",
+          "label": "Softness",
+          "hint": "softens the image underneath the grain, as real film stock loses resolution - 0 = fully sharp",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 15.0,
+          "metadata_address": "0x4000013250"
+        },
+        {
+          "id": "GrainIsColored",
+          "type": "boolean",
+          "label": "Colored",
+          "hint": "enable per-channel grain decorrelation",
+          "default": true,
+          "metadata_address": "0x40000132a8"
+        },
+        {
+          "id": "GrainIntensity",
+          "type": "double",
+          "label": "Intensity",
+          "hint": "Overall strength of the film grain (wet/dry mix)",
+          "display_min": 0.0,
+          "display_max": 200.0,
+          "default": 100.0,
+          "metadata_address": "0x4000013300"
+        },
+        {
+          "id": "ResetGrain",
+          "type": "button",
+          "label": "Reset Grain",
+          "hint": "Reset film grain to defaults",
+          "metadata_address": "0x4000013358"
+        }
+      ]
+    },
+    {
+      "id": "HalationGroup",
+      "label": "Halation",
+      "open_by_default": false,
+      "metadata_address": "0x4000001370",
+      "controls": [
+        {
+          "id": "HalationEnable",
+          "type": "boolean",
+          "label": "Enabled",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x40000138a0"
+        },
+        {
+          "id": "HalationProfile",
+          "label": "Presets",
+          "hint": "Film stock profile - fills in the sliders below. No Remjet variants produce stronger, warmer halation.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "Intense",
+            "Strong",
+            "Moderate",
+            "Soft"
+          ],
+          "default": "Intense",
+          "default_index": 1,
+          "metadata_address": "0x40000138f8"
+        },
+        {
+          "id": "HalationSourceLimiter",
+          "type": "double",
+          "label": "Threshold",
+          "hint": "Cuts off dim light sources so only the brightest ones halate.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 35.0,
+          "metadata_address": "0x4000013950"
+        },
+        {
+          "id": "HalationBackgroundGain",
+          "type": "double",
+          "label": "Spread",
+          "hint": "Darkness level of backgrounds in which halos become visible - lower restricts halos to darker backgrounds only.",
+          "display_min": 0.0,
+          "display_max": 150.0,
+          "default": 60.0,
+          "metadata_address": "0x40000139a8"
+        },
+        {
+          "id": "HalationSmoothness",
+          "type": "double",
+          "label": "Smoothness",
+          "hint": "Softness and distribution across light-source sizes.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 50.0,
+          "metadata_address": "0x4000013a00"
+        },
+        {
+          "id": "HalationLocalDiffusion",
+          "type": "double",
+          "label": "Inner glow",
+          "hint": "Halo radius right around source edges - higher = larger close-in halos.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 25.0,
+          "metadata_address": "0x4000013a58"
+        },
+        {
+          "id": "HalationGlobalDiffusion",
+          "type": "double",
+          "label": "Output glow",
+          "hint": "Secondary scattered red-layer glare across mid-tones.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 35.0,
+          "metadata_address": "0x4000013ab0"
+        },
+        {
+          "id": "HalationAmplify",
+          "type": "double",
+          "label": "Glow strength",
+          "hint": "Glare intensity / energy - higher values shift halo colour toward orange.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 70.0,
+          "metadata_address": "0x4000013b08"
+        },
+        {
+          "id": "HalationHue",
+          "type": "double",
+          "label": "Glow Colour",
+          "hint": "Red-to-orange balance of the halo tint (0 = pure red, 100 = orange-dominant).",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 55.0,
+          "metadata_address": "0x4000013b60"
+        },
+        {
+          "id": "HalationBlueComp",
+          "type": "double",
+          "label": "Cool Glow",
+          "hint": "Blue-channel suppression that compensates for cool backgrounds dampening the halo.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 100.0,
+          "metadata_address": "0x4000013bb8"
+        },
+        {
+          "id": "HalationImpact",
+          "type": "double",
+          "label": "Overall intensity",
+          "hint": "Overall opacity of the halation effect (master mix).",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 100.0,
+          "metadata_address": "0x4000013c10"
+        },
+        {
+          "id": "HalationMaskMode",
+          "type": "boolean",
+          "label": "Show Mask",
+          "hint": "Preview the halation contribution alone (on a black background).",
+          "default": false,
+          "metadata_address": "0x4000013c68"
+        },
+        {
+          "id": "ResetHalation",
+          "type": "button",
+          "label": "Reset",
+          "hint": "Reset halation to defaults.",
+          "metadata_address": "0x4000013cc0"
+        }
+      ]
+    },
+    {
+      "id": "BloomGroup",
+      "label": "Bloom",
+      "open_by_default": false,
+      "metadata_address": "0x40000013c8",
+      "controls": [
+        {
+          "id": "BloomEnable",
+          "type": "boolean",
+          "label": "Enabled",
+          "hint": "Enable",
+          "default": false,
+          "metadata_address": "0x4000013420"
+        },
+        {
+          "id": "BloomProfile",
+          "label": "Profile",
+          "hint": "Film stock profile - fills in the sliders below.",
+          "type": "choice",
+          "options": [
+            "Custom",
+            "8 mm / Super 8",
+            "16 mm / Super 16",
+            "35 mm / Super 35",
+            "65 mm / 70 mm"
+          ],
+          "default": "35 mm / Super 35",
+          "default_index": 3,
+          "metadata_address": "0x4000013478"
+        },
+        {
+          "id": "BloomHighlights",
+          "type": "double",
+          "label": "Highlights",
+          "hint": "Luma threshold of the highlight-detection mask. Lower values allow more of the image to bloom.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 80.0,
+          "metadata_address": "0x40000134d0"
+        },
+        {
+          "id": "BloomSourceLimiter",
+          "type": "double",
+          "label": "Source Limiter",
+          "hint": "Suppresses bloom from dimmer sources so only the brightest highlights glow.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 30.0,
+          "metadata_address": "0x4000013528"
+        },
+        {
+          "id": "BloomDetails",
+          "type": "double",
+          "label": "Details",
+          "hint": "Preserves fine edge detail inside the glow.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 60.0,
+          "metadata_address": "0x4000013580"
+        },
+        {
+          "id": "BloomDiffusion",
+          "type": "double",
+          "label": "Diffusion",
+          "hint": "Halo radius - higher spreads the glow further across the frame. Smaller stocks (8 mm) want larger values.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 50.0,
+          "metadata_address": "0x40000135d8"
+        },
+        {
+          "id": "BloomAmplify",
+          "type": "double",
+          "label": "Amplify",
+          "hint": "Brightness intensity of the bloom contribution.",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 50.0,
+          "metadata_address": "0x4000013630"
+        },
+        {
+          "id": "BloomSaveLights",
+          "type": "double",
+          "label": "Save Lights",
+          "hint": "Protects existing highlights from being washed out by the glow (0 = full wash, 100 = keep lights).",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 100.0,
+          "metadata_address": "0x4000013688"
+        },
+        {
+          "id": "BloomSaturation",
+          "type": "double",
+          "label": "Saturation",
+          "hint": "Saturation of the glow itself (0 = grayscale glow, 100 = full colour).",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 100.0,
+          "metadata_address": "0x40000136e0"
+        },
+        {
+          "id": "BloomImpact",
+          "type": "double",
+          "label": "Impact",
+          "hint": "Overall opacity of the bloom effect (master mix).",
+          "display_min": 0.0,
+          "display_max": 100.0,
+          "default": 50.0,
+          "metadata_address": "0x4000013738"
+        },
+        {
+          "id": "BloomMaskMode",
+          "type": "boolean",
+          "label": "Show Mask",
+          "hint": "Preview the bloom contribution alone (on a black background).",
+          "default": false,
+          "metadata_address": "0x4000013790"
+        },
+        {
+          "id": "ResetBloom",
+          "type": "button",
+          "label": "Reset Bloom",
+          "hint": "Reset bloom to defaults.",
+          "metadata_address": "0x40000137e8"
+        }
+      ]
+    },
+    {
+      "id": "ColorSpaceGroup",
+      "label": "Color Space",
+      "open_by_default": false,
+      "metadata_address": "0x4000001420",
+      "controls": [
+        {
+          "id": "InputColorSpace",
+          "label": "Input color space",
+          "hint": "Primaries of the host buffer. DWG uses DaVinci Intermediate. A selected camera Conversion LUT defines the input instead. Match the host buffer, not the original clip when the host has already converted it.",
+          "type": "choice",
+          "options": [
+            "Rec709",
+            "DaVinci Wide Gamut / Intermediate",
+            "Rec2020"
+          ],
+          "default": "Rec709",
+          "default_index": 0,
+          "metadata_address": "0x40000146c0"
+        },
+        {
+          "id": "InputGamma",
+          "label": "Input transfer function",
+          "hint": "Encoding of the host buffer. Ignored for DWG/Intermediate and when a camera Conversion LUT is selected. An HLG camera LUT applies its authored look; this HLG option is an encoding-only conversion. PQ/HLG use 203-nit reference white; HLG includes the 1000-nit display OOTF.",
+          "type": "choice",
+          "options": [
+            "Gamma 2.4",
+            "Gamma 2.2",
+            "Gamma 1.96 (Rec.709-A approximation)",
+            "sRGB",
+            "Linear",
+            "PQ (203-nit reference white)",
+            "HLG (1000-nit display, 203-nit white)"
+          ],
+          "default": "Gamma 2.4",
+          "default_index": 0,
+          "metadata_address": "0x4000014718"
+        },
+        {
+          "id": "OutputColorSpace",
+          "label": "Output color space",
+          "hint": "Primaries delivered to the host. DWG uses DaVinci Intermediate. Conversion preserves out-of-gamut float data; it does not tone-map or compress the gamut.",
+          "type": "choice",
+          "options": [
+            "Rec709",
+            "DaVinci Wide Gamut / Intermediate",
+            "Rec2020"
+          ],
+          "default": "Rec709",
+          "default_index": 0,
+          "metadata_address": "0x4000014770"
+        },
+        {
+          "id": "ConversionOutput",
+          "label": "Output transfer function",
+          "hint": "Encoding applied after all grading and effects. DWG always uses Intermediate. PQ/HLG use 203-nit reference white; HLG uses a 1000-nit reference display. Match the host's expected encoding. Integer host buffers clip/quantize out-of-range values. Gamma 1.96 is an approximation, not a universal social-media correction.",
+          "type": "choice",
+          "options": [
+            "Gamma 2.4",
+            "Gamma 2.2",
+            "Gamma 1.96 (Rec.709-A approximation)",
+            "sRGB",
+            "Linear",
+            "PQ (203-nit reference white)",
+            "HLG (1000-nit display, 203-nit white)"
+          ],
+          "default": "Gamma 2.4",
+          "default_index": 0,
+          "metadata_address": "0x40000147c8"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "CPU metadata-constructor emulation, not native execution or host validation",
+    "All imports intercepted; filesystem modeled as an empty virtual directory, no host file/network API calls",
+    "Existing local key/pack lookup modeled as an empty list; no entitlement supplied",
+    "CreativeLut options reflect no local entitlements; full asset names are catalogued separately",
+    "Numeric ranges are descriptor/display ranges; hard input constraints have not been established",
+    "Descriptions are metadata, not proof of DSP equivalence or Windows UI behavior"
+  ]
+}

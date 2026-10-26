@@ -110,3 +110,12 @@ Avata 2; um comentário interno menciona Mavic 3 Pro. Ela não declara gamma de
 saída, preservado por padrão. Configurar Rec.709 Gamma 2.4 no projeto não prova
 uma curva 2.4 na LUT. Os algoritmos e looks são próprios e não reproduzem ToneLab.
 As versões anteriores continuam disponíveis como histórico.
+
+## Análise do ToneLab fornecido
+
+[Mapa das 13 seções, menus, faixas e padrões](ToneLab-Analise.md) ·
+[Relatório e evidências para download](ToneLab-Analise-Do-Plugin.zip)
+
+Esse inventário descreve o arquivo fornecido pelo usuário. A versão publicada
+do Mendes Color permanece 1.3.0; a análise não adiciona automaticamente essas
+ferramentas ao plugin e não estabelece equivalência visual com o ToneLab.
