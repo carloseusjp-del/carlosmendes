@@ -14,7 +14,9 @@ Depois de baixar:
 
 Também é possível abrir o [arquivo HTML independente](dist/Mendes-Home-Prototipo.html) diretamente no navegador.
 
-![Prévia da tela inicial](prototype/preview-home.png)
+![Prévia da tela inicial clara do Mendes Home](prototype/preview-home.png)
+
+A seta para baixo sobre o dock abre a [gaveta de entradas, atalhos e informações](prototype/preview-drawer.png).
 
 ## Estado atual
 
@@ -43,7 +45,7 @@ Também é possível abrir o [arquivo HTML independente](dist/Mendes-Home-Protot
 - Permissão SSH confirmada como usuário restrito `prisoner`, sem root.
 - Canal SSAP disponível nas portas TCP 3000 e 3001; candidato a automação externa de inicialização.
 - Investigação da etapa 2 concluída e registrada em `docs/03-INVESTIGACAO-ETAPA-2.md`.
-- Etapa atual: protótipo visual navegável do Mendes Home pronto para avaliação local.
+- Etapa atual: segunda direção do protótipo visual, com fundo branco iluminado, vitrine editorial e dock Liquid Glass.
 - O protótipo ainda não foi instalado na TV e usa somente aplicativos demonstrativos.
 
 Leia primeiro [o perfil e os limites](docs/01-PERFIL-E-LIMITES.md) e depois siga [a primeira conexão](docs/02-PRIMEIRA-CONEXAO.md).

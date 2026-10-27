@@ -2,7 +2,7 @@
 
 ## Estado
 
-O protótipo visual navegável está pronto para avaliação local. Ele permanece separado do aplicativo webOS e não foi instalado na TV. Nenhuma configuração da LG 55UR8750PSA foi alterada.
+A versão visual 0.2.0 está pronta para avaliação local. Ela permanece separada do aplicativo webOS e não foi instalada na TV. Nenhuma configuração da LG 55UR8750PSA foi alterada.
 
 Arquivos principais:
 
@@ -13,31 +13,37 @@ Arquivos principais:
 
 ## Direção visual
 
-A identidade **Mendes Home** usa formas prismáticas, vidro fosco, reflexos discretos, bordas iluminadas e profundidade. A referência de vidro líquido foi traduzida para uma composição original, sem ícones, ativos ou componentes proprietários da Apple.
+O Mendes Home agora usa um fundo branco com passagem muito suave para cinza-claro, brilho central difuso e sombra periférica discreta, como luz natural refletida numa parede.
+
+A composição adota como referência estrutural a prévia do projeto [Free My TV](https://github.com/simbasjungles/free-my-tv/blob/main/.github/preview.webp): título e abas no alto, uma vitrine assimétrica, utilidades no canto superior e uma prateleira de aplicativos na base. O código, os desenhos editoriais, os ícones, a marca e os componentes foram criados para o Mendes Home. Nenhuma imagem, logomarca ou implementação do projeto de referência foi incorporada.
 
 O protótipo contém:
 
-- tela inicial com seleção em destaque;
-- faixa de oito favoritos demonstrativos;
-- cartões para aplicativos, recentes e ambientes;
-- quatro fundos: Aurora, Horizonte, Laguna e Grafite;
-- painel de aparência com transparência, desfoque, qualidade visual e movimento;
-- reorganização visual dos favoritos;
+- cabeçalho “Para você” com abas Descobrir, Filmes e Séries;
+- três cartões editoriais originais desenhados em SVG;
+- dock Liquid Glass com oito aplicativos demonstrativos;
+- foco com contorno, profundidade e movimento curto;
+- gaveta inferior com TV ao vivo, HDMI, atalhos, clima e relógio;
+- quatro fundos: Parede iluminada, Névoa, Areia e Noite;
+- painel de aparência com intensidade do vidro, desfoque, qualidade e movimento;
+- reorganização visual dos aplicativos;
 - navegação por setas, OK/Enter e Voltar/Escape;
 - suporte adicional a mouse para avaliação no computador.
 
-Os aplicativos e contadores são dados demonstrativos. A listagem e a abertura de aplicativos reais ficaram fora desta etapa, conforme combinado.
+Aplicativos, entradas, clima e conteúdo editorial ainda são demonstrativos. A consulta e a abertura de itens reais permanecem fora desta etapa.
 
 ## Decisões para o webOS 24
 
-- A interface usa **1920×1080 lógico**, resolução indicada para o plano de interface do webOS TV. A televisão faz a composição no painel 4K.
+- A interface usa 1920×1080 lógico, resolução indicada para o plano de interface do webOS TV.
 - HTML, CSS e JavaScript sem framework reduzem inicialização, memória e tamanho do pacote.
-- O modo **Equilibrado** é o padrão, com desfoque de 14 px.
-- O modo **Máximo** limita o desfoque a 20 px.
-- O modo **Leve** remove o desfoque em tempo real e mantém o contraste com gradientes opacos.
-- Somente os grandes planos compartilhados recebem `backdrop-filter`; cartões e ícones simulam vidro com gradientes e reflexos.
-- Os brilhos do fundo usam gradientes radiais estáticos, sem animação contínua ou imagens 4K na memória.
-- O foco anima principalmente `transform`, com duração de 180 ms.
+- O modo Equilibrado é o padrão, com desfoque de 14 px.
+- O modo Máximo limita o desfoque a 20 px.
+- O modo Leve remove o desfoque em tempo real e mantém contraste com gradientes opacos.
+- Na tela principal, somente o dock usa `backdrop-filter`.
+- Na gaveta, o dock e dois widgets são os três planos desfocados simultâneos.
+- Cartões, botões e ícones simulam vidro com gradientes e reflexos estáticos.
+- O fundo usa gradientes radiais estáticos, sem imagens 4K ou animação contínua.
+- O foco anima `transform` e a opacidade de um contorno, com duração entre 150 e 180 ms.
 - Há uma opção própria para reduzir movimento.
 - Se `backdrop-filter` não estiver disponível, o fallback é ativado automaticamente.
 
@@ -47,35 +53,28 @@ Os aplicativos e contadores são dados demonstrativos. A listagem e a abertura d
 |---|---|---|
 | Navegar | Setas | Setas |
 | Selecionar | Enter | OK/roda |
-| Organizar favoritos | `E` | Botão verde |
+| Abrir a gaveta | Seta para baixo no dock | Seta para baixo |
+| Organizar aplicativos | `E` | Botão verde |
 | Alternar fundo | `T` | Botão azul |
-| Fechar/voltar | Escape | Voltar |
+| Fechar gaveta/voltar | Escape | Voltar |
 
 ## Verificação executada
 
-O teste automatizado foi executado em Chromium, com viewport de 1920×1080:
+O teste automatizado foi executado em Chromium nas resoluções 1920×1080 e 1366×768:
 
 - documento sem rolagem ou estouro horizontal/vertical;
-- oito favoritos renderizados;
-- foco inicial e atualização do destaque confirmados;
+- três cartões editoriais e oito aplicativos renderizados;
+- navegação horizontal preservando a linha visual;
+- gaveta aberta pela seta para baixo e fechada por Escape;
+- foco transferido corretamente para a primeira entrada;
 - painel de aparência aberto e fechado pelo fluxo de navegação;
-- troca de papel de parede confirmada;
+- fundo Parede iluminada confirmado como padrão;
 - fallback do modo Leve confirmado;
 - zero erros JavaScript e zero erros no console;
-- 20 comandos rápidos de navegação processados em 52 ms no ambiente de teste.
+- 20 comandos rápidos de navegação processados em 120 ms no ambiente de teste.
 
-O tempo acima verifica a lógica no computador; ele não representa FPS medido na televisão. O teste de desempenho no hardware real será feito somente após a aprovação visual e autorização para instalar um IPK de desenvolvimento.
+O tempo acima verifica a lógica no computador; ele não representa FPS medido na televisão. O teste no hardware real será feito somente depois da aprovação visual e da autorização para instalar um IPK de desenvolvimento.
 
-## Pontos para aprovação
+## Próxima decisão
 
-Antes da integração, devem ser avaliados:
-
-1. identidade e nome Mendes Home;
-2. tamanhos, distância e contraste dos elementos;
-3. quatro opções de fundo;
-4. intensidade e aparência do vidro;
-5. organização da tela inicial;
-6. comportamento do painel de aparência;
-7. velocidade percebida das animações.
-
-Após a aprovação, a interface poderá ser promovida para o aplicativo webOS e receber persistência de preferências, consulta permitida de aplicativos, abertura por ID e testes reais no controle Magic Remote.
+Antes da integração, devem ser avaliados o fundo claro, a proporção dos três cartões, o tamanho do dock, as cores dos aplicativos, a gaveta inferior e a velocidade percebida do foco. Depois da aprovação, a interface poderá ser promovida para o aplicativo webOS e receber persistência, consulta permitida de aplicativos, abertura por ID e testes no Magic Remote.

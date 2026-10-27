@@ -1,13 +1,15 @@
 (function () {
   "use strict";
 
-  var WALLPAPERS = ["aurora", "sunset", "lagoon", "graphite"];
-  var WALLPAPER_NAMES = { aurora: "Aurora", sunset: "Horizonte", lagoon: "Laguna", graphite: "Grafite" };
+  var WALLPAPERS = ["wall", "mist", "sand", "night"];
+  var WALLPAPER_NAMES = { wall: "Parede iluminada", mist: "Névoa", sand: "Areia", night: "Noite" };
   var QUALITY_NAMES = { light: "Leve", balanced: "Equilibrado", full: "Máximo" };
   var COLOR_KEYS = { GREEN: 404, BLUE: 406 };
   var editMode = false;
+  var drawerOpen = false;
   var settingsOpen = false;
   var lastMainFocus = null;
+  var lastDockFocus = null;
   var toastTimer = null;
 
   var icons = {
@@ -22,22 +24,23 @@
   };
 
   var apps = [
-    { id: "cinema", title: "Cinema", description: "Filmes e séries reunidos em um espaço feito para você.", a: "#2a91a5", b: "#102e56" },
-    { id: "music", title: "Música", description: "Suas faixas, álbuns e playlists em uma experiência envolvente.", a: "#9f5fe0", b: "#34205d" },
-    { id: "photos", title: "Fotos", description: "Memórias da família apresentadas com cor, luz e profundidade.", a: "#f49c70", b: "#a9446d" },
-    { id: "tv", title: "TV ao vivo", description: "Canais e programação disponíveis com acesso direto.", a: "#58d59e", b: "#176a69" },
-    { id: "web", title: "Navegador", description: "A internet em uma tela ampla, limpa e confortável.", a: "#5cacf2", b: "#244d9f" },
-    { id: "games", title: "Jogos", description: "Entretenimento interativo com seus títulos favoritos.", a: "#f1bd55", b: "#a7552d" },
-    { id: "home", title: "Casa", description: "Acompanhe os dispositivos conectados do seu ambiente.", a: "#73d6c8", b: "#286c7d" },
-    { id: "files", title: "Arquivos", description: "Vídeos, imagens e mídias organizados em um único lugar.", a: "#9caec4", b: "#4a566e" }
+    { id: "cinema", title: "Cinema", a: "#214e5d", b: "#102f44" },
+    { id: "music", title: "Música", a: "#8c67c8", b: "#4b2e74" },
+    { id: "photos", title: "Fotos", a: "#e58c74", b: "#b64f68" },
+    { id: "tv", title: "TV ao vivo", a: "#4cbd91", b: "#237b73" },
+    { id: "web", title: "Navegador", a: "#4f9ee2", b: "#2b5eae" },
+    { id: "games", title: "Jogos", a: "#dfa74e", b: "#a65a31" },
+    { id: "home", title: "Casa", a: "#57bfb5", b: "#2f7582" },
+    { id: "files", title: "Arquivos", a: "#8a9bad", b: "#526173" }
   ];
 
   var rail = document.getElementById("favoritesRail");
   var settingsPanel = document.getElementById("settingsPanel");
+  var quickDrawer = document.getElementById("quickDrawer");
   var scrim = document.getElementById("scrim");
   var toast = document.getElementById("toast");
 
-  function renderApps() {
+  function renderApps(focusId) {
     rail.textContent = "";
     apps.forEach(function (app) {
       var button = document.createElement("button");
@@ -49,36 +52,34 @@
       button.style.setProperty("--app-a", app.a);
       button.style.setProperty("--app-b", app.b);
       button.innerHTML = '<span class="app-icon">' + icons[app.id] + '</span><span class="app-name">' + app.title + "</span>";
-      button.addEventListener("focus", function () { selectApp(app); });
-      button.addEventListener("mouseenter", function () { button.focus(); });
+      button.addEventListener("mouseenter", function () { focusElement(button); });
       button.addEventListener("click", function () {
         if (editMode) toggleEditMode(false);
-        else showToast("Protótipo visual — “" + app.title + "” será integrado na próxima etapa");
+        else showToast("Protótipo visual — “" + app.title + "” será integrado depois da aprovação");
       });
       rail.appendChild(button);
     });
-  }
-
-  function selectApp(app) {
-    document.getElementById("heroTitle").textContent = app.title;
-    document.getElementById("heroDescription").textContent = app.description;
-    document.getElementById("heroGlyph").innerHTML = icons[app.id];
-    document.getElementById("hero").style.setProperty("--accent", app.a);
+    if (focusId) focusElement(rail.querySelector('[data-app-id="' + focusId + '"]'));
   }
 
   function visibleFocusables() {
-    var selector = settingsOpen ? ".settings-focus" : "#appShell .focusable";
+    var selector;
+    if (settingsOpen) selector = ".settings-focus";
+    else if (drawerOpen) selector = "#favoritesRail .focusable, #quickDrawer .focusable";
+    else selector = ".topbar .focusable, #showcase .focusable, #favoritesRail .focusable";
     return Array.prototype.slice.call(document.querySelectorAll(selector)).filter(function (element) {
       var rect = element.getBoundingClientRect();
-      return rect.width > 0 && rect.height > 0 && !element.disabled;
+      var style = window.getComputedStyle(element);
+      return rect.width > 0 && rect.height > 0 && style.visibility !== "hidden" && !element.disabled;
     });
   }
 
   function focusElement(element) {
     if (!element) return;
-    visibleFocusables().forEach(function (item) { item.classList.remove("is-focused"); });
+    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) { item.classList.remove("is-focused"); });
     element.classList.add("is-focused");
-    element.focus();
+    try { element.focus({ preventScroll: true }); }
+    catch (error) { element.focus(); }
   }
 
   function spatialTarget(direction) {
@@ -97,12 +98,13 @@
       var y = rect.top + rect.height / 2;
       var primary;
       var secondary;
-      if (direction === "left" && x < sx - 3) { primary = sx - x; secondary = Math.abs(y - sy); }
-      else if (direction === "right" && x > sx + 3) { primary = x - sx; secondary = Math.abs(y - sy); }
-      else if (direction === "up" && y < sy - 3) { primary = sy - y; secondary = Math.abs(x - sx); }
-      else if (direction === "down" && y > sy + 3) { primary = y - sy; secondary = Math.abs(x - sx); }
+      var aligned;
+      if (direction === "left" && x < sx - 3) { primary = sx - x; secondary = Math.abs(y - sy); aligned = rect.bottom >= source.top && rect.top <= source.bottom; }
+      else if (direction === "right" && x > sx + 3) { primary = x - sx; secondary = Math.abs(y - sy); aligned = rect.bottom >= source.top && rect.top <= source.bottom; }
+      else if (direction === "up" && y < sy - 3) { primary = sy - y; secondary = Math.abs(x - sx); aligned = rect.right >= source.left && rect.left <= source.right; }
+      else if (direction === "down" && y > sy + 3) { primary = y - sy; secondary = Math.abs(x - sx); aligned = rect.right >= source.left && rect.left <= source.right; }
       else return;
-      var score = primary * 12 + secondary;
+      var score = primary * 10 + secondary + (aligned ? 0 : 100000);
       if (score < scoreBest) { scoreBest = score; best = item; }
     });
     return best;
@@ -117,21 +119,37 @@
     var to = from + (direction === "left" ? -1 : 1);
     if (to < 0 || to >= apps.length) return true;
     var moving = apps[from];
-    apps.splice(from, 1); apps.splice(to, 0, moving);
-    renderApps();
-    focusElement(rail.querySelector('[data-app-id="' + id + '"]'));
+    apps.splice(from, 1);
+    apps.splice(to, 0, moving);
+    renderApps(id);
     showToast("Ordem atualizada");
     return true;
   }
 
   function toggleEditMode(force) {
+    var current = document.activeElement;
+    var currentId = current && current.getAttribute("data-app-id");
     editMode = typeof force === "boolean" ? force : !editMode;
-    renderApps();
-    var hint = document.getElementById("editHint");
-    hint.textContent = editMode ? "Modo organizar — use ◀ ▶ e pressione OK para concluir" : "Acesso rápido e personalizável";
-    hint.classList.toggle("is-editing", editMode);
-    focusElement(rail.querySelector(".app-tile"));
-    showToast(editMode ? "Organização ativada" : "Ordem salva");
+    renderApps(currentId || apps[0].id);
+    document.getElementById("appsTitle").textContent = editMode ? "Organizar aplicativos" : "Seus aplicativos";
+    showToast(editMode ? "Use ◀ e ▶ para ordenar; pressione OK para concluir" : "Ordem salva no protótipo");
+  }
+
+  function openDrawer() {
+    if (drawerOpen || settingsOpen) return;
+    drawerOpen = true;
+    lastDockFocus = document.activeElement && document.activeElement.hasAttribute("data-app-id") ? document.activeElement : rail.querySelector(".app-tile");
+    document.body.classList.add("drawer-open");
+    quickDrawer.setAttribute("aria-hidden", "false");
+    setTimeout(function () { focusElement(quickDrawer.querySelector(".drawer-focus")); }, 300);
+  }
+
+  function closeDrawer() {
+    if (!drawerOpen) return;
+    drawerOpen = false;
+    document.body.classList.remove("drawer-open");
+    quickDrawer.setAttribute("aria-hidden", "true");
+    setTimeout(function () { focusElement(lastDockFocus || rail.querySelector(".app-tile")); }, 220);
   }
 
   function openSettings() {
@@ -141,7 +159,7 @@
     document.body.classList.add("settings-open");
     settingsPanel.setAttribute("aria-hidden", "false");
     scrim.setAttribute("aria-hidden", "false");
-    setTimeout(function () { focusElement(document.getElementById("closeSettings")); }, 60);
+    setTimeout(function () { focusElement(document.getElementById("closeSettings")); }, 70);
   }
 
   function closeSettings() {
@@ -150,7 +168,7 @@
     document.body.classList.remove("settings-open");
     settingsPanel.setAttribute("aria-hidden", "true");
     scrim.setAttribute("aria-hidden", "true");
-    setTimeout(function () { focusElement(lastMainFocus || document.getElementById("settingsButton")); }, 60);
+    setTimeout(function () { focusElement(lastMainFocus || document.getElementById("settingsButton")); }, 70);
   }
 
   function setWallpaper(name, announce) {
@@ -169,6 +187,7 @@
   }
 
   function setQuality(name) {
+    if (!QUALITY_NAMES[name]) return;
     document.body.setAttribute("data-quality", name);
     document.getElementById("qualityName").textContent = QUALITY_NAMES[name];
     Array.prototype.forEach.call(document.querySelectorAll("[data-quality-option]"), function (button) {
@@ -191,42 +210,55 @@
 
   function updateDateTime() {
     var now = new Date();
-    document.getElementById("clock").textContent = now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-    document.getElementById("dateLabel").textContent = now.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" }).toUpperCase();
-    var hour = now.getHours();
-    document.getElementById("greeting").textContent = (hour < 12 ? "Bom dia" : hour < 18 ? "Boa tarde" : "Boa noite") + ", Carlos.";
+    var time = now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    document.getElementById("clock").textContent = time;
+    document.getElementById("drawerClock").textContent = time;
+    document.getElementById("drawerDate").textContent = now.toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
   }
 
   document.getElementById("settingsButton").addEventListener("click", openSettings);
+  document.getElementById("drawerSettings").addEventListener("click", openSettings);
   document.getElementById("closeSettings").addEventListener("click", closeSettings);
+  document.getElementById("wallpaperButton").addEventListener("click", cycleWallpaper);
+  document.getElementById("signalButton").addEventListener("click", function () { showToast("Conexão local pronta para a futura integração com a TV"); });
   scrim.addEventListener("click", closeSettings);
 
-  Array.prototype.forEach.call(document.querySelectorAll("[data-wallpaper-option]"), function (button) {
-    button.addEventListener("click", function () { setWallpaper(button.getAttribute("data-wallpaper-option"), true); });
-  });
-  Array.prototype.forEach.call(document.querySelectorAll("[data-quality-option]"), function (button) {
-    button.addEventListener("click", function () { setQuality(button.getAttribute("data-quality-option")); });
-  });
   Array.prototype.forEach.call(document.querySelectorAll("[data-view]"), function (button) {
     button.addEventListener("click", function () {
       Array.prototype.forEach.call(document.querySelectorAll("[data-view]"), function (item) { item.classList.remove("is-active"); });
       button.classList.add("is-active");
-      showToast("Visão “" + button.textContent + "” — demonstração visual");
+      showToast(button.textContent + " — variação visual do protótipo");
     });
   });
-  Array.prototype.forEach.call(document.querySelectorAll("[data-section]"), function (button) {
-    button.addEventListener("click", function () { showToast(button.getAttribute("data-section") + " — conteúdo da próxima etapa"); });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-story]"), function (button) {
+    button.addEventListener("mouseenter", function () { focusElement(button); });
+    button.addEventListener("click", function () { showToast("“" + button.getAttribute("data-story") + "” — conteúdo demonstrativo"); });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-quick]"), function (button) {
+    button.addEventListener("click", function () { showToast(button.getAttribute("data-quick") + " — integração prevista para a próxima etapa"); });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-wallpaper-option]"), function (button) {
+    button.addEventListener("click", function () { setWallpaper(button.getAttribute("data-wallpaper-option"), true); });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-quality-option]"), function (button) {
+    button.addEventListener("click", function () { setQuality(button.getAttribute("data-quality-option")); });
   });
 
   document.getElementById("glassIntensity").addEventListener("input", function (event) {
     var value = Number(event.target.value);
-    document.documentElement.style.setProperty("--glass-alpha", String((100 - value) / 100 * .42));
+    document.documentElement.style.setProperty("--glass-alpha", String(.12 + value / 200));
     document.getElementById("glassValue").textContent = value + "%";
   });
+
   document.getElementById("blurIntensity").addEventListener("input", function (event) {
     document.documentElement.style.setProperty("--glass-blur", event.target.value + "px");
     document.getElementById("blurValue").textContent = event.target.value;
   });
+
   document.getElementById("motionToggle").addEventListener("click", function (event) {
     var enabled = !event.currentTarget.classList.contains("is-on");
     event.currentTarget.classList.toggle("is-on", enabled);
@@ -236,7 +268,9 @@
   });
 
   document.addEventListener("focusin", function (event) {
-    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) { if (item !== event.target) item.classList.remove("is-focused"); });
+    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) {
+      if (item !== event.target) item.classList.remove("is-focused");
+    });
     if (event.target.classList.contains("focusable")) event.target.classList.add("is-focused");
   });
 
@@ -244,32 +278,54 @@
     var code = event.keyCode;
     var key = event.key || "";
     var direction = code === 37 ? "left" : code === 38 ? "up" : code === 39 ? "right" : code === 40 ? "down" : null;
+    var current = document.activeElement;
     var handled = false;
+
     if (direction) {
       if (editMode && reorderFavorite(direction)) handled = true;
-      else if (settingsOpen && document.activeElement && document.activeElement.type === "range" && (direction === "left" || direction === "right")) {
-        adjustRange(document.activeElement, direction === "left" ? -1 : 1); handled = true;
-      } else { focusElement(spatialTarget(direction)); handled = true; }
-    } else if (code === 13 && document.activeElement && typeof document.activeElement.click === "function") {
-      document.activeElement.click(); handled = true;
+      else if (settingsOpen && current && current.type === "range" && (direction === "left" || direction === "right")) {
+        adjustRange(current, direction === "left" ? -1 : 1);
+        handled = true;
+      } else if (!drawerOpen && !settingsOpen && direction === "down" && current && current.hasAttribute("data-app-id")) {
+        openDrawer();
+        handled = true;
+      } else {
+        focusElement(spatialTarget(direction));
+        handled = true;
+      }
+    } else if (code === 13 && current && typeof current.click === "function") {
+      current.click();
+      handled = true;
     } else if (code === COLOR_KEYS.GREEN || key.toLowerCase() === "e") {
-      if (!settingsOpen) toggleEditMode(); handled = true;
+      if (!settingsOpen) {
+        if (drawerOpen) closeDrawer();
+        setTimeout(function () { toggleEditMode(); }, drawerOpen ? 240 : 0);
+        handled = true;
+      }
     } else if (code === COLOR_KEYS.BLUE || key.toLowerCase() === "t") {
-      cycleWallpaper(); handled = true;
+      cycleWallpaper();
+      handled = true;
     } else if (code === 461 || code === 27 || key === "Escape") {
       if (settingsOpen) closeSettings();
+      else if (drawerOpen) closeDrawer();
       else if (editMode) toggleEditMode(false);
-      else showToast("No televisor, Voltar fechará o launcher");
+      else showToast("No televisor, Voltar fechará o Mendes Home");
       handled = true;
     }
-    if (handled) { event.preventDefault(); event.stopPropagation(); }
+
+    if (handled) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   });
 
   if (!(window.CSS && CSS.supports && (CSS.supports("backdrop-filter", "blur(2px)") || CSS.supports("-webkit-backdrop-filter", "blur(2px)")))) {
     document.documentElement.classList.add("no-backdrop");
   }
 
-  renderApps(); selectApp(apps[0]); setQuality("balanced"); updateDateTime();
+  renderApps();
+  setQuality("balanced");
+  updateDateTime();
   setInterval(updateDateTime, 30000);
-  setTimeout(function () { focusElement(rail.querySelector(".app-tile")); }, 80);
+  setTimeout(function () { focusElement(document.querySelector(".story-card")); }, 90);
 }());

@@ -1,4 +1,4 @@
-MENDES HOME — PROTOTIPO VISUAL 0.1.0
+MENDES HOME — PROTOTIPO VISUAL 0.2.0
 ====================================
 
 COMO ABRIR NO WINDOWS
@@ -9,6 +9,7 @@ COMO ABRIR NO WINDOWS
 COMANDOS
 - Setas: navegar
 - Enter: selecionar
+- Seta para baixo em um aplicativo: abrir entradas e atalhos
 - E: ativar ou encerrar a organizacao dos favoritos
 - T: trocar rapidamente o papel de parede
 - Esc: voltar ou fechar os ajustes
@@ -16,9 +17,11 @@ COMANDOS
 
 O QUE ESTA ATIVO NESTA VERSAO
 - Navegacao espacial pelo controle/teclado
-- Destaque e profundidade do aplicativo selecionado
+- Vitrine editorial com tres cartoes originais
+- Dock Liquid Glass com destaque e profundidade
+- Gaveta de entradas, atalhos, clima e relogio
 - Reorganizacao visual dos favoritos
-- Quatro papeis de parede
+- Fundo branco com iluminacao suave e mais tres variacoes
 - Transparencia, desfoque e qualidade visual ajustaveis
 - Movimento suave ou reduzido
 - Modo leve sem desfoque em tempo real
