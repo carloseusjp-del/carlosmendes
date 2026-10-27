@@ -1,0 +1,36 @@
+{
+  "installer": "MendesColor-1.5.0-Setup.exe",
+  "sha256": "d13159ebbc04b87680b547595089c4ee2f3c515b88f85060ee3537fe58c25d7d",
+  "bytes": 8707620,
+  "plugin_sha256": "a07674ef9c9d79a4ee9fa5fc00c1cee22acf69433369f7a99c96c46d42be7c3d",
+  "architecture": "x86_64",
+  "subsystem": "Windows GUI",
+  "uac": "requireAdministrator",
+  "payloads_verified": 16,
+  "evidence_id": "ev_bafc3e2a7d2da6525caa329102528be95fc800cb6ecf9c4d6559c66bcf37fe5f",
+  "windows_execution": "not_run",
+  "resolve_execution": "not_run",
+  "physical_gpu_execution": "not_run",
+  "opencl_execution": "PoCL 6.0 CPU test device, all seven kernels executed; production selects GPUs only",
+  "local_checks": {
+    "color": 9645,
+    "lut": 231,
+    "mock_ofx_serial": 733,
+    "mock_ofx_smp": 735,
+    "installer_filesystem": 21,
+    "halation": 2100,
+    "advanced": 545,
+    "cpu_optimization": 42,
+    "opencl_parity": 426
+  },
+  "total_local_checks": 14478,
+  "sanitizers": "ASan + UBSan + leak detection passed on optimized CPU frame engine and SMP mock host",
+  "implementation": "Independent Mendes GPU/CPU processing and recipes; no ToneLab code or LUT payloads",
+  "visual_reference_video": "not_used; user will test manually",
+  "pe_import_dlls": [
+    "comdlg32.dll",
+    "KERNEL32.dll",
+    "msvcrt.dll",
+    "USER32.dll"
+  ]
+}

@@ -1,4 +1,4 @@
-# Looks cinematográficos — Mendes Color 1.4.0
+# Looks cinematográficos — Mendes Color 1.5.0
 
 Todos os estilos operam **depois** da transformação de entrada. Para sua Avata 2,
 selecione primeiro **Input LUT → DJI Avata 2 D-Log M to Rec.709 (embedded)**.
@@ -79,7 +79,7 @@ existentes foram preservados.
 
 ## Comparação visual
 
-![Comparação com rampas e cores sintéticas](LOOKS-preview.svg)
+![Comparação com rampas e cores sintéticas](docs/LOOKS-preview.svg)
 
 Esta figura histórica mostra apenas os 19 looks iniciais e foi calculada pelo motor C++ do plugin, usando a LUT embutida
 e Look Strength=1, com Halation desligada. Mostra códigos RGB de rampas e amostras sintéticas, limitados

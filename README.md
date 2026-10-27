@@ -1,8 +1,4 @@
-# Mendes Color 1.4.0
-
-**[Baixar instalador Windows](MendesColor-1.4.0-Setup.exe?raw=true)** · [SHA-256](SHA256SUMS.txt)
-
-[ZIP portátil](MendesColor-1.4.0-Windows-x64.zip) · [Código-fonte](MendesColor-1.4.0-source.zip) · [Verificação do Setup](MendesColor-1.4.0-Setup-verification.json)
+# Mendes Color 1.5.0
 
 Plugin OpenFX para **DaVinci Resolve no Windows x64**, com LUT Avata 2 embutida,
 **84 opções de look**, ferramentas de cor e efeitos, **16 slots de LUT** e
@@ -10,7 +6,7 @@ botões **ANTERIOR / PRÓXIMO** em todos os menus. Versão para avaliação manu
 
 ## Instalar ou atualizar
 
-Baixe **MendesColor-1.4.0-Setup.exe**, feche o Resolve e execute o instalador.
+Baixe **MendesColor-1.5.0-Setup.exe**, feche o Resolve e execute o instalador.
 Autorize a solicitação de administrador e confirme o destino mostrado.
 Reabra o Resolve e procure **Mendes Color** em **Effects / Open FX**, grupo Mendes.
 
@@ -24,6 +20,16 @@ assinatura digital de editor; confira a origem e o SHA-256 publicado.
 O ZIP portátil e `Install.ps1` continuam disponíveis como alternativa. Para
 instalação manual, copie **MendesColor.ofx.bundle inteiro**, com o Resolve fechado,
 para `C:\Program Files\Common Files\OFX\Plugins\`.
+
+## Aceleração por GPU
+
+A versão 1.5.0 adiciona **GPU via OpenCL**, incluindo LUTs/looks, ferramentas
+de cor, grão, Halation e Bloom. Em **Camera, Looks & Base → Processing**,
+deixe **GPU (OpenCL; CPU fallback)**. A seleção dá preferência à GPU NVIDIA.
+O primeiro quadro pode aguardar a compilação do driver; os seguintes reutilizam
+o motor. A CPU também foi otimizada e trabalha em paralelo quando o host oferece
+a suíte de threads. Consulte [GPU.md](GPU.md) para requisitos, memória e como
+confirmar o dispositivo no log. O modo CUDA do Resolve pode ser mantido.
 
 ## Começar com a Avata 2
 
@@ -46,7 +52,7 @@ O arquivo cita Avata 2 no nome e Mavic 3 Pro num comentário interno; essa
 proveniência foi mantida. Configurar Rec.709 Gamma 2.4 no Resolve não prova uma
 curva 2.4 no arquivo. Consulte [LUT-AVATA2.md](LUT-AVATA2.md).
 
-## Ferramentas da versão 1.4.0
+## Ferramentas da versão 1.5.0
 
 As novas seções começam **desligadas**, preservando projetos anteriores.
 Selecionar um preset pronto ativa a seção correspondente; para ajuste manual,
@@ -93,18 +99,18 @@ As conversões técnicas embutidas continuam sendo a LUT Avata 2 fornecida;
 para outras câmeras use uma LUT técnica adequada no campo de arquivo. Não foram
 criados presets de normalização de outras câmeras sem suas tabelas.
 
-Passaram **13.264 verificações locais** de cor, LUT, Halation, ferramentas
-avançadas, host simulado e transações de instalação. O binário foi compilado
-para Windows x64 e inspecionado pelo REA. **A interface, os novos efeitos, o
-seletor de arquivos e o Setup ainda precisam de confirmação no Resolve Windows**.
+Passaram **14.478 verificações locais** de cor, LUT, Halation, ferramentas
+avançadas, OpenCL, regressão de otimização, host simulado e instalação. O binário foi compilado
+para Windows x64 e inspecionado pelo REA. **O motor GPU desta versão e o Setup ainda precisam de confirmação no seu
+Resolve Windows**.
 O teste visual será feito manualmente pelo usuário; não depende do vídeo enviado.
 
-O processamento é **CPU, RGBA float32**, com alfa preservado e suporte a tiles.
-Grão com suavização, Halation e Bloom usam buffers espaciais e podem deixar a
-prévia lenta, principalmente em 4K. Não há promessa de tempo real. Máscaras de
+O processamento é **GPU OpenCL ou CPU, RGBA float32**, com alfa preservado e
+suporte a tiles. Os kernels foram executados em um dispositivo OpenCL de teste
+em CPU; não houve medição em GPU NVIDIA. Não há promessa de tempo real 4K. Máscaras de
 pele usam cor/luminância, sem reconhecimento de pessoas ou proteção automática.
 
-Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.4.0.
+Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.5.0.
 O tratamento da descrição opcional que corrigiu o carregamento na 1.0.2 foi
 preservado. Os controles e índices antigos foram mantidos; os novos grupos
 começam desligados. Consulte [VALIDACAO.md](VALIDACAO.md).

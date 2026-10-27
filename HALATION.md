@@ -1,4 +1,4 @@
-# Halation — Mendes Color 1.4.0
+# Halation — Mendes Color 1.5.0
 
 Na aba ou seção **Halation**, escolha o nível em **Halation Preset** ou use
 **ANTERIOR / PRÓXIMO** para comparar as opções sem abrir o menu.
@@ -21,7 +21,7 @@ apropriado quando a imagem já está convertida. O halo não faz outra normaliza
 Look Strength dosa apenas o estilo de cor; **Effect Mix=0** desliga a cadeia
 inteira, incluindo LUT e Halation. Para desligar apenas o halo use Desligado.
 
-![Comparação sintética dos quatro níveis](HALATION-preview.png)
+![Comparação sintética dos quatro níveis](docs/HALATION-preview.png)
 
 A figura é calculada pelo mesmo código C++ em recortes sintéticos de RGB de
 exibição, com tamanho de referência de 1080 linhas. Não usa filmagem nem prova
@@ -50,7 +50,7 @@ RGB acima de 1, sem hard clipping adicional do motor.
 
 A máscara pondera a emissão pelo alfa. Pixels completamente transparentes não
 emitem, e o alfa da imagem não muda; não são criadas áreas de opacidade ao redor
-de objetos isolados. São usados buffers locais por render em CPU, sem acesso
+de objetos isolados. Na CPU são usados buffers locais por render, sem acesso
 temporal. Desligado não cria esses buffers. Não há promessa de reprodução em
 tempo real, especialmente em 4K ou com vários nodes.
 
@@ -60,3 +60,6 @@ e mistura global. A aparência e a interface no Resolve real ainda precisam ser
 confirmadas com sua filmagem no Windows.
 
 A versão 1.4 acrescenta **Halation Advanced**, descrita em [FERRAMENTAS.md](FERRAMENTAS.md). Quando ativada, ela substitui este menu rápido; seus quatro presets e controles têm receitas próprias.
+
+Na versão 1.5.0, a Halation rápida e a avançada também podem rodar na GPU
+OpenCL, conforme **Processing**. Consulte [GPU.md](GPU.md).

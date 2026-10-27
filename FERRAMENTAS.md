@@ -1,4 +1,4 @@
-# Ferramentas avançadas — Mendes Color 1.4.0
+# Ferramentas avançadas — Mendes Color 1.5.0
 
 Esta versão amplia o plugin para testes manuais no Resolve Windows. As
 ferramentas e receitas são implementações próprias; não são os algoritmos ou
@@ -109,7 +109,8 @@ Black & White Point → Custom LUT → Finishing Tones → Split Tone → Skin T
 Color Punch → Vignette → suavização/grão → Halation → Bloom → conversão de saída →
 Effect Mix com o sinal original.
 
-Todos os efeitos são CPU. Os filtros espaciais somam a vizinhança necessária
+Os efeitos podem rodar na GPU OpenCL ou na CPU otimizada. A seleção fica
+em Camera, Looks & Base → Processing. Veja [GPU.md](GPU.md). Os filtros espaciais somam a vizinhança necessária
 ao pedir o source ROI, inclusive na combinação de suavização, Halation e Bloom.
 Isso evita emendas entre tiles nos testes locais. Em 4K/vários nodes, avalie a
 velocidade e use cache/proxy do Resolve conforme necessário. Interface,
