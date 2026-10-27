@@ -1,0 +1,8 @@
+node_modules/
+*.ipk
+reports/*.json
+reports/*.txt
+.webos/
+dist/*.zip
+!dist/Mendes-Home-Prototipo-LEVE.zip
+dist/*.sha256

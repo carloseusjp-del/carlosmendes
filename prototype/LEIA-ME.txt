@@ -1,0 +1,33 @@
+MENDES HOME — PROTOTIPO VISUAL 0.1.0
+====================================
+
+COMO ABRIR NO WINDOWS
+1. Extraia todo o conteudo do arquivo ZIP.
+2. De dois cliques em ABRIR-PROTOTIPO.cmd.
+3. Coloque o navegador em tela cheia com F11.
+
+COMANDOS
+- Setas: navegar
+- Enter: selecionar
+- E: ativar ou encerrar a organizacao dos favoritos
+- T: trocar rapidamente o papel de parede
+- Esc: voltar ou fechar os ajustes
+- Mouse: disponivel para avaliacao no computador
+
+O QUE ESTA ATIVO NESTA VERSAO
+- Navegacao espacial pelo controle/teclado
+- Destaque e profundidade do aplicativo selecionado
+- Reorganizacao visual dos favoritos
+- Quatro papeis de parede
+- Transparencia, desfoque e qualidade visual ajustaveis
+- Movimento suave ou reduzido
+- Modo leve sem desfoque em tempo real
+
+LIMITES DESTA VERSAO
+Este e um prototipo visual com dados demonstrativos. Ele nao lista nem abre os
+aplicativos reais da TV e nao substitui a tela inicial da LG. Nenhuma alteracao
+foi feita na TV. A integracao sera iniciada somente depois da aprovacao visual.
+
+IDENTIDADE
+A interface, o simbolo, os icones e os componentes foram desenhados para o
+Mendes Home. Nenhum icone, codigo ou elemento proprietario da Apple foi usado.

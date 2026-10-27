@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#081421">
+    <title>Mendes Home — Protótipo visual</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-wallpaper="aurora" data-quality="balanced">
+    <div class="wallpaper" aria-hidden="true">
+      <span class="light light-a"></span><span class="light light-b"></span><span class="light light-c"></span><span class="horizon"></span>
+    </div>
+    <div class="texture" aria-hidden="true"></div>
+
+    <div id="appShell" class="app-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="Mendes Home">
+          <span class="brand-symbol" aria-hidden="true"><i></i><i></i></span>
+          <div><strong>Mendes Home</strong><small>Minha experiência</small></div>
+        </div>
+        <nav class="glass nav-capsule" aria-label="Seções principais">
+          <button class="nav-item focusable is-active" type="button" data-view="inicio">Início</button>
+          <button class="nav-item focusable" type="button" data-view="aplicativos">Aplicativos</button>
+          <button class="nav-item focusable" type="button" data-view="colecoes">Coleções</button>
+        </nav>
+        <div class="top-actions">
+          <span class="prototype-state"><i></i> Protótipo</span><time id="clock">--:--</time>
+          <button id="settingsButton" class="glass round-button focusable" type="button" aria-label="Abrir ajustes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M8 14v6"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="welcome" aria-labelledby="greeting">
+          <p id="dateLabel" class="overline">TERÇA-FEIRA, 27 DE OUTUBRO</p>
+          <h1 id="greeting">Boa noite, Carlos.</h1>
+          <p>Seu conteúdo, organizado com calma e sem distrações.</p>
+        </section>
+
+        <section id="hero" class="glass hero" aria-live="polite">
+          <div class="hero-copy">
+            <span class="hero-label"><i></i> SELEÇÃO ATUAL</span>
+            <h2 id="heroTitle">Cinema</h2>
+            <p id="heroDescription">Filmes e séries reunidos em um espaço feito para você.</p>
+            <div class="hero-meta"><span>Favorito</span><span>Pronto para abrir</span></div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <span class="hero-orbit orbit-a"></span><span class="hero-orbit orbit-b"></span><span id="heroGlyph" class="hero-glyph"></span>
+          </div>
+        </section>
+
+        <section class="favorites-section" aria-labelledby="favoritesTitle">
+          <div class="section-title-row">
+            <div><span class="section-index">01</span><h2 id="favoritesTitle">Favoritos</h2></div>
+            <span id="editHint" class="section-hint">Acesso rápido e personalizável</span>
+          </div>
+          <div id="favoritesRail" class="glass favorites-rail" role="list"></div>
+        </section>
+
+        <section class="library-section" aria-labelledby="libraryTitle">
+          <div class="section-title-row compact"><div><span class="section-index">02</span><h2 id="libraryTitle">Sua biblioteca</h2></div></div>
+          <div class="library-grid">
+            <button class="glass library-card focusable" type="button" data-section="Todos os aplicativos">
+              <span class="library-icon grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span><strong>Todos os apps</strong><small>Organize sua coleção</small></span><b>12</b>
+            </button>
+            <button class="glass library-card focusable" type="button" data-section="Recentes">
+              <span class="library-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 7v5l3 2M4.9 5.2A8 8 0 1 1 4 17M4 5v4h4"/></svg></span>
+              <span><strong>Recentes</strong><small>Continue de onde parou</small></span><b>4</b>
+            </button>
+            <button class="glass library-card focusable" type="button" data-section="Ambientes">
+              <span class="library-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19V9l7-5 7 5v10h-5v-6h-4v6H5Z"/></svg></span>
+              <span><strong>Ambientes</strong><small>Perfis para cada momento</small></span><b>3</b>
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="helpbar">
+        <span><kbd>◀ ▲ ▼ ▶</kbd> Navegar</span><span><kbd>OK</kbd> Selecionar</span>
+        <span><i class="remote-key green"></i> Organizar</span><span><i class="remote-key blue"></i> Fundo</span><span><kbd>Voltar</kbd> Fechar</span>
+      </footer>
+    </div>
+
+    <div id="scrim" class="scrim" aria-hidden="true"></div>
+    <aside id="settingsPanel" class="glass settings-panel" aria-hidden="true" aria-labelledby="settingsTitle">
+      <div class="settings-header">
+        <div><span class="overline">PERSONALIZAÇÃO</span><h2 id="settingsTitle">Aparência</h2></div>
+        <button id="closeSettings" class="glass round-button focusable settings-focus" type="button" aria-label="Fechar ajustes">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>
+        </button>
+      </div>
+      <div class="settings-scroll">
+        <section class="setting-group">
+          <div class="setting-heading"><strong>Papel de parede</strong><span id="wallpaperName">Aurora</span></div>
+          <div class="wallpaper-options" role="radiogroup" aria-label="Papel de parede">
+            <button class="wallpaper-option focusable settings-focus is-selected" type="button" data-wallpaper-option="aurora" aria-label="Aurora"><i></i></button>
+            <button class="wallpaper-option focusable settings-focus" type="button" data-wallpaper-option="sunset" aria-label="Horizonte"><i></i></button>
+            <button class="wallpaper-option focusable settings-focus" type="button" data-wallpaper-option="lagoon" aria-label="Laguna"><i></i></button>
+            <button class="wallpaper-option focusable settings-focus" type="button" data-wallpaper-option="graphite" aria-label="Grafite"><i></i></button>
+          </div>
+        </section>
+        <section class="setting-group">
+          <label class="range-label" for="glassIntensity"><span><strong>Transparência</strong><small>Intensidade do vidro</small></span><output id="glassValue">68%</output></label>
+          <input id="glassIntensity" class="range-control focusable settings-focus" type="range" min="40" max="90" value="68" step="2">
+        </section>
+        <section class="setting-group">
+          <label class="range-label" for="blurIntensity"><span><strong>Desfoque</strong><small>Separação do fundo</small></span><output id="blurValue">14</output></label>
+          <input id="blurIntensity" class="range-control focusable settings-focus" type="range" min="0" max="20" value="14" step="2">
+        </section>
+        <section class="setting-group">
+          <div class="setting-heading"><strong>Qualidade visual</strong><span id="qualityName">Equilibrado</span></div>
+          <div class="segmented glass" role="radiogroup" aria-label="Qualidade visual">
+            <button class="focusable settings-focus" type="button" data-quality-option="light">Leve</button>
+            <button class="focusable settings-focus is-selected" type="button" data-quality-option="balanced">Equilibrado</button>
+            <button class="focusable settings-focus" type="button" data-quality-option="full">Máximo</button>
+          </div>
+        </section>
+        <section class="setting-group row-setting">
+          <span><strong>Movimento suave</strong><small>Transições e profundidade</small></span>
+          <button id="motionToggle" class="switch focusable settings-focus is-on" type="button" role="switch" aria-checked="true"><i></i></button>
+        </section>
+      </div>
+      <p class="settings-note">O modo leve preserva contraste e profundidade com menos desfoque em tempo real.</p>
+    </aside>
+
+    <div id="toast" class="toast glass" role="status" aria-live="polite"></div>
+    <script src="prototype.js"></script>
+  </body>
+</html>
