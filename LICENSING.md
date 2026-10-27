@@ -1,4 +1,6 @@
-# Licenciamento — Mendes Color 1.6.0
+# Licenciamento — Mendes Color 1.6.1
+
+Copyright © 2026 Carlos Mendes. Todos os direitos reservados.
 
 O instalador público inclui o plugin e o aplicativo **Ativar Mendes Color**.
 O painel administrativo **Mendes License Studio** é entregue separadamente ao
@@ -6,7 +8,7 @@ proprietário e não deve ser enviado aos clientes.
 
 ## Fluxo para disponibilizar uma licença
 
-1. O cliente instala `MendesColor-1.6.0-Setup.exe` e abre **Ativar Mendes Color**
+1. O cliente instala `MendesColor-1.6.1-Setup.exe` e abre **Ativar Mendes Color**
    pelo menu Iniciar ou pela aba **License** do efeito.
 2. O cliente copia o ID `MC-....` da máquina e envia ao proprietário.
 3. No **Mendes License Studio**, o proprietário informa a senha administrativa,

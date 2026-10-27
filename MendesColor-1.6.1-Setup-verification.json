@@ -1,0 +1,62 @@
+{
+  "version": "1.6.1",
+  "copyright": "Copyright (C) 2026 Carlos Mendes. All rights reserved.",
+  "artifacts": [
+    {
+      "file": "MendesColor.ofx",
+      "bytes": 4294319,
+      "sha256": "ca82556149c9f5b89770386e63f4b6a5721a1a9cc92e162382a073d5702ccbfa",
+      "architecture": "amd64",
+      "kind": "DLL"
+    },
+    {
+      "file": "MendesColorActivate.exe",
+      "bytes": 2936779,
+      "sha256": "db9791572e9dc39a5e200ed390f58da5c9916b102c0869cfa094916876b9c2c6",
+      "architecture": "amd64",
+      "kind": "Windows GUI"
+    },
+    {
+      "file": "MendesColor-License-Studio-1.6.1.exe",
+      "bytes": 3050810,
+      "sha256": "65325ba60a74ee594b8cfac7a4ba39be97f5254dc83878723f182de4ec47999f",
+      "architecture": "amd64",
+      "kind": "Windows GUI"
+    },
+    {
+      "file": "MendesColor-1.6.1-Setup.exe",
+      "bytes": 12086702,
+      "sha256": "8596f12a8bd713989148d78e79ad84dfbe493cc963b72c826a1cadaefa4a2fed",
+      "architecture": "amd64",
+      "kind": "Windows GUI"
+    }
+  ],
+  "installer_payloads_verified": 19,
+  "installer_entry_point_regression": "TaskDialogIndirect absent",
+  "installer_rea_imports_evidence_id": "ev_0a9adcc20b2a8fb1455aa2215fc74738e56ac6fcfe22f9d66cbf2123f32e30a4",
+  "installer_rea_evidence_id": "ev_22951e4eed3447c08b7079c26e95fc92c7dbc90188ee75ebcd485a49fbc92722",
+  "plugin_rea_exports_evidence_id": "ev_45d7a482fdc75294b837ac329afc9dc04f48d957130f8912678777f277879f0a",
+  "plugin_rea_imports_evidence_id": "ev_b79a42d0563fbc69a66c7d2012d870af19cc16f6d6ca0077bfbd78c6cc6ff00d",
+  "plugin_import_dlls": [
+    "ADVAPI32.dll",
+    "bcrypt.dll",
+    "comdlg32.dll",
+    "KERNEL32.dll",
+    "msvcrt.dll",
+    "SHELL32.dll",
+    "USER32.dll"
+  ],
+  "local_checks": {
+    "portable_suites": 14062,
+    "opencl_parity": 426,
+    "total": 14488,
+    "license_crypto_identity": "passed",
+    "release_secret_scan": "passed"
+  },
+  "runtime_scope": {
+    "windows_execution": "not_run",
+    "resolve_1_6_0_execution": "not_run",
+    "opencl_execution": "PoCL 6.0 CPU test device; production selects GPUs only",
+    "previous_version": "1.5.0 confirmed by user in DaVinci Resolve with NVIDIA GPU"
+  }
+}

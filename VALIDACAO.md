@@ -1,4 +1,4 @@
-# Validação — Mendes Color 1.6.0
+# Validação — Mendes Color 1.6.1
 
 O plugin Windows x64 foi compilado com MinGW-w64 GCC 14 POSIX, C++17, O3,
 avisos tratados como erros e runtimes GCC/C++ estáticos. As exportações OpenFX,
@@ -35,11 +35,17 @@ a regressão do novo motor CPU e o host multithread foram repetidos com esses
 sanitizadores.
 A transação do instalador foi exercitada em filesystem Linux, não na UI Windows.
 
-Na 1.6.0, oito verificações cobrem o formato canônico das keys, datas, IDs de
+Na 1.6.1, oito verificações cobrem o formato canônico das keys, datas, IDs de
 máquina, UTF-8, alterações de assinatura e entradas inválidas. Um teste Python
 independente decifra a chave privada embarcada com a senha administrativa,
 confere que ela corresponde à chave pública e realiza uma assinatura ECDSA
 P-256/SHA-256. A senha e a chave privada em texto aberto não entram nos pacotes.
+
+O Setup 1.6.1 usa uma janela Win32 própria e não importa
+`TaskDialogIndirect`. Essa regressão cobre o erro de ponto de entrada observado
+no Setup 1.6.0 quando o Windows carregava uma variante antiga de `comctl32.dll`.
+Os quatro binários PE carregam `CompanyName=Carlos Mendes` e o aviso legal de
+copyright nos recursos VERSIONINFO.
 
 ## Motor OpenCL e CPU otimizada
 
@@ -107,7 +113,7 @@ apropriados no campo técnico de LUT. Há apenas o preset Avata 2 embutido.
 ## Limites da execução
 
 O usuário confirmou funcionamento da versão 1.5.0 com GPU no Resolve em 4K num
-i5-13420H/32 GB/RTX 3050 Laptop 6 GB. **A 1.6.0 ainda não foi executada aqui no
+i5-13420H/32 GB/RTX 3050 Laptop 6 GB. **A 1.6.1 ainda não foi executada aqui no
 Windows nem no Resolve real**. A UI das páginas/grupos,
 o seletor múltiplo GetOpenFileNameW, UAC/BCrypt, desfazer real e desempenho em
 4K, o ativador e o License Studio ficam para avaliação manual pelo usuário. As
@@ -121,7 +127,7 @@ manifesto requireAdministrator e payloads com os hashes do build. O executável
 não foram exercitados neste ambiente Linux. Não há certificação de produção,
 emulação calibrada de película ou promessa de tempo real.
 
-O REA observou no OFX 1.6.0 um PE32+ AMD64, as exportações
+O REA observou no OFX 1.6.1 um PE32+ AMD64, as exportações
 `OfxGetNumberOfPlugins` e `OfxGetPlugin`, sete DLLs importadas e cobertura
 completa das tabelas inspecionadas, sem problemas reportados. Essa inspeção é
 estática e não prova carregamento ou execução no Resolve.

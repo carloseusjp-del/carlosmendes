@@ -1,13 +1,19 @@
-# Mendes Color 1.6.0
+# Mendes Color 1.6.1
+
+**Copyright © 2026 Carlos Mendes. Todos os direitos reservados.**
 
 Plugin OpenFX para **DaVinci Resolve no Windows x64**, com LUT Avata 2 embutida,
 **84 opções de look**, ferramentas de cor e efeitos, **16 slots de LUT** e
 botões **ANTERIOR / PRÓXIMO** em todos os menus, instalador com identidade visual
 e ativação offline por key.
 
+A versão 1.6.1 traz a nova interface escura do instalador, identifica Carlos
+Mendes nos metadados legais de todos os executáveis e remove a dependência de
+`TaskDialogIndirect` que impedia o Setup 1.6.0 de abrir em alguns sistemas.
+
 ## Instalar ou atualizar
 
-Baixe **MendesColor-1.6.0-Setup.exe**, feche o Resolve e execute o instalador.
+Baixe **MendesColor-1.6.1-Setup.exe**, feche o Resolve e execute o instalador.
 Autorize a solicitação de administrador e confirme o destino mostrado.
 Depois, abra **Ativar Mendes Color** no menu Iniciar, copie o ID da máquina e
 insira a key recebida. Reabra o Resolve e procure **Mendes Color** em
@@ -27,14 +33,14 @@ para `C:\Program Files\Common Files\OFX\Plugins\`.
 
 ## Licenças para distribuição
 
-A versão 1.6.0 inclui dois aplicativos com o logo Mendes Color:
+A versão 1.6.1 inclui dois aplicativos com o logo Mendes Color:
 
 - **Ativar Mendes Color**, instalado junto do plugin para o cliente copiar o ID
   da máquina, colar a key e consultar o estado da licença;
 - **Mendes License Studio**, painel separado e protegido por senha para o
   proprietário emitir keys perpétuas ou com data de validade.
 
-O proprietário deve guardar **MendesColor-Owner-Kit-1.6.0.zip** e a senha
+O proprietário deve guardar **MendesColor-Owner-Kit-1.6.1.zip** e a senha
 administrativa em locais privados separados. O kit contém o Studio e o guia de
 emissão; a senha não está dentro do ZIP.
 
@@ -44,7 +50,7 @@ cifrada. Consulte [LICENSING.md](LICENSING.md) para o fluxo completo.
 
 ## Aceleração por GPU
 
-A versão 1.5.0 adicionou **GPU via OpenCL**, mantida na 1.6.0, incluindo LUTs/looks, ferramentas
+A versão 1.5.0 adicionou **GPU via OpenCL**, mantida na 1.6.1, incluindo LUTs/looks, ferramentas
 de cor, grão, Halation e Bloom. Em **Camera, Looks & Base → Processing**,
 deixe **GPU (OpenCL; CPU fallback)**. A seleção dá preferência à GPU NVIDIA.
 O primeiro quadro pode aguardar a compilação do driver; os seguintes reutilizam
@@ -73,7 +79,7 @@ O arquivo cita Avata 2 no nome e Mavic 3 Pro num comentário interno; essa
 proveniência foi mantida. Configurar Rec.709 Gamma 2.4 no Resolve não prova uma
 curva 2.4 no arquivo. Consulte [LUT-AVATA2.md](LUT-AVATA2.md).
 
-## Ferramentas da versão 1.6.0
+## Ferramentas da versão 1.6.1
 
 As novas seções começam **desligadas**, preservando projetos anteriores.
 Selecionar um preset pronto ativa a seção correspondente; para ajuste manual,
@@ -132,7 +138,7 @@ suporte a tiles. Os kernels foram executados em um dispositivo OpenCL de teste
 em CPU; não houve medição em GPU NVIDIA. Não há promessa de tempo real 4K. Máscaras de
 pele usam cor/luminância, sem reconhecimento de pessoas ou proteção automática.
 
-Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.6.0.
+Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.6.1.
 O tratamento da descrição opcional que corrigiu o carregamento na 1.0.2 foi
 preservado. Os controles e índices antigos foram mantidos; os novos grupos
 começam desligados. Consulte [VALIDACAO.md](VALIDACAO.md).
