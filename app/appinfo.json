@@ -1,11 +1,14 @@
 {
   "id": "com.carlosmendes.mendeshome",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "vendor": "Carlos Mendes",
   "type": "web",
   "main": "index.html",
   "title": "Mendes Home",
   "icon": "icon.png",
   "largeIcon": "largeIcon.png",
-  "bgColor": "#07111c"
+  "bgColor": "#f4f4f2",
+  "resolution": "1920x1080",
+  "handlesRelaunch": true,
+  "disableBackHistoryAPI": true
 }

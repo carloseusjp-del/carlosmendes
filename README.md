@@ -1,71 +1,70 @@
-# LG webOS Launcher
+# Mendes Home para LG webOS
 
-Projeto original para uma interface inicial rápida e personalizável na LG 55UR8750PSA, usando somente o fluxo oficial de desenvolvimento do LG webOS TV.
+Launcher original com interface Liquid Glass para a LG 55UR8750PSA. O projeto usa o fluxo oficial de desenvolvimento do webOS TV e não modifica firmware, não faz root e não remove componentes da LG.
 
-## Avaliar o protótipo visual
+## Estado da etapa 4
 
-[**Baixar Mendes Home — pacote leve**](dist/Mendes-Home-Prototipo-LEVE.zip?raw=1)
-
-Depois de baixar:
-
-1. extraia o ZIP;
-2. abra `ABRIR-MENDES-HOME.cmd`;
-3. pressione `F11` para avaliar em tela cheia.
-
-Também é possível abrir o [arquivo HTML independente](dist/Mendes-Home-Prototipo.html) diretamente no navegador.
-
-![Prévia da tela inicial clara do Mendes Home](prototype/preview-home.png)
-
-A seta para baixo sobre o dock abre a [gaveta de entradas, atalhos e informações](prototype/preview-drawer.png).
-
-## Estado atual
-
-- Sistema identificado: LG webOS TV.
-- TV registrada: 55UR8750PSA, webOS 24 / 9.2.1-40, firmware informado `lgtv23crtk108312530`.
+- TV confirmada: LG 55UR8750PSA.
+- Sistema: webOS 24 / SDK 9.2.1.
+- Firmware confirmado pela TV: 23.21.20.
 - Computador: Windows 11.
-- Método: Developer Mode app + Key Server + CLI oficial na porta 9922.
-- CLI fixada: `@webos-tools/cli` 3.2.6, perfil `tv`.
-- Nenhuma modificação foi feita na TV.
-- Rede confirmada no Windows: Wi-Fi, IPv4 `192.168.0.103`, gateway `192.168.0.1`.
-- TV confirmada na mesma rede: IPv4 `192.168.0.108`.
-- Comunicação pela rede: confirmada por duas respostas em aproximadamente 4 ms.
-- Aplicativo oficial Developer Mode: instalado.
-- Estado atual: Dev Mode Status `ON`, Key Server `OFF`, Session Time `999h:57m`.
-- IP confirmado pelo aplicativo Developer Mode: `192.168.0.108`.
-- Comunicação oficial confirmada: TCP 9922 acessível do Windows para a TV.
-- Key Server ativado com autorização; TCP 9991 acessível do Windows para a TV.
-- Rede pronta para pareamento: portas 9922 e 9991 confirmadas.
-- Ferramentas base confirmadas no Windows: Node.js `v24.20.0` e npm `11.19.0`.
-- Pasta local criada em Documentos e CLI oficial `@webos-tools/cli` 3.2.6 confirmada.
-- Perfil `tv` selecionado e dispositivo local `lg-sala` registrado como `prisoner@192.168.0.108:9922`.
-- Chave de desenvolvimento obtida e salva localmente como `%USERPROFILE%\.ssh\lg-sala_webos`.
-- Pareamento confirmado por `ares-device`: modelo `55UR8750PSA`, SDK `9.2.1`, firmware `23.21.20`.
-- Key Server desligado após o pareamento; a conexão por chave continua funcional.
-- Preparação concluída: sistema, rede, CLI, pareamento e limites confirmados.
-- Permissão SSH confirmada como usuário restrito `prisoner`, sem root.
-- Canal SSAP disponível nas portas TCP 3000 e 3001; candidato a automação externa de inicialização.
-- Investigação da etapa 2 concluída e registrada em `docs/03-INVESTIGACAO-ETAPA-2.md`.
-- Etapa atual: segunda direção do protótipo visual, com fundo branco iluminado, vitrine editorial e dock Liquid Glass.
-- O protótipo ainda não foi instalado na TV e usa somente aplicativos demonstrativos.
+- Ferramentas: `@webos-tools/cli` 3.2.6, perfil `tv`.
+- Dispositivo pareado: `lg-sala`, usuário restrito `prisoner`.
+- Versão preparada: **Mendes Home 0.2.0**.
+- IPK validado localmente; instalação real na TV ainda depende de autorização e teste do usuário.
 
-Leia primeiro [o perfil e os limites](docs/01-PERFIL-E-LIMITES.md) e depois siga [a primeira conexão](docs/02-PRIMEIRA-CONEXAO.md).
+## Baixar
 
-Para avaliar a etapa 3, abra `prototype/ABRIR-PROTOTIPO.cmd`. A documentação do protótipo está em [docs/04-PROTOTIPO-VISUAL-ETAPA-3.md](docs/04-PROTOTIPO-VISUAL-ETAPA-3.md).
+[**Baixar Mendes Home 0.2.0 para webOS**](dist/com.carlosmendes.mendeshome_0.2.0_all.ipk?raw=1)
 
-## Primeiro passo no Windows
+Se o navegador bloquear a extensão IPK, use o [pacote ZIP com o IPK, checksum e instruções](dist/Mendes-Home-webOS-0.2.0.zip?raw=1).
 
-Dê dois cliques em:
+Antes de instalar, siga [o guia de instalação, testes e restauração](docs/INSTALACAO-TV.md). O procedimento oficial usa o Developer Mode e a webOS CLI no Windows.
 
-```text
-INICIAR-DIAGNOSTICO.cmd
+O protótipo visual para navegador continua disponível em [Mendes Home — pacote leve](dist/Mendes-Home-Prototipo-LEVE.zip?raw=1).
+
+## Recursos implementados
+
+- interface clara Liquid Glass, otimizada para plano lógico de 1920×1080;
+- navegação por setas, OK, Voltar e teclas coloridas do controle;
+- dock com oito favoritos, ordenação e seleção pela biblioteca completa;
+- tentativa segura de listar launch points e aplicativos do webOS;
+- fallback por aplicativos conhecidos quando o firmware limita a enumeração;
+- abertura de aplicativos pelo Application Manager;
+- atalhos para TV ao vivo e HDMI 1 a 3, sujeitos à confirmação no aparelho;
+- gaveta de entradas e atalhos;
+- papéis de parede, intensidade do vidro, desfoque, qualidade e movimento persistentes;
+- catálogo opcional da TMDB para Descobrir, Filmes e Séries;
+- chave TMDB fornecida pelo próprio usuário e guardada apenas no armazenamento local do app;
+- cache do catálogo para uso temporário sem conexão.
+
+## Validação local concluída
+
+O teste automatizado cobre fallback sem TV, navegação, gaveta, biblioteca, ajustes, persistência, TMDB simulada e uma simulação do `PalmServiceBridge`. Nessa simulação, dez aplicativos foram enumerados, um aplicativo da biblioteca foi fixado no dock e o pedido de abertura chegou ao Application Manager.
+
+```bash
+npm run test:browser
+npx --no-install ares-package -c app
+npx --no-install ares-package app -o dist
+npx --no-install ares-package -I dist/com.carlosmendes.mendeshome_0.2.0_all.ipk
 ```
 
-Envie somente estas três linhas do resultado:
+Esses testes não substituem o teste na TV. Fluidez da GPU, IDs das entradas, permissões de enumeração, acesso à TMDB e abertura dos aplicativos precisam ser comprovados na unidade 55UR8750PSA.
 
-```text
-Interface recomendada:
-IPv4 do computador:
-Gateway:
-```
+## Limites confirmados
 
-Não envie senhas, chaves ou dados da conta LG Developer.
+O SDK público de um aplicativo comum em Developer Mode não oferece uma API documentada para substituir a Home da LG, interceptar globalmente o botão Home ou iniciar o launcher automaticamente ao ligar. Esta versão permanece um aplicativo reversível. Depois do teste, o mecanismo nativo **Quick Access** da LG pode ser usado como atalho por um número do controle, se disponível no aparelho.
+
+O firmware pode negar a lista completa de aplicativos mesmo quando permite abrir IDs conhecidos. O Mendes Home informa esse estado como acesso limitado e não tenta elevar privilégios.
+
+## Documentação
+
+- [Perfil da TV e limites](docs/01-PERFIL-E-LIMITES.md)
+- [Primeira conexão](docs/02-PRIMEIRA-CONEXAO.md)
+- [Investigação sobre Home e inicialização](docs/03-INVESTIGACAO-ETAPA-2.md)
+- [Protótipo visual](docs/04-PROTOTIPO-VISUAL-ETAPA-3.md)
+- [Instalação, testes e restauração](docs/INSTALACAO-TV.md)
+- [Direitos autorais](COPYRIGHT.md)
+- [Avisos de terceiros](THIRD_PARTY_NOTICES.md)
+
+Copyright © 2026 Carlos Mendes. Todos os direitos reservados.

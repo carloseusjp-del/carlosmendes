@@ -6,3 +6,7 @@ reports/*.txt
 dist/*.zip
 !dist/Mendes-Home-Prototipo-LEVE.zip
 dist/*.sha256
+!dist/com.carlosmendes.mendeshome_0.2.0_all.ipk
+!dist/com.carlosmendes.mendeshome_0.2.0_all.ipk.sha256
+!dist/Mendes-Home-webOS-0.2.0.zip
+!dist/Mendes-Home-webOS-0.2.0.zip.sha256

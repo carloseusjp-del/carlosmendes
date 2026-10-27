@@ -1,296 +1,825 @@
 (function () {
   "use strict";
 
-  var APP_ID = "com.carlosmendes.mendeshome";
-  var STORAGE_ORDER = "mendes-home.app-order.v1";
-  var STORAGE_THEME = "mendes-home.theme.v1";
-  var THEMES = ["aurora", "sunset", "graphite"];
-  var COLOR_KEYS = { GREEN: 404, BLUE: 406 };
-  var apps = [];
-  var focusedIndex = 0;
+  var platform = window.MendesPlatform;
+  var catalog = window.MendesCatalog;
+  var STORAGE_KEY = "com.carlosmendes.mendeshome.state.v1";
+  var SCHEMA_VERSION = 1;
+  var WALLPAPERS = ["wall", "mist", "sand", "night"];
+  var WALLPAPER_NAMES = { wall:"Parede iluminada", mist:"Névoa", sand:"Areia", night:"Noite" };
+  var QUALITY_NAMES = { light:"Leve", balanced:"Equilibrado", full:"Máximo" };
+  var COLOR_KEYS = { GREEN:404, BLUE:406 };
   var editMode = false;
-  var bridges = [];
+  var drawerOpen = false;
+  var allAppsOpen = false;
+  var settingsOpen = false;
+  var lastMainFocus = null;
+  var lastDockFocus = null;
   var toastTimer = null;
+  var saveTimer = null;
+  var stateReadOnly = false;
+  var currentCatalogMode = "discover";
+  var catalogRequestId = 0;
+  var platformDetail = "Inicializando";
+  var allApps = [];
+  var apps = [];
 
-  var grid = document.getElementById("appGrid");
-  var emptyState = document.getElementById("emptyState");
-  var emptyMessage = document.getElementById("emptyMessage");
-  var connectionState = document.getElementById("connectionState");
-  var appCount = document.getElementById("appCount");
+  var icons = {
+    cinema:'<svg viewBox="0 0 48 48"><path d="M15 11v26M33 11v26M10 16h28M10 32h28M10 11h28v26H10zM15 11l4 5m5-5 4 5m5-5 4 5"/></svg>',
+    music:'<svg viewBox="0 0 48 48"><path d="M18 33V15l20-4v18M18 20l20-4"/><ellipse cx="13" cy="35" rx="5" ry="4"/><ellipse cx="33" cy="31" rx="5" ry="4"/></svg>',
+    photos:'<svg viewBox="0 0 48 48"><rect x="9" y="10" width="30" height="28" rx="6"/><circle cx="29" cy="19" r="4"/><path d="m12 34 9-10 6 6 4-4 6 8"/></svg>',
+    tv:'<svg viewBox="0 0 48 48"><rect x="7" y="12" width="34" height="25" rx="6"/><path d="m18 7 6 5 6-5M18 41h12m3-21 9 5-9 5z"/></svg>',
+    web:'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M8 24h32M24 8c5 5 7 10 7 16s-2 11-7 16c-5-5-7-10-7-16s2-11 7-16z"/></svg>',
+    games:'<svg viewBox="0 0 48 48"><path d="M15 18h18c5 0 9 5 9 11 0 5-3 9-7 9-3 0-5-4-7-6h-8c-2 2-4 6-7 6-4 0-7-4-7-9 0-6 4-11 9-11zM14 27h8M18 23v8M32 25h.1M36 29h.1"/></svg>',
+    home:'<svg viewBox="0 0 48 48"><path d="M9 23 24 10l15 13v15H28V27h-8v11H9zM34 14v-3h5v8"/></svg>',
+    files:'<svg viewBox="0 0 48 48"><path d="M7 16h14l4 5h16v17H7zM7 16v-5h13l4 5"/></svg>'
+  };
+
+  var rail = document.getElementById("favoritesRail");
+  var settingsPanel = document.getElementById("settingsPanel");
+  var quickDrawer = document.getElementById("quickDrawer");
+  var allAppsPanel = document.getElementById("allAppsPanel");
+  var allAppsGrid = document.getElementById("allAppsGrid");
+  var showcase = document.getElementById("showcase");
+  var scrim = document.getElementById("scrim");
   var toast = document.getElementById("toast");
-
-  function callLuna(method, parameters) {
-    return new Promise(function (resolve, reject) {
-      if (typeof window.PalmServiceBridge !== "function") {
-        reject(new Error("PalmServiceBridge indisponível fora da TV"));
-        return;
-      }
-
-      var bridge = new window.PalmServiceBridge();
-      bridges.push(bridge);
-      bridge.onservicecallback = function (raw) {
-        var index = bridges.indexOf(bridge);
-        if (index >= 0) bridges.splice(index, 1);
-        try {
-          var response = JSON.parse(raw || "{}");
-          if (response.returnValue === false) {
-            reject(new Error(response.errorText || "A chamada foi recusada pelo webOS"));
-          } else {
-            resolve(response);
-          }
-        } catch (error) {
-          reject(error);
-        }
-      };
-      bridge.call(
-        "luna://com.webos.applicationManager/" + method,
-        JSON.stringify(parameters || {})
-      );
-    });
-  }
-
-  function normalizeApp(item) {
-    var title = item.title || item.defaultAppName || item.id || "Aplicativo";
+  var catalogStatus = document.getElementById("catalogStatus");
+  var credentialInput = document.getElementById("tmdbCredential");
+  var storyCards = Array.prototype.slice.call(document.querySelectorAll("[data-story-slot]"));
+  var fallbackStories = storyCards.map(function (card, index) {
+    var badge = document.getElementById("storyBadge" + index);
     return {
-      id: item.id || item.appId,
-      title: title,
-      visible: item.visible !== false && item.noDisplay !== true,
-      params: item.params || {},
-      accent: accentFor(item.id || title)
+      title:document.getElementById("storyTitle" + index).textContent,
+      meta:document.getElementById("storyMeta" + index).textContent,
+      story:card.getAttribute("data-story"),
+      badge:badge ? badge.textContent : "",
+      badgeHidden:badge ? badge.hidden : true
+    };
+  });
+
+  function defaultState() {
+    return {
+      schemaVersion:SCHEMA_VERSION,
+      appearance:{ wallpaper:"wall", glassIntensity:72, blur:14, quality:"balanced", motion:true },
+      dock:{ order:[], favorites:[] }
     };
   }
 
-  function accentFor(value) {
-    var palette = ["#63e6be", "#58b9ff", "#a78bfa", "#ff9f6e", "#f2d15f", "#ef83b9"];
-    var hash = 0;
-    for (var i = 0; i < value.length; i += 1) hash = ((hash << 5) - hash + value.charCodeAt(i)) | 0;
-    return palette[Math.abs(hash) % palette.length];
+  function safeStorageGet(key) {
+    try { return localStorage.getItem(key); }
+    catch (error) { return null; }
+  }
+
+  function safeStorageSet(key, value) {
+    try { localStorage.setItem(key, value); return true; }
+    catch (error) { return false; }
+  }
+
+  function clampStep(value, minimum, maximum, step, fallback) {
+    var number = Number(value);
+    if (!isFinite(number)) number = fallback;
+    number = Math.max(minimum, Math.min(maximum, number));
+    return Math.round(number / step) * step;
+  }
+
+  function uniqueStrings(value) {
+    var seen = {};
+    return (Array.isArray(value) ? value : []).filter(function (item) {
+      if (typeof item !== "string" || !item || seen[item]) return false;
+      seen[item] = true;
+      return true;
+    });
+  }
+
+  function sanitizeState(raw) {
+    var clean = defaultState();
+    var appearance = raw && raw.appearance || {};
+    var dock = raw && raw.dock || {};
+    clean.appearance.wallpaper = WALLPAPERS.indexOf(appearance.wallpaper) >= 0 ? appearance.wallpaper : clean.appearance.wallpaper;
+    clean.appearance.quality = QUALITY_NAMES[appearance.quality] ? appearance.quality : clean.appearance.quality;
+    clean.appearance.glassIntensity = clampStep(appearance.glassIntensity, 40, 90, 2, 72);
+    clean.appearance.blur = clampStep(appearance.blur, 0, 20, 2, 14);
+    clean.appearance.motion = typeof appearance.motion === "boolean" ? appearance.motion : true;
+    clean.dock.order = uniqueStrings(dock.order);
+    clean.dock.favorites = uniqueStrings(dock.favorites);
+    return clean;
+  }
+
+  function loadState() {
+    var raw = null;
+    try { raw = JSON.parse(safeStorageGet(STORAGE_KEY) || "null"); }
+    catch (error) { raw = null; }
+    if (raw && Number(raw.schemaVersion) > SCHEMA_VERSION) {
+      stateReadOnly = true;
+      return defaultState();
+    }
+    if (!raw) {
+      var legacyOrder = null;
+      try { legacyOrder = JSON.parse(safeStorageGet("mendes-home.app-order.v1") || "[]"); }
+      catch (error) { legacyOrder = []; }
+      var legacyTheme = safeStorageGet("mendes-home.theme.v1");
+      raw = defaultState();
+      raw.dock.order = Array.isArray(legacyOrder) ? legacyOrder : [];
+      raw.appearance.wallpaper = legacyTheme === "sunset" ? "sand" : legacyTheme === "graphite" ? "night" : "wall";
+    }
+    return sanitizeState(raw);
+  }
+
+  var state = loadState();
+
+  function flushSave() {
+    clearTimeout(saveTimer);
+    saveTimer = null;
+    if (stateReadOnly) return;
+    if (!safeStorageSet(STORAGE_KEY, JSON.stringify(state))) showToast("As preferências não puderam ser salvas");
+  }
+
+  function queueSave() {
+    if (stateReadOnly) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(flushSave, 220);
   }
 
   function initials(title) {
-    var words = title.trim().split(/\s+/).filter(Boolean);
+    var words = String(title || "App").trim().split(/\s+/).filter(Boolean);
     if (!words.length) return "AP";
-    if (words.length === 1) return words[0].slice(0, 2).toUpperCase();
-    return (words[0][0] + words[1][0]).toUpperCase();
+    return words.length === 1 ? words[0].slice(0, 2).toUpperCase() : (words[0][0] + words[1][0]).toUpperCase();
   }
 
-  function storedOrder() {
-    try {
-      var value = JSON.parse(localStorage.getItem(STORAGE_ORDER) || "[]");
-      return Array.isArray(value) ? value : [];
-    } catch (_) {
-      return [];
-    }
-  }
-
-  function applyStoredOrder(items) {
-    var order = storedOrder();
-    var positions = {};
-    order.forEach(function (id, index) { positions[id] = index; });
-    return items.slice().sort(function (a, b) {
-      var aKnown = Object.prototype.hasOwnProperty.call(positions, a.id);
-      var bKnown = Object.prototype.hasOwnProperty.call(positions, b.id);
-      if (aKnown && bKnown) return positions[a.id] - positions[b.id];
-      if (aKnown) return -1;
-      if (bKnown) return 1;
-      return a.title.localeCompare(b.title, "pt-BR");
+  function mergeAppOrder(items, savedOrder) {
+    var byId = {};
+    var seen = {};
+    var result = [];
+    items.forEach(function (app) { byId[app.id] = app; });
+    uniqueStrings(savedOrder).forEach(function (id) {
+      if (byId[id] && !seen[id]) { result.push(byId[id]); seen[id] = true; }
     });
+    items.forEach(function (app) {
+      if (!seen[app.id]) { result.push(app); seen[app.id] = true; }
+    });
+    return result;
   }
 
-  function saveOrder() {
-    localStorage.setItem(STORAGE_ORDER, JSON.stringify(apps.map(function (app) { return app.id; })));
+  function selectDockApps(items) {
+    var preferred = state.dock.favorites.length ? state.dock.favorites : state.dock.order.slice(0, 8);
+    var byId = {};
+    var selected = [];
+    items.forEach(function (app) { byId[app.id] = app; });
+    preferred.forEach(function (id) {
+      if (byId[id] && selected.length < 8 && selected.indexOf(byId[id]) < 0) selected.push(byId[id]);
+    });
+    items.forEach(function (app) {
+      if (selected.length < 8 && selected.indexOf(app) < 0) selected.push(app);
+    });
+    return selected;
   }
 
-  function render() {
-    grid.textContent = "";
-    emptyState.hidden = apps.length > 0;
-    appCount.textContent = apps.length ? apps.length + (apps.length === 1 ? " aplicativo" : " aplicativos") : "";
+  function updateSavedOrder() {
+    var dockIds = apps.map(function (app) { return app.id; });
+    var tail = state.dock.order.concat(allApps.map(function (app) { return app.id; })).filter(function (id) {
+      return dockIds.indexOf(id) < 0;
+    });
+    state.dock.order = uniqueStrings(dockIds.concat(tail));
+    state.dock.favorites = dockIds.slice();
+    queueSave();
+  }
 
-    apps.forEach(function (app, index) {
+  function renderApps(focusId) {
+    rail.textContent = "";
+    rail.classList.toggle("is-sparse", apps.length < 8);
+    apps.forEach(function (app) {
       var button = document.createElement("button");
-      button.className = "app-card" + (editMode && index === focusedIndex ? " is-moving" : "");
       button.type = "button";
+      button.className = "app-tile focusable" + (editMode ? " is-editing" : "");
+      button.setAttribute("data-app-id", app.id);
       button.setAttribute("role", "listitem");
-      button.setAttribute("data-index", String(index));
-      button.setAttribute("aria-label", "Abrir " + app.title);
-      button.style.setProperty("--card-accent", app.accent);
+      button.setAttribute("aria-label", app.title);
+      button.style.setProperty("--app-a", app.a || "#4f7780");
+      button.style.setProperty("--app-b", app.b || "#29464e");
 
-      var glyph = document.createElement("span");
-      glyph.className = "app-glyph";
-      glyph.textContent = initials(app.title);
+      var icon = document.createElement("span");
+      icon.className = "app-icon";
+      var fallback = document.createElement("span");
+      fallback.className = "app-fallback";
+      if (icons[app.iconKey]) fallback.innerHTML = icons[app.iconKey];
+      else {
+        var letters = document.createElement("span");
+        letters.className = "app-initials";
+        letters.textContent = initials(app.title);
+        fallback.appendChild(letters);
+      }
+      icon.appendChild(fallback);
+      if (app.icon) {
+        var image = document.createElement("img");
+        image.alt = "";
+        image.onload = function () { icon.classList.add("has-image"); };
+        image.onerror = function () { image.removeAttribute("src"); icon.classList.remove("has-image"); };
+        image.src = app.icon;
+        icon.appendChild(image);
+      }
 
       var title = document.createElement("span");
-      title.className = "app-title";
+      title.className = "app-name";
       title.textContent = app.title;
-
-      button.appendChild(glyph);
+      button.appendChild(icon);
       button.appendChild(title);
-      button.addEventListener("focus", function () {
-        focusedIndex = index;
-        button.scrollIntoView({ block: "nearest", inline: "nearest" });
+      button.addEventListener("mouseenter", function () { focusElement(button); });
+      button.addEventListener("click", function () {
+        if (editMode) { toggleEditMode(false); return; }
+        launchDockApp(app);
       });
-      button.addEventListener("click", function () { launchApp(index); });
-      grid.appendChild(button);
+      rail.appendChild(button);
     });
-
-    focusCard(focusedIndex, false);
+    if (focusId) focusElement(rail.querySelector('[data-app-id="' + focusId + '"]'));
   }
 
-  function focusCard(index, smooth) {
-    var cards = Array.prototype.slice.call(grid.querySelectorAll(".app-card"));
-    if (!cards.length) return;
-    focusedIndex = Math.max(0, Math.min(index, cards.length - 1));
-    cards.forEach(function (card) { card.classList.remove("is-focused"); });
-    var card = cards[focusedIndex];
-    card.classList.add("is-focused");
-    card.focus();
-    card.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "nearest", inline: "nearest" });
+  function renderAllApps(focusId) {
+    allAppsGrid.textContent = "";
+    document.getElementById("allAppsCount").textContent = allApps.length + (allApps.length === 1 ? " aplicativo" : " aplicativos") + " · Verde: fixar no dock";
+    allApps.forEach(function (app) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "app-tile all-apps-tile focusable all-apps-focus";
+      if (apps.some(function (favorite) { return favorite.id === app.id; })) button.classList.add("is-favorite");
+      button.setAttribute("data-library-app-id", app.id);
+      button.setAttribute("role", "listitem");
+      button.setAttribute("aria-label", app.title);
+      button.style.setProperty("--app-a", app.a || "#4f7780");
+      button.style.setProperty("--app-b", app.b || "#29464e");
+
+      var icon = document.createElement("span");
+      icon.className = "app-icon";
+      var fallback = document.createElement("span");
+      fallback.className = "app-fallback";
+      if (icons[app.iconKey]) fallback.innerHTML = icons[app.iconKey];
+      else {
+        var letters = document.createElement("span");
+        letters.className = "app-initials";
+        letters.textContent = initials(app.title);
+        fallback.appendChild(letters);
+      }
+      icon.appendChild(fallback);
+      if (app.icon) {
+        var image = document.createElement("img");
+        image.alt = "";
+        image.onload = function () { icon.classList.add("has-image"); };
+        image.onerror = function () { image.removeAttribute("src"); icon.classList.remove("has-image"); };
+        image.src = app.icon;
+        icon.appendChild(image);
+      }
+
+      var title = document.createElement("span");
+      title.className = "app-name";
+      title.textContent = app.title;
+      button.appendChild(icon);
+      button.appendChild(title);
+      if (button.classList.contains("is-favorite")) {
+        var pin = document.createElement("span");
+        pin.className = "favorite-pin";
+        pin.textContent = "NO DOCK";
+        button.appendChild(pin);
+      }
+      button.addEventListener("mouseenter", function () { focusElement(button); });
+      button.addEventListener("click", function () { launchDockApp(app); });
+      allAppsGrid.appendChild(button);
+    });
+    if (focusId) focusElement(allAppsGrid.querySelector('[data-library-app-id="' + focusId + '"]'));
   }
 
-  function nextSpatialIndex(direction) {
-    var cards = Array.prototype.slice.call(grid.querySelectorAll(".app-card"));
-    if (!cards.length) return focusedIndex;
-    var source = cards[focusedIndex].getBoundingClientRect();
+  function setPlatformStatus(label, mode, detail) {
+    var dot = document.getElementById("platformDot");
+    document.getElementById("platformStatus").textContent = label;
+    dot.classList.toggle("is-limited", mode === "limited");
+    dot.classList.toggle("is-offline", mode === "offline");
+    platformDetail = detail || label;
+  }
+
+  function loadInstalledApps() {
+    setPlatformStatus(platform.isWebOS() ? "Lendo apps" : "Modo computador", platform.isWebOS() ? "limited" : "offline", "Consultando aplicativos disponíveis");
+    return platform.listApps().then(function (result) {
+      var focusedDockId = document.activeElement && document.activeElement.getAttribute("data-app-id");
+      allApps = mergeAppOrder(result.apps, state.dock.order);
+      apps = selectDockApps(allApps);
+      if (!apps.length) apps = platform.demoApps();
+      renderApps();
+      renderAllApps();
+      if (focusedDockId) focusElement(rail.querySelector('[data-app-id="' + focusedDockId + '"]') || rail.querySelector(".app-tile"));
+      if (result.source === "launchPoints" || result.source === "apps") {
+        setPlatformStatus("Apps conectados", "online", allApps.length + " aplicativos retornados pela TV");
+      } else if (result.source === "knownApps") {
+        setPlatformStatus("Apps verificados", "limited", allApps.length + " aplicativos conhecidos encontrados; a lista completa foi limitada pelo webOS");
+      } else if (result.source === "limited") {
+        setPlatformStatus("Acesso limitado", "limited", "O webOS não liberou a lista; o dock está em modo demonstrativo");
+      } else {
+        setPlatformStatus("Modo computador", "offline", "A integração com aplicativos será ativada dentro da TV");
+      }
+    }).catch(function () {
+      var focusedDockId = document.activeElement && document.activeElement.getAttribute("data-app-id");
+      allApps = platform.demoApps();
+      apps = allApps.slice(0, 8);
+      renderApps();
+      renderAllApps();
+      if (focusedDockId) focusElement(rail.querySelector(".app-tile"));
+      setPlatformStatus("Acesso limitado", "limited", "Não foi possível consultar os aplicativos; o dock está em modo demonstrativo");
+    });
+  }
+
+  function launchDockApp(app) {
+    setPlatformStatus("Abrindo app", "online", "Abrindo " + app.title);
+    platform.launchApp(app).then(function () {
+      setPlatformStatus("Apps conectados", "online", app.title + " foi enviado ao Application Manager");
+    }).catch(function (error) {
+      setPlatformStatus(platform.isWebOS() ? "Acesso limitado" : "Modo computador", platform.isWebOS() ? "limited" : "offline", error.message);
+      showToast(error.message || "Não foi possível abrir o aplicativo");
+    });
+  }
+
+  function visibleFocusables() {
+    var selector;
+    if (settingsOpen) selector = ".settings-focus";
+    else if (allAppsOpen) selector = ".all-apps-focus";
+    else if (drawerOpen) selector = "#favoritesRail .focusable, #quickDrawer .focusable";
+    else selector = ".topbar .focusable, #showcase .focusable, #favoritesRail .focusable";
+    return Array.prototype.slice.call(document.querySelectorAll(selector)).filter(function (element) {
+      var rect = element.getBoundingClientRect();
+      var style = window.getComputedStyle(element);
+      return rect.width > 0 && rect.height > 0 && style.visibility !== "hidden" && !element.disabled;
+    });
+  }
+
+  function focusElement(element) {
+    if (!element) return;
+    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) { item.classList.remove("is-focused"); });
+    element.classList.add("is-focused");
+    try { element.focus({ preventScroll:true }); }
+    catch (error) { element.focus(); }
+  }
+
+  function spatialTarget(direction) {
+    var items = visibleFocusables();
+    var current = document.activeElement;
+    if (items.indexOf(current) < 0) return items[0];
+    var source = current.getBoundingClientRect();
     var sx = source.left + source.width / 2;
     var sy = source.top + source.height / 2;
-    var best = focusedIndex;
-    var bestScore = Infinity;
-
-    cards.forEach(function (card, index) {
-      if (index === focusedIndex) return;
-      var rect = card.getBoundingClientRect();
+    var best = current;
+    var scoreBest = Infinity;
+    items.forEach(function (item) {
+      if (item === current) return;
+      var rect = item.getBoundingClientRect();
       var x = rect.left + rect.width / 2;
       var y = rect.top + rect.height / 2;
       var primary;
       var secondary;
-
-      if (direction === "left" && x < sx) { primary = sx - x; secondary = Math.abs(y - sy); }
-      else if (direction === "right" && x > sx) { primary = x - sx; secondary = Math.abs(y - sy); }
-      else if (direction === "up" && y < sy) { primary = sy - y; secondary = Math.abs(x - sx); }
-      else if (direction === "down" && y > sy) { primary = y - sy; secondary = Math.abs(x - sx); }
+      var aligned;
+      if (direction === "left" && x < sx - 3) { primary = sx - x; secondary = Math.abs(y - sy); aligned = rect.bottom >= source.top && rect.top <= source.bottom; }
+      else if (direction === "right" && x > sx + 3) { primary = x - sx; secondary = Math.abs(y - sy); aligned = rect.bottom >= source.top && rect.top <= source.bottom; }
+      else if (direction === "up" && y < sy - 3) { primary = sy - y; secondary = Math.abs(x - sx); aligned = rect.right >= source.left && rect.left <= source.right; }
+      else if (direction === "down" && y > sy + 3) { primary = y - sy; secondary = Math.abs(x - sx); aligned = rect.right >= source.left && rect.left <= source.right; }
       else return;
-
-      var score = primary * 10 + secondary;
-      if (score < bestScore) { bestScore = score; best = index; }
+      var score = primary * 10 + secondary + (aligned ? 0 : 100000);
+      if (score < scoreBest) { scoreBest = score; best = item; }
     });
     return best;
   }
 
-  function moveOrFocus(direction) {
-    var target = nextSpatialIndex(direction);
-    if (target === focusedIndex) return;
-    if (editMode) {
-      var selected = apps[focusedIndex];
-      apps[focusedIndex] = apps[target];
-      apps[target] = selected;
-      focusedIndex = target;
-      saveOrder();
-      render();
-    } else {
-      focusCard(target, true);
-    }
+  function reorderFavorite(direction) {
+    var current = document.activeElement;
+    if (!current || !current.hasAttribute("data-app-id") || (direction !== "left" && direction !== "right")) return false;
+    var id = current.getAttribute("data-app-id");
+    var ids = apps.map(function (app) { return app.id; });
+    var from = ids.indexOf(id);
+    var to = from + (direction === "left" ? -1 : 1);
+    if (to < 0 || to >= apps.length) return true;
+    var moving = apps[from];
+    apps.splice(from, 1);
+    apps.splice(to, 0, moving);
+    updateSavedOrder();
+    renderApps(id);
+    showToast("Ordem atualizada");
+    return true;
   }
 
-  function launchApp(index) {
-    var app = apps[index];
-    if (!app) return;
-    if (editMode) {
-      editMode = false;
-      render();
-      showToast("Ordem salva");
-      return;
+  function pinLibraryApp() {
+    var current = document.activeElement;
+    var id = current && current.getAttribute("data-library-app-id");
+    if (!id) return false;
+    var app = allApps.filter(function (item) { return item.id === id; })[0];
+    if (!app) return false;
+    if (apps.some(function (item) { return item.id === id; })) {
+      showToast(app.title + " já está no dock");
+      return true;
     }
-    connectionState.textContent = "Abrindo " + app.title;
-    callLuna("launch", { id: app.id, params: app.params }).catch(function (error) {
-      connectionState.textContent = "Não foi possível abrir";
-      showToast(error.message || "Aplicativo indisponível");
-    });
+    if (apps.length >= 8) apps.pop();
+    apps.push(app);
+    updateSavedOrder();
+    renderApps();
+    renderAllApps(id);
+    showToast(app.title + " foi fixado no dock");
+    return true;
   }
 
-  function toggleEditMode() {
+  function toggleEditMode(force) {
     if (!apps.length) return;
-    editMode = !editMode;
-    render();
-    showToast(editMode ? "Organização ligada — use as setas" : "Ordem salva");
+    var current = document.activeElement;
+    var currentId = current && current.getAttribute("data-app-id");
+    editMode = typeof force === "boolean" ? force : !editMode;
+    renderApps(currentId || apps[0].id);
+    document.getElementById("appsTitle").textContent = editMode ? "Organizar aplicativos" : "Seus aplicativos";
+    if (!editMode) flushSave();
+    showToast(editMode ? "Use ◀ e ▶ para ordenar; pressione OK para concluir" : "Ordem salva");
   }
 
-  function cycleTheme() {
-    var current = document.body.getAttribute("data-theme") || THEMES[0];
-    var next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
-    document.body.setAttribute("data-theme", next);
-    localStorage.setItem(STORAGE_THEME, next);
-    showToast("Visual: " + next);
+  function openDrawer() {
+    if (drawerOpen || settingsOpen) return;
+    drawerOpen = true;
+    lastDockFocus = document.activeElement && document.activeElement.hasAttribute("data-app-id") ? document.activeElement : rail.querySelector(".app-tile");
+    document.body.classList.add("drawer-open");
+    quickDrawer.setAttribute("aria-hidden", "false");
+    focusElement(quickDrawer.querySelector(".drawer-focus"));
+  }
+
+  function closeDrawer(restoreFocus) {
+    if (!drawerOpen) return;
+    drawerOpen = false;
+    document.body.classList.remove("drawer-open");
+    quickDrawer.setAttribute("aria-hidden", "true");
+    if (restoreFocus !== false) focusElement(lastDockFocus || rail.querySelector(".app-tile"));
+  }
+
+  function openAllApps() {
+    if (allAppsOpen || settingsOpen) return;
+    var previousFocus = document.activeElement;
+    if (drawerOpen) closeDrawer(false);
+    allAppsOpen = true;
+    lastMainFocus = lastDockFocus || previousFocus;
+    renderAllApps();
+    document.body.classList.add("all-apps-open");
+    allAppsPanel.setAttribute("aria-hidden", "false");
+    focusElement(allAppsGrid.querySelector(".all-apps-focus") || document.getElementById("closeAllApps"));
+  }
+
+  function closeAllApps() {
+    if (!allAppsOpen) return;
+    allAppsOpen = false;
+    document.body.classList.remove("all-apps-open");
+    allAppsPanel.setAttribute("aria-hidden", "true");
+    focusElement(lastMainFocus || rail.querySelector(".app-tile"));
+  }
+
+  function openSettings() {
+    if (settingsOpen) return;
+    settingsOpen = true;
+    lastMainFocus = document.activeElement;
+    document.body.classList.add("settings-open");
+    settingsPanel.setAttribute("aria-hidden", "false");
+    scrim.setAttribute("aria-hidden", "false");
+    focusElement(document.getElementById("closeSettings"));
+  }
+
+  function closeSettings() {
+    if (!settingsOpen) return;
+    settingsOpen = false;
+    document.body.classList.remove("settings-open");
+    settingsPanel.setAttribute("aria-hidden", "true");
+    scrim.setAttribute("aria-hidden", "true");
+    flushSave();
+    focusElement(lastMainFocus || document.getElementById("settingsButton"));
+  }
+
+  function setWallpaper(name, announce, persist) {
+    if (WALLPAPERS.indexOf(name) < 0) return;
+    document.body.setAttribute("data-wallpaper", name);
+    document.getElementById("wallpaperName").textContent = WALLPAPER_NAMES[name];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-wallpaper-option]"), function (button) {
+      button.classList.toggle("is-selected", button.getAttribute("data-wallpaper-option") === name);
+    });
+    if (persist !== false) { state.appearance.wallpaper = name; queueSave(); }
+    if (announce) showToast("Papel de parede: " + WALLPAPER_NAMES[name]);
+  }
+
+  function cycleWallpaper() {
+    var current = document.body.getAttribute("data-wallpaper") || WALLPAPERS[0];
+    setWallpaper(WALLPAPERS[(WALLPAPERS.indexOf(current) + 1) % WALLPAPERS.length], true, true);
+  }
+
+  function setQuality(name, persist) {
+    if (!QUALITY_NAMES[name]) return;
+    document.body.setAttribute("data-quality", name);
+    document.getElementById("qualityName").textContent = QUALITY_NAMES[name];
+    Array.prototype.forEach.call(document.querySelectorAll("[data-quality-option]"), function (button) {
+      button.classList.toggle("is-selected", button.getAttribute("data-quality-option") === name);
+    });
+    if (persist !== false) { state.appearance.quality = name; queueSave(); }
+  }
+
+  function setGlassIntensity(value, persist) {
+    var clean = clampStep(value, 40, 90, 2, 72);
+    document.getElementById("glassIntensity").value = String(clean);
+    document.getElementById("glassValue").textContent = clean + "%";
+    document.documentElement.style.setProperty("--glass-alpha", String(.12 + clean / 200));
+    if (persist !== false) { state.appearance.glassIntensity = clean; queueSave(); }
+  }
+
+  function setBlur(value, persist) {
+    var clean = clampStep(value, 0, 20, 2, 14);
+    document.getElementById("blurIntensity").value = String(clean);
+    document.getElementById("blurValue").textContent = String(clean);
+    document.documentElement.style.setProperty("--glass-blur", clean + "px");
+    if (persist !== false) { state.appearance.blur = clean; queueSave(); }
+  }
+
+  function setMotion(enabled, announce, persist) {
+    var button = document.getElementById("motionToggle");
+    button.classList.toggle("is-on", enabled);
+    button.setAttribute("aria-checked", enabled ? "true" : "false");
+    document.body.classList.toggle("reduce-motion", !enabled);
+    if (persist !== false) { state.appearance.motion = enabled; queueSave(); }
+    if (announce) showToast(enabled ? "Movimento suave ativado" : "Movimento reduzido");
+  }
+
+  function applyState() {
+    setWallpaper(state.appearance.wallpaper, false, false);
+    setQuality(state.appearance.quality, false);
+    setGlassIntensity(state.appearance.glassIntensity, false);
+    setBlur(state.appearance.blur, false);
+    setMotion(state.appearance.motion, false, false);
+  }
+
+  function adjustRange(input, delta) {
+    var next = Math.max(Number(input.min), Math.min(Number(input.max), Number(input.value) + delta * Number(input.step || 1)));
+    input.value = String(next);
+    input.dispatchEvent(new Event("input", { bubbles:true }));
   }
 
   function showToast(message) {
     clearTimeout(toastTimer);
     toast.textContent = message;
     toast.classList.add("show");
-    toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2200);
+    toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 2600);
   }
 
-  function updateClock() {
+  function updateDateTime() {
     var now = new Date();
-    document.getElementById("clock").textContent = now.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-    var hour = now.getHours();
-    document.querySelector(".intro h1").textContent = (hour < 12 ? "Bom dia." : hour < 18 ? "Boa tarde." : "Boa noite.");
+    var time = now.toLocaleTimeString("pt-BR", { hour:"2-digit", minute:"2-digit" });
+    document.getElementById("clock").textContent = time;
+    document.getElementById("drawerClock").textContent = time;
+    document.getElementById("drawerDate").textContent = now.toLocaleDateString("pt-BR", { weekday:"long", day:"2-digit", month:"long" });
   }
 
-  function extractApps(response) {
-    if (Array.isArray(response.apps)) return response.apps;
-    if (Array.isArray(response.launchPoints)) return response.launchPoints;
-    return [];
-  }
-
-  function queryApps() {
-    return callLuna("listApps", {}).then(function (response) {
-      var result = extractApps(response);
-      if (result.length) return result;
-      return callLuna("getLaunchPoints", {}).then(extractApps);
-    }).catch(function () {
-      return callLuna("getLaunchPoints", {}).then(extractApps);
+  function resetCatalogFallback() {
+    storyCards.forEach(function (card, index) {
+      var saved = fallbackStories[index];
+      var image = document.getElementById("catalogImage" + index);
+      var badge = document.getElementById("storyBadge" + index);
+      card._catalogItem = null;
+      card.setAttribute("data-story", saved.story);
+      document.getElementById("storyTitle" + index).textContent = saved.title;
+      document.getElementById("storyMeta" + index).textContent = saved.meta;
+      image.classList.remove("is-visible");
+      image.hidden = true;
+      image.removeAttribute("src");
+      if (badge) { badge.textContent = saved.badge; badge.hidden = saved.badgeHidden; }
     });
   }
 
-  function loadApps() {
-    connectionState.textContent = "Lendo aplicativos";
-    queryApps().then(function (received) {
-      apps = applyStoredOrder(received.map(normalizeApp).filter(function (app) {
-        return app.id && app.id !== APP_ID && app.visible;
-      }));
-      connectionState.textContent = apps.length ? "Sistema conectado" : "Nenhum aplicativo exposto";
-      if (!apps.length) emptyMessage.textContent = "O webOS não retornou aplicativos visíveis para esta conta.";
-      render();
+  function catalogMeta(item) {
+    var pieces = [item.mediaType === "tv" ? "Série" : "Filme"];
+    if (item.year) pieces.push(item.year);
+    if (item.rating) pieces.push("★ " + item.rating.toFixed(1));
+    return pieces.join(" · ");
+  }
+
+  function renderCatalog(items) {
+    if (!items || items.length < 3) return false;
+    storyCards.forEach(function (card, index) {
+      var item = items[index];
+      var image = document.getElementById("catalogImage" + index);
+      var badge = document.getElementById("storyBadge" + index);
+      var url = catalog.imageUrl(item, index === 0);
+      card._catalogItem = item;
+      card.setAttribute("data-story", item.title);
+      document.getElementById("storyTitle" + index).textContent = item.title;
+      document.getElementById("storyMeta" + index).textContent = catalogMeta(item);
+      if (badge) {
+        badge.hidden = false;
+        badge.textContent = index === 0 ? "EM ALTA" : item.mediaType === "tv" ? "SÉRIE" : "FILME";
+      }
+      image.classList.remove("is-visible");
+      image.hidden = false;
+      image._requestedUrl = url;
+      image.onload = function () { if (image._requestedUrl === url) image.classList.add("is-visible"); };
+      image.onerror = function () {
+        if (image._requestedUrl !== url) return;
+        image.classList.remove("is-visible");
+        image.hidden = true;
+        image.removeAttribute("src");
+      };
+      image.src = url;
+    });
+    return true;
+  }
+
+  function setCatalogStatus(text) {
+    catalogStatus.textContent = text;
+  }
+
+  function loadCatalog(mode, announce) {
+    currentCatalogMode = mode || "discover";
+    var requestId = ++catalogRequestId;
+    showcase.classList.add("is-loading");
+    return catalog.load(currentCatalogMode).then(function (result) {
+      if (requestId !== catalogRequestId) return;
+      if (result.items && result.items.length >= 3) {
+        renderCatalog(result.items);
+        setCatalogStatus(result.stale ? "Cache offline" : "Configurada");
+        if (announce) showToast(result.stale ? "Exibindo destaques salvos" : "Destaques atualizados pela TMDB");
+      } else {
+        resetCatalogFallback();
+        setCatalogStatus("Não configurada");
+        if (announce) showToast("Adicione sua chave TMDB em Aparência");
+      }
     }).catch(function (error) {
-      apps = [];
-      connectionState.textContent = "Acesso limitado pelo sistema";
-      emptyMessage.textContent = error.message || "O Application Manager recusou a consulta.";
-      render();
+      if (requestId !== catalogRequestId) return;
+      resetCatalogFallback();
+      setCatalogStatus(error.code === "AUTH" ? "Chave recusada" : "Sem conexão");
+      if (announce) showToast(error.message || "Não foi possível carregar os destaques");
+    }).then(function () {
+      if (requestId === catalogRequestId) showcase.classList.remove("is-loading");
     });
   }
 
-  document.addEventListener("keydown", function (event) {
-    var handled = true;
-    if (event.keyCode === 37) moveOrFocus("left");
-    else if (event.keyCode === 38) moveOrFocus("up");
-    else if (event.keyCode === 39) moveOrFocus("right");
-    else if (event.keyCode === 40) moveOrFocus("down");
-    else if (event.keyCode === 13) launchApp(focusedIndex);
-    else if (event.keyCode === COLOR_KEYS.GREEN) toggleEditMode();
-    else if (event.keyCode === COLOR_KEYS.BLUE) cycleTheme();
-    else if (event.keyCode === 461 || event.keyCode === 27) {
-      if (editMode) toggleEditMode();
-      else window.close();
-    } else handled = false;
+  function updateCredentialUI() {
+    var configured = catalog.hasCredential();
+    credentialInput.value = "";
+    credentialInput.placeholder = configured ? "Chave salva nesta TV" : "API Key ou Read Access Token";
+    setCatalogStatus(configured ? "Configurada" : "Não configurada");
+  }
 
-    if (handled) {
-      event.preventDefault();
-      event.stopPropagation();
+  function saveCredential() {
+    var value = credentialInput.value.trim();
+    if (!value) { showToast(catalog.hasCredential() ? "Uma chave já está salva nesta TV" : "Digite sua chave da TMDB"); return; }
+    var button = document.getElementById("saveTmdbCredential");
+    button.disabled = true;
+    setCatalogStatus("Verificando");
+    catalog.validateCredential(value).then(function () {
+      if (!catalog.saveCredential(value)) throw new Error("A TV não permitiu salvar a chave");
+      credentialInput.value = "";
+      credentialInput.placeholder = "Chave salva nesta TV";
+      setCatalogStatus("Configurada");
+      showToast("TMDB configurada com sucesso");
+      return loadCatalog(currentCatalogMode, false);
+    }).catch(function (error) {
+      setCatalogStatus(error.code === "AUTH" || error.code === "FORMAT" ? "Chave recusada" : "Sem conexão");
+      showToast(error.message || "Não foi possível validar a chave");
+    }).then(function () { button.disabled = false; });
+  }
+
+  function removeCredential() {
+    catalog.removeCredential();
+    updateCredentialUI();
+    resetCatalogFallback();
+    showToast("Chave da TMDB removida desta TV");
+  }
+
+  document.getElementById("settingsButton").addEventListener("click", openSettings);
+  document.getElementById("drawerSettings").addEventListener("click", openSettings);
+  document.getElementById("closeSettings").addEventListener("click", closeSettings);
+  document.getElementById("wallpaperButton").addEventListener("click", cycleWallpaper);
+  document.getElementById("signalButton").addEventListener("click", function () { showToast(platformDetail); });
+  document.getElementById("saveTmdbCredential").addEventListener("click", saveCredential);
+  document.getElementById("clearTmdbCredential").addEventListener("click", removeCredential);
+  document.getElementById("closeAllApps").addEventListener("click", closeAllApps);
+  scrim.addEventListener("click", closeSettings);
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-view]"), function (button) {
+    button.addEventListener("click", function () {
+      Array.prototype.forEach.call(document.querySelectorAll("[data-view]"), function (item) { item.classList.remove("is-active"); });
+      button.classList.add("is-active");
+      loadCatalog(button.getAttribute("data-catalog-mode") || "discover", true);
+    });
+  });
+
+  storyCards.forEach(function (button) {
+    button.addEventListener("mouseenter", function () { focusElement(button); });
+    button.addEventListener("click", function () {
+      var item = button._catalogItem;
+      if (!item) { showToast("“" + button.getAttribute("data-story") + "” — conteúdo demonstrativo"); return; }
+      var message = item.overview || (item.title + " · " + catalogMeta(item));
+      showToast(message.length > 190 ? message.slice(0, 187) + "…" : message);
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-quick]"), function (button) {
+    button.addEventListener("click", function () {
+      var id = button.getAttribute("data-system-app");
+      var label = button.getAttribute("data-quick");
+      if (id) {
+        platform.launchSystemApp(id).catch(function (error) { showToast(error.message || (label + " não está disponível")); });
+      } else if (label === "Todos os apps") {
+        openAllApps();
+      } else {
+        showToast(label + " — integração em preparação");
+      }
+    });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-wallpaper-option]"), function (button) {
+    button.addEventListener("click", function () { setWallpaper(button.getAttribute("data-wallpaper-option"), true, true); });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-quality-option]"), function (button) {
+    button.addEventListener("click", function () { setQuality(button.getAttribute("data-quality-option"), true); });
+  });
+
+  document.getElementById("glassIntensity").addEventListener("input", function (event) { setGlassIntensity(event.target.value, true); });
+  document.getElementById("blurIntensity").addEventListener("input", function (event) { setBlur(event.target.value, true); });
+  document.getElementById("glassIntensity").addEventListener("change", flushSave);
+  document.getElementById("blurIntensity").addEventListener("change", flushSave);
+  document.getElementById("motionToggle").addEventListener("click", function () {
+    setMotion(!document.getElementById("motionToggle").classList.contains("is-on"), true, true);
+  });
+
+  document.addEventListener("focusin", function (event) {
+    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) {
+      if (item !== event.target) item.classList.remove("is-focused");
+    });
+    if (event.target.classList.contains("focusable")) event.target.classList.add("is-focused");
+    if (settingsOpen && event.target.classList.contains("settings-focus")) {
+      try { event.target.scrollIntoView({ block:"nearest", behavior:"smooth" }); }
+      catch (error) { event.target.scrollIntoView(false); }
+    }
+    if (allAppsOpen && event.target.classList.contains("all-apps-focus")) {
+      try { event.target.scrollIntoView({ block:"nearest", behavior:"smooth" }); }
+      catch (error) { event.target.scrollIntoView(false); }
     }
   });
 
-  document.body.setAttribute("data-theme", localStorage.getItem(STORAGE_THEME) || THEMES[0]);
-  updateClock();
-  setInterval(updateClock, 30000);
-  loadApps();
+  document.addEventListener("keydown", function (event) {
+    var code = event.keyCode;
+    var key = event.key || "";
+    var direction = code === 37 ? "left" : code === 38 ? "up" : code === 39 ? "right" : code === 40 ? "down" : null;
+    var current = document.activeElement;
+    var handled = false;
+
+    if (direction) {
+      if (editMode && reorderFavorite(direction)) handled = true;
+      else if (settingsOpen && current && current.type === "range" && (direction === "left" || direction === "right")) {
+        adjustRange(current, direction === "left" ? -1 : 1);
+        handled = true;
+      } else if (!drawerOpen && !settingsOpen && direction === "down" && current && current.hasAttribute("data-app-id")) {
+        openDrawer();
+        handled = true;
+      } else {
+        focusElement(spatialTarget(direction));
+        handled = true;
+      }
+    } else if (code === 13 && current && current.id === "tmdbCredential") {
+      saveCredential();
+      handled = true;
+    } else if (code === 13 && current && typeof current.click === "function") {
+      current.click();
+      handled = true;
+    } else if (code === COLOR_KEYS.GREEN || key.toLowerCase() === "e") {
+      if (allAppsOpen) {
+        handled = pinLibraryApp();
+      } else if (!settingsOpen) {
+        if (drawerOpen) closeDrawer();
+        toggleEditMode();
+        handled = true;
+      }
+    } else if (code === COLOR_KEYS.BLUE || key.toLowerCase() === "t") {
+      cycleWallpaper();
+      handled = true;
+    } else if (code === 461 || code === 27 || key === "Escape") {
+      if (settingsOpen) closeSettings();
+      else if (allAppsOpen) closeAllApps();
+      else if (drawerOpen) closeDrawer();
+      else if (editMode) toggleEditMode(false);
+      else if (platform.isWebOS()) platform.closeApp();
+      else showToast("No televisor, Voltar fechará o Mendes Home");
+      handled = true;
+    }
+
+    if (handled) { event.preventDefault(); event.stopPropagation(); }
+  });
+
+  window.addEventListener("pagehide", flushSave);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flushSave(); });
+
+  if (!(window.CSS && CSS.supports && (CSS.supports("backdrop-filter", "blur(2px)") || CSS.supports("-webkit-backdrop-filter", "blur(2px)")))) {
+    document.documentElement.classList.add("no-backdrop");
+  }
+
+  applyState();
+  apps = platform.demoApps();
+  allApps = apps.slice();
+  renderApps();
+  renderAllApps();
+  updateCredentialUI();
+  updateDateTime();
+  setInterval(updateDateTime, 30000);
+  loadInstalledApps();
+  loadCatalog("discover", false);
+  setTimeout(function () { focusElement(document.querySelector(".story-card")); }, 90);
 }());
