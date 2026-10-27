@@ -1,0 +1,59 @@
+{
+  "version": "1.6.0",
+  "artifacts": [
+    {
+      "file": "MendesColor.ofx",
+      "bytes": 4120733,
+      "sha256": "0ebc434ef384c17cd6e0e1c337855f3363d8fffce7217e697612a52577a366fc",
+      "architecture": "amd64",
+      "kind": "DLL"
+    },
+    {
+      "file": "MendesColorActivate.exe",
+      "bytes": 2935755,
+      "sha256": "dd506e8cf88bfec3d2bc13307a17e1ea7ea097bae324aa0bef404fe7d0cfe311",
+      "architecture": "amd64",
+      "kind": "Windows GUI"
+    },
+    {
+      "file": "MendesColor-License-Studio-1.6.0.exe",
+      "bytes": 3049274,
+      "sha256": "8967e08df345f7f7fcd301b5ceee033c90f69c3d58b271645f6f95fe4c556d0c",
+      "architecture": "amd64",
+      "kind": "Windows GUI"
+    },
+    {
+      "file": "MendesColor-1.6.0-Setup.exe",
+      "bytes": 11891148,
+      "sha256": "7ea6456a33720a197575511f31a57a61f9471ad37e14bce154e00946ae9965df",
+      "architecture": "amd64",
+      "kind": "Windows GUI"
+    }
+  ],
+  "installer_payloads_verified": 18,
+  "installer_rea_evidence_id": "ev_1f857fe7feafc4938b814e8de956745924940854c2e0bdf872157ae7eb449de1",
+  "plugin_rea_exports_evidence_id": "ev_6e0d4134afe5500b2a12288a1d02b25c350ae25c10674aaa1d32407df0f45ac5",
+  "plugin_rea_imports_evidence_id": "ev_a31eea010a149204367a5ecf3d5c8c8b3b5d4869ecc0ce256f89d94e2c362cc9",
+  "plugin_import_dlls": [
+    "ADVAPI32.dll",
+    "bcrypt.dll",
+    "comdlg32.dll",
+    "KERNEL32.dll",
+    "msvcrt.dll",
+    "SHELL32.dll",
+    "USER32.dll"
+  ],
+  "local_checks": {
+    "portable_suites": 14062,
+    "opencl_parity": 426,
+    "total": 14488,
+    "license_crypto_identity": "passed",
+    "release_secret_scan": "passed"
+  },
+  "runtime_scope": {
+    "windows_execution": "not_run",
+    "resolve_1_6_0_execution": "not_run",
+    "opencl_execution": "PoCL 6.0 CPU test device; production selects GPUs only",
+    "previous_version": "1.5.0 confirmed by user in DaVinci Resolve with NVIDIA GPU"
+  }
+}

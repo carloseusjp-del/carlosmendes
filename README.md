@@ -1,14 +1,17 @@
-# Mendes Color 1.5.0
+# Mendes Color 1.6.0
 
 Plugin OpenFX para **DaVinci Resolve no Windows x64**, com LUT Avata 2 embutida,
 **84 opções de look**, ferramentas de cor e efeitos, **16 slots de LUT** e
-botões **ANTERIOR / PRÓXIMO** em todos os menus. Versão para avaliação manual.
+botões **ANTERIOR / PRÓXIMO** em todos os menus, instalador com identidade visual
+e ativação offline por key.
 
 ## Instalar ou atualizar
 
-Baixe **MendesColor-1.5.0-Setup.exe**, feche o Resolve e execute o instalador.
+Baixe **MendesColor-1.6.0-Setup.exe**, feche o Resolve e execute o instalador.
 Autorize a solicitação de administrador e confirme o destino mostrado.
-Reabra o Resolve e procure **Mendes Color** em **Effects / Open FX**, grupo Mendes.
+Depois, abra **Ativar Mendes Color** no menu Iniciar, copie o ID da máquina e
+insira a key recebida. Reabra o Resolve e procure **Mendes Color** em
+**Effects / Open FX**, grupo Mendes.
 
 O Setup funciona offline, verifica os arquivos por SHA-256, instala na pasta
 OpenFX e guarda a versão anterior em
@@ -17,13 +20,31 @@ Não é necessário copiar a pasta do plugin. Ele pede que você feche o Resolve
 quando estiver aberto, sem encerrar seus projetos. O executável não tem
 assinatura digital de editor; confira a origem e o SHA-256 publicado.
 
-O ZIP portátil e `Install.ps1` continuam disponíveis como alternativa. Para
+O instalador também cria o atalho **Mendes Color → Ativar Mendes Color** no menu
+Iniciar. O ZIP portátil e `Install.ps1` continuam disponíveis como alternativa. Para
 instalação manual, copie **MendesColor.ofx.bundle inteiro**, com o Resolve fechado,
 para `C:\Program Files\Common Files\OFX\Plugins\`.
 
+## Licenças para distribuição
+
+A versão 1.6.0 inclui dois aplicativos com o logo Mendes Color:
+
+- **Ativar Mendes Color**, instalado junto do plugin para o cliente copiar o ID
+  da máquina, colar a key e consultar o estado da licença;
+- **Mendes License Studio**, painel separado e protegido por senha para o
+  proprietário emitir keys perpétuas ou com data de validade.
+
+O proprietário deve guardar **MendesColor-Owner-Kit-1.6.0.zip** e a senha
+administrativa em locais privados separados. O kit contém o Studio e o guia de
+emissão; a senha não está dentro do ZIP.
+
+As keys são vinculadas à máquina e assinadas offline com ECDSA P-256. O plugin e
+o ativador carregam somente a chave pública; a chave privada do Studio fica
+cifrada. Consulte [LICENSING.md](LICENSING.md) para o fluxo completo.
+
 ## Aceleração por GPU
 
-A versão 1.5.0 adiciona **GPU via OpenCL**, incluindo LUTs/looks, ferramentas
+A versão 1.5.0 adicionou **GPU via OpenCL**, mantida na 1.6.0, incluindo LUTs/looks, ferramentas
 de cor, grão, Halation e Bloom. Em **Camera, Looks & Base → Processing**,
 deixe **GPU (OpenCL; CPU fallback)**. A seleção dá preferência à GPU NVIDIA.
 O primeiro quadro pode aguardar a compilação do driver; os seguintes reutilizam
@@ -52,7 +73,7 @@ O arquivo cita Avata 2 no nome e Mavic 3 Pro num comentário interno; essa
 proveniência foi mantida. Configurar Rec.709 Gamma 2.4 no Resolve não prova uma
 curva 2.4 no arquivo. Consulte [LUT-AVATA2.md](LUT-AVATA2.md).
 
-## Ferramentas da versão 1.5.0
+## Ferramentas da versão 1.6.0
 
 As novas seções começam **desligadas**, preservando projetos anteriores.
 Selecionar um preset pronto ativa a seção correspondente; para ajuste manual,
@@ -99,10 +120,11 @@ As conversões técnicas embutidas continuam sendo a LUT Avata 2 fornecida;
 para outras câmeras use uma LUT técnica adequada no campo de arquivo. Não foram
 criados presets de normalização de outras câmeras sem suas tabelas.
 
-Passaram **14.478 verificações locais** de cor, LUT, Halation, ferramentas
-avançadas, OpenCL, regressão de otimização, host simulado e instalação. O binário foi compilado
-para Windows x64 e inspecionado pelo REA. **O motor GPU desta versão e o Setup ainda precisam de confirmação no seu
-Resolve Windows**.
+Passaram as suítes locais de cor, LUT, Halation, ferramentas avançadas,
+regressão de otimização, host simulado, instalação e formato de licença. A
+identidade criptográfica também foi validada de forma independente. O binário
+foi compilado para Windows x64 e inspecionado pelo REA. **A ativação e o novo
+Setup ainda precisam de confirmação no seu Resolve Windows**.
 O teste visual será feito manualmente pelo usuário; não depende do vídeo enviado.
 
 O processamento é **GPU OpenCL ou CPU, RGBA float32**, com alfa preservado e
@@ -110,7 +132,7 @@ suporte a tiles. Os kernels foram executados em um dispositivo OpenCL de teste
 em CPU; não houve medição em GPU NVIDIA. Não há promessa de tempo real 4K. Máscaras de
 pele usam cor/luminância, sem reconhecimento de pessoas ou proteção automática.
 
-Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.5.0.
+Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.6.0.
 O tratamento da descrição opcional que corrigiu o carregamento na 1.0.2 foi
 preservado. Os controles e índices antigos foram mantidos; os novos grupos
 começam desligados. Consulte [VALIDACAO.md](VALIDACAO.md).
@@ -121,7 +143,7 @@ GCC/G++ C++17, Make e Python 3:
 
 ```sh
 make test
-make windows WIN_CXX=x86_64-w64-mingw32-g++
+make windows WIN_CXX=x86_64-w64-mingw32-g++ WIN_WINDRES=x86_64-w64-mingw32-windres
 python3 scripts/package.py
 make installer WIN_CXX=x86_64-w64-mingw32-g++ WIN_WINDRES=x86_64-w64-mingw32-windres
 ```
@@ -133,7 +155,8 @@ No Developer PowerShell x64 do Visual Studio 2022:
 python scripts/package.py
 ```
 
-O script MSVC compila o plugin e os testes portáveis; o Setup entregue é gerado
-com MinGW-w64. A compilação MSVC não foi exercitada neste ambiente Linux.
+O script MSVC compila o plugin e os testes portáveis. Os aplicativos de licença
+e o Setup entregue são gerados com MinGW-w64. A compilação MSVC não foi
+exercitada neste ambiente Linux.
 A tabela Avata 2 e o registro de controles são gerados com Python antes do build.
 Os pacotes de fontes incluem os headers oficiais OpenFX e suas licenças.
