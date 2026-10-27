@@ -1,4 +1,4 @@
-# Looks cinematográficos — Mendes Color 1.3.0
+# Looks cinematográficos — Mendes Color 1.4.0
 
 Todos os estilos operam **depois** da transformação de entrada. Para sua Avata 2,
 selecione primeiro **Input LUT → DJI Avata 2 D-Log M to Rec.709 (embedded)**.
@@ -29,6 +29,26 @@ Ao trocar estilos, a mesma conversão técnica continua sendo usada como base.
 | Sunset Glow | Quente com magenta sutil, sensação de pôr do sol |
 | Rich Film | Contraste rico, leve matte e compressão gradual de altas luzes |
 | Commercial Teal | Contraste e saturação moderados, sombras verde-azuladas e luzes levemente quentes |
+
+## Famílias adicionais da 1.4.0
+
+O menu agora tem **84 opções**, incluindo Neutral e os 18 estilos acima.
+Os primeiros 19 índices não mudaram. Foram acrescentadas **65 receitas próprias**,
+identificadas como **(Mendes)**:
+
+| Família | Variações | Direção estética |
+|---|---:|---|
+| Signature | 01–11 | Contraste, matte, densidade e balanço variados |
+| Cinema Blue | 01–12 | Balanço frio e sombras azuladas |
+| Cinema Warm | 01–11 | Calor e altas luzes quentes |
+| Commercial | 01–12 | Contraste limpo e separação verde-azulada |
+| Ethereal Green | 01–07 | Verde suave, cores contidas e pretos elevados |
+| Terra Tones | 01–12 | Calor terroso e saturação moderada |
+
+Essas receitas não contêm os dados das LUTs comerciais do ToneLab. Nomes de
+família descrevem uma direção visual; os resultados não foram comprovados
+idênticos aos daquele produto. Finishing Tones oferece outros 17 acabamentos
+próprios em uma seção separada, com mistura independente.
 
 ## Intensidade e uso
 
@@ -61,7 +81,7 @@ existentes foram preservados.
 
 ![Comparação com rampas e cores sintéticas](LOOKS-preview.svg)
 
-Esta figura foi calculada pelo mesmo motor C++ do plugin, usando a LUT embutida
+Esta figura histórica mostra apenas os 19 looks iniciais e foi calculada pelo motor C++ do plugin, usando a LUT embutida
 e Look Strength=1, com Halation desligada. Mostra códigos RGB de rampas e amostras sintéticas, limitados
 a 0–1 para exibição SVG. Não é uma comparação fotográfica, uma simulação exata
 do seu monitor ou certificação colorimétrica. Para regenerar: `make preview`.

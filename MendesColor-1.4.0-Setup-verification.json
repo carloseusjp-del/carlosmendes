@@ -1,0 +1,23 @@
+{
+  "installer": "MendesColor-1.4.0-Setup.exe",
+  "sha256": "55f45ff48649185b59638c8aa48233e8707dd4afc048ffadb1663800f29d05a4",
+  "architecture": "x86_64",
+  "subsystem": "Windows GUI",
+  "uac": "requireAdministrator",
+  "payloads_verified": 14,
+  "evidence_id": "ev_30b644bea918a49be1da23f49cd14d72469e9b9f25422ac1f89313a9c1db4372",
+  "windows_execution": "not_run",
+  "resolve_execution": "not_run",
+  "local_checks": {
+    "color": 9645,
+    "lut": 231,
+    "mock_ofx": 722,
+    "installer_filesystem": 21,
+    "halation": 2100,
+    "advanced": 545
+  },
+  "total_local_checks": 13264,
+  "sanitizers": "ASan + UBSan + leak detection passed on color, LUT, halation, advanced tools, mock host",
+  "implementation": "Independent Mendes processing/preset recipes; no ToneLab code or LUT payloads",
+  "visual_reference_video": "not_used; user will test manually"
+}

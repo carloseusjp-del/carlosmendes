@@ -4,7 +4,7 @@ As seis partes recebidas formam um arquivo 7z completo de **187.712.230 bytes**.
 
 O bundle contém `Info.plist` e **`Contents/Win64/ToneLab.ofx`**, uma DLL Windows x64 de **509.365.248 bytes**. O SHA-256 do original permanece `f74ecc8a51d1f75918304e214c6b40844ead89767895f3d65a80d4736d1cd27e`.
 
-Este documento é um inventário técnico. **O Mendes Color entregue continua na versão 1.3.0; os recursos abaixo não foram adicionados a ele por esta análise.** A lista de nomes/configurações não estabelece equivalência matemática ou visual entre os programas.
+Este documento é um inventário técnico. **Este inventário registra a análise anterior à versão 1.4.0 e compara o Mendes Color 1.3.0. A implementação própria posterior é descrita em [FERRAMENTAS.md](FERRAMENTAS.md).** A lista de nomes/configurações não estabelece equivalência matemática ou visual entre os programas.
 
 ## O que foi recuperado
 

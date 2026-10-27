@@ -1,4 +1,4 @@
-# Halation — Mendes Color 1.3.0
+# Halation — Mendes Color 1.4.0
 
 Na aba ou seção **Halation**, escolha o nível em **Halation Preset** ou use
 **ANTERIOR / PRÓXIMO** para comparar as opções sem abrir o menu.
@@ -58,3 +58,5 @@ Os testes comparam tiles e imagens inteiras, inclusive com source ROI recortada,
 origem não nula, stride negativo, alfa premultiplicado, cancelamento, LUT, look
 e mistura global. A aparência e a interface no Resolve real ainda precisam ser
 confirmadas com sua filmagem no Windows.
+
+A versão 1.4 acrescenta **Halation Advanced**, descrita em [FERRAMENTAS.md](FERRAMENTAS.md). Quando ativada, ela substitui este menu rápido; seus quatro presets e controles têm receitas próprias.

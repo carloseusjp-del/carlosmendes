@@ -1,121 +1,133 @@
-# Mendes Color 1.3.0 — Halation e navegação rápida
+# Mendes Color 1.4.0
 
-Plugin OpenFX para DaVinci Resolve no Windows x64, com LUT Avata 2,
-19 looks, Halation e botões ANTERIOR/PRÓXIMO nos menus.
+**[Baixar instalador Windows](MendesColor-1.4.0-Setup.exe?raw=true)** · [SHA-256](SHA256SUMS.txt)
 
-## Download e atualização
+[ZIP portátil](MendesColor-1.4.0-Windows-x64.zip) · [Código-fonte](MendesColor-1.4.0-source.zip) · [Verificação do Setup](MendesColor-1.4.0-Setup-verification.json)
 
-**[Baixar MendesColor-1.3.0-Setup.exe](MendesColor-1.3.0-Setup.exe?raw=true)**
+Plugin OpenFX para **DaVinci Resolve no Windows x64**, com LUT Avata 2 embutida,
+**84 opções de look**, ferramentas de cor e efeitos, **16 slots de LUT** e
+botões **ANTERIOR / PRÓXIMO** em todos os menus. Versão para avaliação manual.
 
-1. Feche o DaVinci Resolve.
-2. Abra o Setup, autorize a solicitação de administrador do Windows e confirme o destino.
-3. Reabra o Resolve e procure **Mendes Color** em **Effects / Open FX**, grupo **Mendes**.
+## Instalar ou atualizar
 
-O instalador funciona offline e instala na pasta OpenFX automaticamente.
-Ele verifica os arquivos por SHA-256 e guarda a versão anterior em
+Baixe **MendesColor-1.4.0-Setup.exe**, feche o Resolve e execute o instalador.
+Autorize a solicitação de administrador e confirme o destino mostrado.
+Reabra o Resolve e procure **Mendes Color** em **Effects / Open FX**, grupo Mendes.
+
+O Setup funciona offline, verifica os arquivos por SHA-256, instala na pasta
+OpenFX e guarda a versão anterior em
 `C:\Program Files\Common Files\MendesColor\Backups\`.
-Se o Resolve estiver aberto, pede que você o feche; não encerra seus projetos.
-Nas próximas atualizações, execute o Setup da nova versão da mesma forma.
+Não é necessário copiar a pasta do plugin. Ele pede que você feche o Resolve
+quando estiver aberto, sem encerrar seus projetos. O executável não tem
+assinatura digital de editor; confira a origem e o SHA-256 publicado.
 
-O executável não tem assinatura digital de editor; o Windows pode exibir
-confirmação adicional. Confira a origem e o SHA-256 antes de executar.
+O ZIP portátil e `Install.ps1` continuam disponíveis como alternativa. Para
+instalação manual, copie **MendesColor.ofx.bundle inteiro**, com o Resolve fechado,
+para `C:\Program Files\Common Files\OFX\Plugins\`.
 
-- [SHA-256 dos downloads](SHA256SUMS.txt)
-- [Verificação técnica do instalador](MendesColor-1.3.0-Setup-verification.json)
-- [Pacote portátil Windows](MendesColor-1.3.0-Windows-x64.zip)
-- [Código-fonte completo](MendesColor-1.3.0-source.zip)
+## Começar com a Avata 2
 
-## Halation
+1. Use o material original em **D-Log M**. Num fluxo manual DaVinci YRGB,
+   configure a saída/monitoramento em **Rec.709 Gamma 2.4**.
+2. Selecione **Input LUT → DJI Avata 2 D-Log M to Rec.709 (embedded)**.
+3. Mantenha **LUT Output Transfer=Keep LUT output**, **Creative Gamma=1** e
+   **Effect Mix=1**. Comece por Creative Look=Neutral e compare os estilos
+   com ANTERIOR/PRÓXIMO.
+4. Experimente Golden Hour, Sunset Glow, Moody Forest e Commercial Teal, ou
+   as novas famílias numeradas identificadas como **(Mendes)**.
 
-Abra a aba ou seção **Halation** e escolha **Halation Preset**:
+A mesma LUT técnica é aplicada antes dos estilos. Look Strength dosa apenas
+esse estilo. **Effect Mix=0** desliga toda a cadeia, inclusive LUT e efeitos.
+Não normalize o mesmo sinal novamente com outra LUT técnica/CST/RCM sem definir
+os espaços. O plugin não detecta a gestão de cor do projeto.
 
-| Opção | Aparência |
+O `.cube` enviado é preservado byte a byte e **não declara gamma de saída**.
+O arquivo cita Avata 2 no nome e Mavic 3 Pro num comentário interno; essa
+proveniência foi mantida. Configurar Rec.709 Gamma 2.4 no Resolve não prova uma
+curva 2.4 no arquivo. Consulte [LUT-AVATA2.md](LUT-AVATA2.md).
+
+## Ferramentas da versão 1.4.0
+
+As novas seções começam **desligadas**, preservando projetos anteriores.
+Selecionar um preset pronto ativa a seção correspondente; para ajuste manual,
+marque **Enable / Enabled**. As seções podem aparecer como abas ou grupos
+expansíveis conforme a interface OpenFX do Resolve.
+
+| Seção | O que oferece |
 |---|---|
-| Desligado | Sem halo; padrão para preservar projetos existentes |
-| Mínimo | Halo quente discreto e mais estreito |
-| Médio | Halo mais visível e espalhado |
-| Alto | Halo mais intenso e amplo |
+| Basic Adjustments | Exposure, Lift, Gamma, Gain, Highlights, balanço, saturação, contraste, Fade, Colour Richness e Bleach Bypass |
+| Black & White Point | Três presets, modo Normal/RGB/Luma e intensidade |
+| Custom LUT | 16 slots persistidos no projeto; arquivos .cube e .3dl; seletor múltiplo Windows |
+| Finishing Tones | 17 acabamentos próprios e intensidade |
+| Split Tone | Cores complementares por zona tonal, proteção de neutros, Amount/Hue/Balance |
+| Skin Tones | Seleção por matiz e luminância, saturação, brilho, rotação de matiz e máscara |
+| Color Punch | Saturação global e seis faixas de cor, com opção de restringir às altas luzes |
+| Vignette | Exposição, tamanho, feather, proporção, centro e máscara |
+| Film Grain | Oito presets, tamanho, força, zonas tonais, cor, agrupamento, orientação e suavização da imagem |
+| Halation | Menu rápido Desligado/Mínimo/Médio/Alto, mantido da 1.3 |
+| Halation Advanced | Quatro presets e controles de threshold, spread, suavidade, halos interno/externo, energia, cor, compensação azul, intensidade e máscara |
+| Bloom | Quatro perfis, detecção de luzes, detalhes, difusão, proteção de luzes, saturação, intensidade e máscara |
+| Color Space | Conversões Rec.709/DWG/Rec.2020 e Gamma 2.4/2.2/1.96, sRGB, Linear, PQ e HLG |
 
-O halo vermelho-alaranjado aparece ao redor das altas luzes, depois da LUT e do
-look, antes de Effect Mix. Comece em Mínimo e compare uma cena com janelas,
-reflexos ou sol junto de áreas mais escuras. O tamanho acompanha a resolução,
-a escala da prévia e a proporção dos pixels. O alfa é preservado.
+**Halation Advanced ativada substitui a Halation rápida**, evitando duplicar o
+halo. Cada seção tem seus presets, controles, navegação e Reset quando aplicável.
+As máscaras de pele, vinheta, Halation e Bloom são exclusivas na interface.
 
-[Guia da Halation](HALATION.md)
+Os ajustes de Camera, Looks & Base e Basic Adjustments se acumulam. Comece com
+um conjunto neutro e altere uma seção de cada vez. **Color Space é opcional**;
+com a LUT Avata 2, comece com essa seção desligada. Gamma 1.96 é uma aproximação;
+PQ/HLG usam branco de referência de 203 nits e HLG inclui OOTF de display 1000 nits.
 
-![Halation em recortes sintéticos](HALATION-preview.png)
+Veja [FERRAMENTAS.md](FERRAMENTAS.md) para uso, ordem de processamento e limites,
+[LOOKS.md](LOOKS.md) para estilos e [HALATION.md](HALATION.md) para o menu rápido.
 
-A figura usa o mesmo motor C++ em dados sintéticos de RGB de exibição. Não é
-filmagem, emulação calibrada de película ou garantia da aparência no monitor.
+## Alcance desta entrega
 
-## Botões ANTERIOR e PRÓXIMO
+É uma implementação **própria** das ferramentas e presets. Não carrega o ToneLab,
+não depende da instalação ou licença dele e não incorpora seus algoritmos nem
+suas 65 LUTs comerciais. As novas variações de look têm “(Mendes)” no nome.
+Não foi estabelecido resultado visual idêntico ao ToneLab. O catálogo analisado
+serviu para organizar ferramentas e faixas de interface.
 
-Os quatro menus **Creative Look**, **Input LUT**, **LUT Output Transfer** e
-**Halation Preset** têm botões **ANTERIOR / PRÓXIMO**. Cada clique troca uma
-opção do menu correspondente. Depois da última, PRÓXIMO volta à primeira;
-ANTERIOR na primeira vai para a última. Os menus continuam disponíveis.
+As conversões técnicas embutidas continuam sendo a LUT Avata 2 fornecida;
+para outras câmeras use uma LUT técnica adequada no campo de arquivo. Não foram
+criados presets de normalização de outras câmeras sem suas tabelas.
 
-A navegação preserva os demais ajustes. Em Look/Halation já animados, atualiza
-somente o tempo atual sem alterar os outros keyframes; sem animação prévia,
-não cria keyframes. As alterações são agrupadas para desfazer pelo host.
-O layout dos botões, abas e seções depende da interface OpenFX do Resolve.
+Passaram **13.264 verificações locais** de cor, LUT, Halation, ferramentas
+avançadas, host simulado e transações de instalação. O binário foi compilado
+para Windows x64 e inspecionado pelo REA. **A interface, os novos efeitos, o
+seletor de arquivos e o Setup ainda precisam de confirmação no Resolve Windows**.
+O teste visual será feito manualmente pelo usuário; não depende do vídeo enviado.
 
-Os botões de Input LUT alternam os modos; em Custom ainda é preciso selecionar
-um arquivo em LUT File. Para a LUT enviada, mantenha **LUT Output Transfer →
-Keep LUT output**. A outra opção é uma recodificação avançada que depende da
-curva de saída documentada da LUT.
+O processamento é **CPU, RGBA float32**, com alfa preservado e suporte a tiles.
+Grão com suavização, Halation e Bloom usam buffers espaciais e podem deixar a
+prévia lenta, principalmente em 4K. Não há promessa de tempo real. Máscaras de
+pele usam cor/luminância, sem reconhecimento de pessoas ou proteção automática.
 
-## Looks sobre a conversão da Avata 2
+Diagnóstico: `%LOCALAPPDATA%\MendesColor\OpenFX.log`, versão 1.4.0.
+O tratamento da descrição opcional que corrigiu o carregamento na 1.0.2 foi
+preservado. Os controles e índices antigos foram mantidos; os novos grupos
+começam desligados. Consulte [VALIDACAO.md](VALIDACAO.md).
 
-Com os arquivos originais D-Log M, selecione **Input LUT → DJI Avata 2 D-Log M
-to Rec.709 (embedded)**. A mesma conversão acontece primeiro, uma única vez;
-escolha depois o estilo em **Creative Look**, ou use os botões de navegação.
-No fluxo manual, mantenha Creative Gamma=1 e configure saída/monitoramento
-Rec.709 Gamma 2.4 no Resolve. Não normalize o mesmo sinal duas vezes.
+## Compilar
 
-| Estilo desejado | Look |
-|---|---|
-| Quente cinematográfico | Warm Cinema / Golden Hour |
-| Fim de tarde | Golden Hour |
-| Pôr do sol | Sunset Glow |
-| Verde cinematográfico | Moody Forest / Soft Green |
-| Comercial com verde e azul | Commercial Teal |
-| Sombras frias e luzes quentes | Teal & Orange |
+GCC/G++ C++17, Make e Python 3:
 
-**Look Strength** dosa apenas o estilo: zero mantém a LUT, as correções manuais
-e a Halation selecionada. Para desligar só o halo use Halation Preset=Desligado.
-**Effect Mix=0** desliga o plugin inteiro, incluindo a LUT.
+```sh
+make test
+make windows WIN_CXX=x86_64-w64-mingw32-g++
+python3 scripts/package.py
+make installer WIN_CXX=x86_64-w64-mingw32-g++ WIN_WINDRES=x86_64-w64-mingw32-windres
+```
 
-[Catálogo de looks](LOOKS.md)
+No Developer PowerShell x64 do Visual Studio 2022:
 
-## Validação
+```powershell
+.\scripts\build-windows.ps1
+python scripts/package.py
+```
 
-Passaram **4.860 verificações locais**: 2.235 de cor, 166 de LUT/transferências,
-2.100 de Halation, 338 de host OpenFX simulado e 21 de instalação/backup/restauração.
-Também passaram ASan/UBSan com detecção de vazamentos. Os testes espaciais
-comparam imagem inteira e tiles, source ROI recortada, alfa, stride negativo,
-ROI, escala/PAR, mistura, cancelamento e resposta de impulso analítica.
-Os botões foram testados nos quatro menus, incluindo passagem circular,
-keyframes, notificações e falha de escrita com fechamento do grupo de desfazer.
-
-O REA inspecionou as exportações/importações do plugin e os recursos do Setup.
-Os **13 payloads** e o manifesto UAC foram conferidos no EXE final.
-A interface e as APIs Windows do instalador, o layout/undo do host e a aparência
-na filmagem real ainda precisam ser verificados no Resolve do usuário.
-A versão 1.0.2 do plugin foi confirmada pelo usuário. O processamento é CPU,
-RGBA float32, sem promessa de desempenho em tempo real, especialmente em 4K.
-
-A LUT enviada foi preservada byte a byte com sua proveniência. O nome identifica
-Avata 2; um comentário interno menciona Mavic 3 Pro. Ela não declara gamma de
-saída, preservado por padrão. Configurar Rec.709 Gamma 2.4 no projeto não prova
-uma curva 2.4 na LUT. Os algoritmos e looks são próprios e não reproduzem ToneLab.
-As versões anteriores continuam disponíveis como histórico.
-
-## Análise do ToneLab fornecido
-
-[Mapa das 13 seções, menus, faixas e padrões](ToneLab-Analise.md) ·
-[Relatório e evidências para download](ToneLab-Analise-Do-Plugin.zip)
-
-Esse inventário descreve o arquivo fornecido pelo usuário. A versão publicada
-do Mendes Color permanece 1.3.0; a análise não adiciona automaticamente essas
-ferramentas ao plugin e não estabelece equivalência visual com o ToneLab.
+O script MSVC compila o plugin e os testes portáveis; o Setup entregue é gerado
+com MinGW-w64. A compilação MSVC não foi exercitada neste ambiente Linux.
+A tabela Avata 2 e o registro de controles são gerados com Python antes do build.
+Os pacotes de fontes incluem os headers oficiais OpenFX e suas licenças.
