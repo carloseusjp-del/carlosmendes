@@ -94,6 +94,14 @@ D6EBF7DDCBA9D80C9D5125935767734A5283D68867DC6ADBA15BA845B3F096AB
 
 Este é o primeiro passo que grava algo na TV. Ele adiciona apenas o IPK à área de aplicativos do Developer Mode e é reversível pela desinstalação descrita adiante.
 
+Com a instalação autorizada, o fluxo automático pode ser executado na raiz do projeto:
+
+```powershell
+.\INSTALAR-MENDES-HOME-0.2.1.cmd
+```
+
+O instalador verifica a conexão `lg-sala`, baixa o IPK publicado, confere o SHA-256, instala e abre o Mendes Home. O comando manual equivalente permanece abaixo para diagnóstico.
+
 ```powershell
 npx --no-install ares-install .\dist\com.carlosmendes.mendeshome_0.2.1_all.ipk -d lg-sala
 ```
@@ -211,6 +219,14 @@ O último comando fornece o endereço do Web Inspector. Com o app aberto, acesse
 Não publique a credencial TMDB, a chave SSH, passphrase ou conteúdo de `C:\Users\<usuario>\.ssh`.
 
 ## 9. Restauração completa
+
+O fluxo automático de remoção é:
+
+```powershell
+.\INSTALAR-MENDES-HOME-0.2.1.cmd /remover
+```
+
+Ele pede confirmação antes de apagar o aplicativo e seus dados locais. Os comandos manuais equivalentes estão abaixo.
 
 Primeiro feche o launcher:
 

@@ -11,7 +11,7 @@ Launcher original com interface Liquid Glass para a LG 55UR8750PSA. O projeto us
 - Ferramentas: `@webos-tools/cli` 3.2.6, perfil `tv`.
 - Dispositivo pareado: `lg-sala`, usuário restrito `prisoner`.
 - Versão preparada: **Mendes Home 0.2.1**.
-- IPK validado localmente; instalação real na TV ainda depende de autorização e teste do usuário.
+- IPK validado localmente; a instalação na TV usa somente o Developer Mode oficial e permanece reversível.
 
 ## Baixar
 
@@ -20,6 +20,8 @@ Launcher original com interface Liquid Glass para a LG 55UR8750PSA. O projeto us
 Se o navegador bloquear a extensão IPK, use o [pacote ZIP com o IPK, checksum e instruções](dist/Mendes-Home-webOS-0.2.1.zip?raw=1).
 
 Antes de instalar, siga [o guia de instalação, testes e restauração](docs/INSTALACAO-TV.md). O procedimento oficial usa o Developer Mode e a webOS CLI no Windows.
+
+No computador já pareado como `lg-sala`, o arquivo [INSTALAR-MENDES-HOME-0.2.1.cmd](INSTALAR-MENDES-HOME-0.2.1.cmd) automatiza o diagnóstico, download, validação SHA-256, instalação e abertura do launcher. Para desfazer, execute o mesmo arquivo com `/remover`.
 
 O protótipo visual para navegador continua disponível em [Mendes Home — pacote leve](dist/Mendes-Home-Prototipo-LEVE.zip?raw=1).
 
