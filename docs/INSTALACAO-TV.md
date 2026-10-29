@@ -67,27 +67,27 @@ O primeiro comando deve exibir o modelo e a versão. O segundo deve retornar a l
 O arquivo esperado é:
 
 ```text
-dist\com.carlosmendes.mendeshome_0.2.0_all.ipk
+dist\com.carlosmendes.mendeshome_0.2.1_all.ipk
 ```
 
 Confira seus metadados sem instalar:
 
 ```powershell
-npx --no-install ares-package -I .\dist\com.carlosmendes.mendeshome_0.2.0_all.ipk
+npx --no-install ares-package -I .\dist\com.carlosmendes.mendeshome_0.2.1_all.ipk
 ```
 
-O resultado deve mostrar o ID `com.carlosmendes.mendeshome`, a versão `0.2.0` e o tipo de arquitetura `all`.
+O resultado deve mostrar o ID `com.carlosmendes.mendeshome`, a versão `0.2.1` e o tipo de arquitetura `all`.
 
 Confira também a integridade do arquivo:
 
 ```powershell
-(Get-FileHash .\dist\com.carlosmendes.mendeshome_0.2.0_all.ipk -Algorithm SHA256).Hash
+(Get-FileHash .\dist\com.carlosmendes.mendeshome_0.2.1_all.ipk -Algorithm SHA256).Hash
 ```
 
 Resultado esperado:
 
 ```text
-A7891803E8484C65B30BA2E6120447755EF5CD16AFBC9A09A6CE3EA4E96A1AED
+D6EBF7DDCBA9D80C9D5125935767734A5283D68867DC6ADBA15BA845B3F096AB
 ```
 
 ## 3. Instalação — somente após autorização
@@ -95,10 +95,10 @@ A7891803E8484C65B30BA2E6120447755EF5CD16AFBC9A09A6CE3EA4E96A1AED
 Este é o primeiro passo que grava algo na TV. Ele adiciona apenas o IPK à área de aplicativos do Developer Mode e é reversível pela desinstalação descrita adiante.
 
 ```powershell
-npx --no-install ares-install .\dist\com.carlosmendes.mendeshome_0.2.0_all.ipk -d lg-sala
+npx --no-install ares-install .\dist\com.carlosmendes.mendeshome_0.2.1_all.ipk -d lg-sala
 ```
 
-Se uma versão anterior existir, o comando atualiza o mesmo ID e preserva preferências do `localStorage`. Em caso de erro, não repita várias vezes: registre a mensagem completa e use a seção de diagnóstico.
+Se uma versão anterior existir, o comando atualiza o mesmo ID e preserva preferências do `localStorage`. Na primeira abertura da versão 0.2.1, o perfil visual existente é migrado uma única vez para **Leve · TV**, corrigindo a lentidão sem apagar papel de parede, favoritos ou chave TMDB. Depois disso, uma escolha manual de outro perfil permanece salva. Em caso de erro, não repita várias vezes: registre a mensagem completa e use a seção de diagnóstico.
 
 Confirme que o app aparece na lista:
 
@@ -160,9 +160,9 @@ Com o launcher aberto e depois de abrir outro aplicativo, confirme:
 
 1. Navegue continuamente pelo dock por pelo menos 30 segundos.
 2. Abra e feche gaveta e Ajustes dez vezes.
-3. Alterne os níveis de vidro, desfoque, movimento e qualidade.
+3. Confirme que **Leve · TV** está selecionado e compare com **Equilibrado**. O desfoque em tempo real fica reservado ao modo **Máximo**.
 4. Confirme que texto e foco continuam legíveis sobre cada papel de parede.
-5. Se houver travadas, selecione qualidade **Leve**, reduza o desfoque e compare novamente.
+5. Se houver travadas mesmo em **Leve · TV**, desligue **Movimento suave**, repita o teste e registre CPU/memória pelo comando abaixo.
 
 Para observar recursos sem alterar a TV, deixe este comando rodar em outro PowerShell e encerre com `Ctrl+C`:
 
@@ -238,7 +238,7 @@ Preencha este bloco depois do teste real:
 
 ```text
 Instalação: pendente / aprovada / concluída / falhou
-Versão testada: 0.2.0
+Versão testada: 0.2.1
 Navegação (setas/OK/Voltar):
 Origem da lista de apps exibida:
 Apps que abriram:

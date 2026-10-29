@@ -1,10 +1,11 @@
 {
   "name": "lg-webos-launcher",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Launcher personalizado e original para LG webOS TV",
   "scripts": {
     "test:browser": "node tests/browser-smoke.js",
+    "test:performance": "node tests/performance-smoke.js",
     "webos:version": "ares -V",
     "webos:devices": "ares-setup-device -l",
     "webos:profile": "ares-config --profile tv"

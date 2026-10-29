@@ -123,7 +123,7 @@
     return {
       id:id,
       title:title,
-      icon:item.largeIcon || item.icon || item.iconPath || "",
+      icon:item.icon || item.largeIcon || item.iconPath || "",
       iconKey:item.iconKey || inferIconKey(id, title),
       params:item.params || {},
       visible:item.visible !== false && item.noDisplay !== true,

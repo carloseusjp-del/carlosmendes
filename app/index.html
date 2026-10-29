@@ -8,7 +8,7 @@
     <link rel="icon" href="data:,">
     <link rel="stylesheet" href="css/app.css">
   </head>
-  <body data-wallpaper="wall" data-quality="balanced">
+  <body data-wallpaper="wall" data-quality="light">
     <div class="wallpaper" aria-hidden="true">
       <span class="wall-light wall-light-a"></span>
       <span class="wall-light wall-light-b"></span>
@@ -71,7 +71,7 @@
                 </g>
                 <g stroke="#cde8e3" stroke-width="3" fill="none" opacity=".42"><path d="M70 382c180-22 315-17 490 5s324 24 501-8"/><path d="M98 427c214-18 361-7 520 14s294 15 415-3"/></g>
               </svg>
-              <img id="catalogImage0" class="catalog-image" alt="" hidden>
+              <img id="catalogImage0" class="catalog-image" alt="" decoding="async" hidden>
               <span class="story-glare"></span>
               <span id="storyBadge0" class="story-badge">CONTINUAR</span>
             </span>
@@ -89,7 +89,7 @@
                 <path d="M205 520c12-84 21-139 75-215-29 68-31 144-24 215Z" fill="#e9c086" opacity=".78"/>
                 <g fill="#17272c"><circle cx="218" cy="344" r="10"/><path d="M207 356h23l13 76h-47Z"/></g>
               </svg>
-              <img id="catalogImage1" class="catalog-image" alt="" hidden>
+              <img id="catalogImage1" class="catalog-image" alt="" decoding="async" hidden>
               <span class="story-glare"></span>
               <span id="storyBadge1" class="story-badge" hidden>EM ALTA</span>
             </span>
@@ -107,7 +107,7 @@
                 <g stroke="#b8d5be" stroke-width="3" opacity=".27"><path d="m52 115 54 405M132 56l38 464M282 72l-32 448M365 119l-52 401"/></g>
                 <path d="M124 520c22-113 72-182 156-243-61 76-92 150-98 243Z" fill="#7aa884" opacity=".64"/>
               </svg>
-              <img id="catalogImage2" class="catalog-image" alt="" hidden>
+              <img id="catalogImage2" class="catalog-image" alt="" decoding="async" hidden>
               <span class="story-glare"></span>
               <span id="storyBadge2" class="story-badge">NOVO</span>
             </span>
@@ -199,14 +199,14 @@
           <input id="glassIntensity" class="range-control focusable settings-focus" type="range" min="40" max="90" value="72" step="2">
         </section>
         <section class="setting-group">
-          <label class="range-label" for="blurIntensity"><span><strong>Desfoque</strong><small>Separação do fundo</small></span><output id="blurValue">14</output></label>
-          <input id="blurIntensity" class="range-control focusable settings-focus" type="range" min="0" max="20" value="14" step="2">
+          <label class="range-label" for="blurIntensity"><span><strong>Desfoque</strong><small>Usado somente no modo Máximo</small></span><output id="blurValue">8</output></label>
+          <input id="blurIntensity" class="range-control focusable settings-focus" type="range" min="0" max="12" value="8" step="2">
         </section>
         <section class="setting-group">
-          <div class="setting-heading"><strong>Qualidade visual</strong><span id="qualityName">Equilibrado</span></div>
+          <div class="setting-heading"><strong>Qualidade visual</strong><span id="qualityName">Leve</span></div>
           <div class="segmented" role="radiogroup" aria-label="Qualidade visual">
-            <button class="focusable settings-focus" type="button" data-quality-option="light">Leve</button>
-            <button class="focusable settings-focus is-selected" type="button" data-quality-option="balanced">Equilibrado</button>
+            <button class="focusable settings-focus is-selected" type="button" data-quality-option="light">Leve · TV</button>
+            <button class="focusable settings-focus" type="button" data-quality-option="balanced">Equilibrado</button>
             <button class="focusable settings-focus" type="button" data-quality-option="full">Máximo</button>
           </div>
         </section>

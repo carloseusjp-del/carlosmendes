@@ -205,10 +205,12 @@
     Object.keys(PATHS).forEach(function (view) { storageRemove(cacheKey(view)); });
   }
 
-  function imageUrl(item, wide) {
+  function imageUrl(item, wide, quality) {
     if (!item) return "";
     var path = wide ? (item.backdrop || item.poster) : (item.poster || item.backdrop);
-    return path ? IMAGE_ROOT + (wide ? "w1280" : "w500") + path : "";
+    var full = quality === "full";
+    var size = wide ? (full ? "w1280" : "w780") : (full ? "w500" : "w342");
+    return path ? IMAGE_ROOT + size + path : "";
   }
 
   global.MendesCatalog = {

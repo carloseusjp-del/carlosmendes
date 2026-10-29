@@ -190,6 +190,18 @@ async function run() {
     assert(apiPaths.some((item) => item.includes("/trending/movie/")), "A aba Filmes deve consultar filmes.");
     assert(apiPaths.some((item) => item.includes("/trending/tv/")), "A aba Séries deve consultar séries.");
 
+    await page.setViewportSize({ width: 1366, height: 768 });
+    await page.locator("#favoritesRail .app-tile").first().focus();
+    await page.keyboard.press("ArrowDown");
+    await page.waitForFunction(() => document.body.classList.contains("drawer-open"));
+    await page.waitForTimeout(200);
+    const drawerBounds = await page.evaluate(() => {
+      const rect = document.querySelector("#quickDrawer").getBoundingClientRect();
+      return { top: rect.top, bottom: rect.bottom, height: rect.height, viewport: innerHeight };
+    });
+    assert(drawerBounds.top >= 0 && drawerBounds.bottom <= drawerBounds.viewport, `A gaveta otimizada deve permanecer dentro da tela em 1366×768 (${JSON.stringify(drawerBounds)}).`);
+    await page.keyboard.press("Escape");
+
     assert(browserErrors.length === 0, browserErrors.join("\n") || "O navegador não deve produzir erros.");
 
     const webosContext = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
@@ -198,6 +210,13 @@ async function run() {
         identifier: "com.carlosmendes.mendeshome 1000",
         launchParams: "{}"
       };
+      try {
+        localStorage.setItem("com.carlosmendes.mendeshome.state.v1", JSON.stringify({
+          schemaVersion: 1,
+          appearance: { wallpaper: "wall", glassIntensity: 72, blur: 14, quality: "balanced", motion: true },
+          dock: { order: [], favorites: [] }
+        }));
+      } catch (error) {}
       window.__lunaCalls = [];
       window.PalmServiceBridge = function PalmServiceBridge() {};
       window.PalmServiceBridge.prototype.call = function call(uri, rawParameters) {
@@ -224,14 +243,17 @@ async function run() {
     });
     await webosPage.goto(origin, { waitUntil: "networkidle" });
     await webosPage.waitForFunction(() => document.querySelector("#platformStatus").textContent === "Apps conectados");
+    assert(await webosPage.locator("body").getAttribute("data-quality") === "light", "A atualização deve migrar a TV uma vez para o modo Leve.");
+    assert(await webosPage.evaluate(() => JSON.parse(localStorage.getItem("com.carlosmendes.mendeshome.state.v1")).schemaVersion === 2), "A migração de desempenho deve ser persistida.");
     assert(await webosPage.locator("#favoritesRail .app-tile").count() === 8, "O dock da TV deve limitar os favoritos a oito.");
-    assert(await webosPage.locator("#allAppsGrid .app-tile").count() === 10, "A biblioteca deve listar todos os launch points retornados pela TV.");
+    assert(await webosPage.locator("#allAppsGrid .app-tile").count() === 0, "A biblioteca fechada não deve criar ícones fora da tela.");
     await webosPage.locator("#favoritesRail .app-tile").first().focus();
     await webosPage.keyboard.press("ArrowDown");
     await webosPage.waitForFunction(() => document.body.classList.contains("drawer-open"));
     await webosPage.locator('[data-quick="Todos os apps"]').focus();
     await webosPage.keyboard.press("Enter");
     await webosPage.waitForFunction(() => document.body.classList.contains("all-apps-open"));
+    assert(await webosPage.locator("#allAppsGrid .app-tile").count() === 10, "A biblioteca deve listar todos os launch points retornados pela TV quando aberta.");
     await webosPage.locator('[data-library-app-id="test.app.9"]').focus();
     await webosPage.keyboard.press("e");
     assert(await webosPage.locator('#favoritesRail [data-app-id="test.app.9"]').count() === 1, "A tecla verde deve permitir fixar um app da biblioteca no dock.");

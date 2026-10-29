@@ -4,7 +4,8 @@
   var platform = window.MendesPlatform;
   var catalog = window.MendesCatalog;
   var STORAGE_KEY = "com.carlosmendes.mendeshome.state.v1";
-  var SCHEMA_VERSION = 1;
+  var SCHEMA_VERSION = 2;
+  var tvRuntime = platform.isWebOS();
   var WALLPAPERS = ["wall", "mist", "sand", "night"];
   var WALLPAPER_NAMES = { wall:"Parede iluminada", mist:"Névoa", sand:"Areia", night:"Noite" };
   var QUALITY_NAMES = { light:"Leve", balanced:"Equilibrado", full:"Máximo" };
@@ -17,12 +18,18 @@
   var lastDockFocus = null;
   var toastTimer = null;
   var saveTimer = null;
+  var allAppsCleanupTimer = null;
   var stateReadOnly = false;
+  var performanceMigrationPending = false;
+  var allAppsDirty = true;
+  var visualFocusedElement = null;
   var currentCatalogMode = "discover";
   var catalogRequestId = 0;
   var platformDetail = "Inicializando";
   var allApps = [];
   var apps = [];
+
+  document.documentElement.classList.toggle("webos-runtime", tvRuntime);
 
   var icons = {
     cinema:'<svg viewBox="0 0 48 48"><path d="M15 11v26M33 11v26M10 16h28M10 32h28M10 11h28v26H10zM15 11l4 5m5-5 4 5m5-5 4 5"/></svg>',
@@ -60,7 +67,7 @@
   function defaultState() {
     return {
       schemaVersion:SCHEMA_VERSION,
-      appearance:{ wallpaper:"wall", glassIntensity:72, blur:14, quality:"balanced", motion:true },
+      appearance:{ wallpaper:"wall", glassIntensity:72, blur:8, quality:tvRuntime ? "light" : "balanced", motion:true },
       dock:{ order:[], favorites:[] }
     };
   }
@@ -98,11 +105,23 @@
     clean.appearance.wallpaper = WALLPAPERS.indexOf(appearance.wallpaper) >= 0 ? appearance.wallpaper : clean.appearance.wallpaper;
     clean.appearance.quality = QUALITY_NAMES[appearance.quality] ? appearance.quality : clean.appearance.quality;
     clean.appearance.glassIntensity = clampStep(appearance.glassIntensity, 40, 90, 2, 72);
-    clean.appearance.blur = clampStep(appearance.blur, 0, 20, 2, 14);
+    clean.appearance.blur = clampStep(appearance.blur, 0, 12, 2, 8);
     clean.appearance.motion = typeof appearance.motion === "boolean" ? appearance.motion : true;
     clean.dock.order = uniqueStrings(dock.order);
     clean.dock.favorites = uniqueStrings(dock.favorites);
     return clean;
+  }
+
+  function migrateState(raw) {
+    if (!raw) return raw;
+    var version = Number(raw.schemaVersion) || 1;
+    if (version < 2) {
+      raw.appearance = raw.appearance || {};
+      if (tvRuntime) raw.appearance.quality = "light";
+      raw.schemaVersion = 2;
+      performanceMigrationPending = true;
+    }
+    return raw;
   }
 
   function loadState() {
@@ -122,7 +141,7 @@
       raw.dock.order = Array.isArray(legacyOrder) ? legacyOrder : [];
       raw.appearance.wallpaper = legacyTheme === "sunset" ? "sand" : legacyTheme === "graphite" ? "night" : "wall";
     }
-    return sanitizeState(raw);
+    return sanitizeState(migrateState(raw));
   }
 
   var state = loadState();
@@ -212,6 +231,7 @@
       if (app.icon) {
         var image = document.createElement("img");
         image.alt = "";
+        image.decoding = "async";
         image.onload = function () { icon.classList.add("has-image"); };
         image.onerror = function () { image.removeAttribute("src"); icon.classList.remove("has-image"); };
         image.src = app.icon;
@@ -233,9 +253,13 @@
     if (focusId) focusElement(rail.querySelector('[data-app-id="' + focusId + '"]'));
   }
 
+  function updateAllAppsSummary() {
+    document.getElementById("allAppsCount").textContent = allApps.length + (allApps.length === 1 ? " aplicativo" : " aplicativos") + " · Verde: fixar no dock";
+  }
+
   function renderAllApps(focusId) {
     allAppsGrid.textContent = "";
-    document.getElementById("allAppsCount").textContent = allApps.length + (allApps.length === 1 ? " aplicativo" : " aplicativos") + " · Verde: fixar no dock";
+    updateAllAppsSummary();
     allApps.forEach(function (app) {
       var button = document.createElement("button");
       button.type = "button";
@@ -262,6 +286,8 @@
       if (app.icon) {
         var image = document.createElement("img");
         image.alt = "";
+        image.decoding = "async";
+        image.loading = "lazy";
         image.onload = function () { icon.classList.add("has-image"); };
         image.onerror = function () { image.removeAttribute("src"); icon.classList.remove("has-image"); };
         image.src = app.icon;
@@ -283,6 +309,7 @@
       button.addEventListener("click", function () { launchDockApp(app); });
       allAppsGrid.appendChild(button);
     });
+    allAppsDirty = false;
     if (focusId) focusElement(allAppsGrid.querySelector('[data-library-app-id="' + focusId + '"]'));
   }
 
@@ -302,7 +329,9 @@
       apps = selectDockApps(allApps);
       if (!apps.length) apps = platform.demoApps();
       renderApps();
-      renderAllApps();
+      allAppsDirty = true;
+      updateAllAppsSummary();
+      if (allAppsOpen) renderAllApps();
       if (focusedDockId) focusElement(rail.querySelector('[data-app-id="' + focusedDockId + '"]') || rail.querySelector(".app-tile"));
       if (result.source === "launchPoints" || result.source === "apps") {
         setPlatformStatus("Apps conectados", "online", allApps.length + " aplicativos retornados pela TV");
@@ -318,7 +347,9 @@
       allApps = platform.demoApps();
       apps = allApps.slice(0, 8);
       renderApps();
-      renderAllApps();
+      allAppsDirty = true;
+      updateAllAppsSummary();
+      if (allAppsOpen) renderAllApps();
       if (focusedDockId) focusElement(rail.querySelector(".app-tile"));
       setPlatformStatus("Acesso limitado", "limited", "Não foi possível consultar os aplicativos; o dock está em modo demonstrativo");
     });
@@ -341,18 +372,35 @@
     else if (drawerOpen) selector = "#favoritesRail .focusable, #quickDrawer .focusable";
     else selector = ".topbar .focusable, #showcase .focusable, #favoritesRail .focusable";
     return Array.prototype.slice.call(document.querySelectorAll(selector)).filter(function (element) {
-      var rect = element.getBoundingClientRect();
-      var style = window.getComputedStyle(element);
-      return rect.width > 0 && rect.height > 0 && style.visibility !== "hidden" && !element.disabled;
+      return !element.disabled;
     });
+  }
+
+  function setVisualFocus(element) {
+    if (visualFocusedElement && visualFocusedElement !== element) visualFocusedElement.classList.remove("is-focused");
+    visualFocusedElement = element || null;
+    if (visualFocusedElement) visualFocusedElement.classList.add("is-focused");
   }
 
   function focusElement(element) {
     if (!element) return;
-    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) { item.classList.remove("is-focused"); });
-    element.classList.add("is-focused");
+    setVisualFocus(element);
     try { element.focus({ preventScroll:true }); }
     catch (error) { element.focus(); }
+  }
+
+  function libraryGridTarget(direction) {
+    var current = document.activeElement;
+    if (!allAppsOpen || !current || !current.hasAttribute("data-library-app-id")) return null;
+    var items = Array.prototype.slice.call(allAppsGrid.querySelectorAll(".all-apps-focus"));
+    var index = items.indexOf(current);
+    if (index < 0) return null;
+    var columns = 6;
+    if (direction === "left" && index % columns > 0) return items[index - 1];
+    if (direction === "right" && index % columns < columns - 1 && items[index + 1]) return items[index + 1];
+    if (direction === "up") return items[index - columns] || null;
+    if (direction === "down" && items[index + columns]) return items[index + columns];
+    return current;
   }
 
   function spatialTarget(direction) {
@@ -449,11 +497,12 @@
 
   function openAllApps() {
     if (allAppsOpen || settingsOpen) return;
+    clearTimeout(allAppsCleanupTimer);
     var previousFocus = document.activeElement;
     if (drawerOpen) closeDrawer(false);
     allAppsOpen = true;
     lastMainFocus = lastDockFocus || previousFocus;
-    renderAllApps();
+    if (allAppsDirty || !allAppsGrid.firstChild) renderAllApps();
     document.body.classList.add("all-apps-open");
     allAppsPanel.setAttribute("aria-hidden", "false");
     focusElement(allAppsGrid.querySelector(".all-apps-focus") || document.getElementById("closeAllApps"));
@@ -465,6 +514,12 @@
     document.body.classList.remove("all-apps-open");
     allAppsPanel.setAttribute("aria-hidden", "true");
     focusElement(lastMainFocus || rail.querySelector(".app-tile"));
+    allAppsCleanupTimer = setTimeout(function () {
+      if (!allAppsOpen) {
+        allAppsGrid.textContent = "";
+        allAppsDirty = true;
+      }
+    }, 220);
   }
 
   function openSettings() {
@@ -522,7 +577,7 @@
   }
 
   function setBlur(value, persist) {
-    var clean = clampStep(value, 0, 20, 2, 14);
+    var clean = clampStep(value, 0, 12, 2, 8);
     document.getElementById("blurIntensity").value = String(clean);
     document.getElementById("blurValue").textContent = String(clean);
     document.documentElement.style.setProperty("--glass-blur", clean + "px");
@@ -573,6 +628,7 @@
       var image = document.getElementById("catalogImage" + index);
       var badge = document.getElementById("storyBadge" + index);
       card._catalogItem = null;
+      card.classList.remove("has-catalog-image");
       card.setAttribute("data-story", saved.story);
       document.getElementById("storyTitle" + index).textContent = saved.title;
       document.getElementById("storyMeta" + index).textContent = saved.meta;
@@ -596,7 +652,7 @@
       var item = items[index];
       var image = document.getElementById("catalogImage" + index);
       var badge = document.getElementById("storyBadge" + index);
-      var url = catalog.imageUrl(item, index === 0);
+      var url = catalog.imageUrl(item, index === 0, state.appearance.quality);
       card._catalogItem = item;
       card.setAttribute("data-story", item.title);
       document.getElementById("storyTitle" + index).textContent = item.title;
@@ -606,12 +662,19 @@
         badge.textContent = index === 0 ? "EM ALTA" : item.mediaType === "tv" ? "SÉRIE" : "FILME";
       }
       image.classList.remove("is-visible");
+      card.classList.remove("has-catalog-image");
       image.hidden = false;
+      image.decoding = "async";
       image._requestedUrl = url;
-      image.onload = function () { if (image._requestedUrl === url) image.classList.add("is-visible"); };
+      image.onload = function () {
+        if (image._requestedUrl !== url) return;
+        image.classList.add("is-visible");
+        card.classList.add("has-catalog-image");
+      };
       image.onerror = function () {
         if (image._requestedUrl !== url) return;
         image.classList.remove("is-visible");
+        card.classList.remove("has-catalog-image");
         image.hidden = true;
         image.removeAttribute("src");
       };
@@ -740,18 +803,23 @@
     setMotion(!document.getElementById("motionToggle").classList.contains("is-on"), true, true);
   });
 
+  function keepFocusVisible(element, container) {
+    if (!element || !container) return;
+    var target = element.getBoundingClientRect();
+    var viewport = container.getBoundingClientRect();
+    if (target.top < viewport.top || target.bottom > viewport.bottom) {
+      try { element.scrollIntoView({ block:"nearest", behavior:"auto" }); }
+      catch (error) { element.scrollIntoView(false); }
+    }
+  }
+
   document.addEventListener("focusin", function (event) {
-    Array.prototype.forEach.call(document.querySelectorAll(".is-focused"), function (item) {
-      if (item !== event.target) item.classList.remove("is-focused");
-    });
-    if (event.target.classList.contains("focusable")) event.target.classList.add("is-focused");
+    if (event.target.classList.contains("focusable")) setVisualFocus(event.target);
     if (settingsOpen && event.target.classList.contains("settings-focus")) {
-      try { event.target.scrollIntoView({ block:"nearest", behavior:"smooth" }); }
-      catch (error) { event.target.scrollIntoView(false); }
+      keepFocusVisible(event.target, document.querySelector(".settings-scroll"));
     }
     if (allAppsOpen && event.target.classList.contains("all-apps-focus")) {
-      try { event.target.scrollIntoView({ block:"nearest", behavior:"smooth" }); }
-      catch (error) { event.target.scrollIntoView(false); }
+      keepFocusVisible(event.target, allAppsGrid);
     }
   });
 
@@ -771,7 +839,7 @@
         openDrawer();
         handled = true;
       } else {
-        focusElement(spatialTarget(direction));
+        focusElement(libraryGridTarget(direction) || spatialTarget(direction));
         handled = true;
       }
     } else if (code === 13 && current && current.id === "tmdbCredential") {
@@ -812,14 +880,19 @@
   }
 
   applyState();
+  if (performanceMigrationPending) flushSave();
   apps = platform.demoApps();
   allApps = apps.slice();
   renderApps();
-  renderAllApps();
+  updateAllAppsSummary();
   updateCredentialUI();
   updateDateTime();
-  setInterval(updateDateTime, 30000);
-  loadInstalledApps();
-  loadCatalog("discover", false);
-  setTimeout(function () { focusElement(document.querySelector(".story-card")); }, 90);
+  setInterval(updateDateTime, 60000);
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(function () { loadInstalledApps(); }, { timeout:400 });
+  } else {
+    setTimeout(function () { loadInstalledApps(); }, 80);
+  }
+  setTimeout(function () { loadCatalog("discover", false); }, tvRuntime ? 240 : 80);
+  setTimeout(function () { focusElement(document.querySelector(".story-card")); }, 60);
 }());
